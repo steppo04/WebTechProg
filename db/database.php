@@ -9,7 +9,7 @@
                 die("Connection failed: " . $this->db->connect_error);
             }
         }
-        
+
         public function getUsers(){
             $stmt = $this->db->prepare("SELECT * FROM UTENTI");
             $stmt->execute();
