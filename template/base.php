@@ -64,16 +64,45 @@
             
         </section>
     </aside>
-    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top"> 
-      <div class="col-md-4 d-flex align-items-center">
-         <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1" aria-label="Bootstrap">
-           <svg class="bi" width="30" height="24" aria-hidden="true"><use xlink:href="#bootstrap"></use></svg> </a> 
-           <span class="mb-3 mb-md-0 text-body-secondary">© 2025 Company, Inc</span> </div> <ul class="nav col-md-4 justify-content-end list-unstyled d-flex"> 
-            <li class="ms-3"><a class="text-body-secondary" href="#" aria-label="Instagram"><svg class="bi" width="24" height="24" aria-hidden="true">
-            <use xlink:href="#instagram"></use></svg></a></li> <li class="ms-3">
-              <a class="text-body-secondary" href="#" aria-label="Facebook">
-                <svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li> </ul> </footer>
+
+<footer class="text-center text-lg-start text-white mt-auto" style="background-color: #929fba">
+
+    <div class="container p-4">
+
+        <div class="row">
+
+            <div class="col-md-4 mx-auto mb-3">
+                <h6 class="text-uppercase fw-bold">Company</h6>
+                <p>Descrizione azienda.</p>
+            </div>
+
+            <div class="col-md-4 mx-auto mb-3">
+                <h6 class="text-uppercase fw-bold">Contatti</h6>
+                <p><i class="fas fa-envelope me-2"></i> info@email.com</p>
+                <p><i class="fas fa-phone me-2"></i> +39 123 456 789</p>
+            </div>
+
+            <div class="col-md-4 mx-auto mb-3">
+                <h6 class="text-uppercase fw-bold">Social</h6>
+                <a class="btn btn-dark btn-sm me-1" href="#"><i class="fab fa-facebook-f"></i></a>
+                <a class="btn btn-dark btn-sm me-1" href="#"><i class="fab fa-instagram"></i></a>
+                <a class="btn btn-dark btn-sm" href="#"><i class="fab fa-github"></i></a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="text-center p-2 bg-dark">
+        © 2026 MySite
+    </div>
+
+</footer>
+
+<!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
+
+
 </html>
