@@ -197,9 +197,11 @@ class DatabaseHelper
             $user = $result->fetch_assoc();
 
             if ($password === $user['password']) {
-
-                return $user;
-
+                if ($user['stato'] === 'attivo') {
+                    return $user;
+                } else {
+                    return -1;
+                }
             }
             return false;
         }
