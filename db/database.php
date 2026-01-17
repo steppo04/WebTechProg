@@ -79,7 +79,7 @@ class DatabaseHelper
     public function getLastSpots($n)
     {
 
-        $stmt = $this->db->prepare("SELECT * FROM spot WHERE stato='approvato' ORDER BY dataInserimento LIMIT ?");
+        $stmt = $this->db->prepare("SELECT * FROM SPOT WHERE stato='approvato' ORDER BY dataInserimento LIMIT ?");
         $stmt->bind_param('i', $n);
         $stmt->execute();
         $result = $stmt->get_result();
