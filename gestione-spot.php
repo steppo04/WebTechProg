@@ -7,6 +7,11 @@ if (!isUserLoggedIn()) {
     exit();
 }
 
+if (isset($_SESSION["admin"]) || $_SESSION["admin"] == true) {
+    header("location: index.php");
+    exit();
+}
+
 $idSpot = isset($_GET["id"]) ? $_GET["id"] : null;
 $spotEsistente = null;
 
