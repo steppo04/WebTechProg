@@ -1,10 +1,17 @@
 <section class="container mt-5">
+
     <div class="row justify-content-center mb-5">
+
         <div class="col-md-8 col-lg-6">
+
             <form action="lista-categoria.php" method="GET">
+
                 <div class="row justify-content-center mb-5">
+
                     <div class="col-md-8">
+
                         <div class="d-flex gap-2" role="search">
+
                             <label for="ricerca" class="visually-hidden">Ricerca</label>
                             <input type="text" class="form-control form-control-lg" name="ricerca" id="ricerca" 
                                 placeholder="Cerca uno spot..." 
@@ -12,11 +19,14 @@
                             
                             <button type="submit" class="btn btn-danger">Cerca</button>
                             
-                            <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#modalFiltri">
+                            <button type="button" class="btn btn-outline-dark d-flex gap-2 align-items-center" data-bs-toggle="modal" data-bs-target="#modalFiltri">
                                 <i class="bi bi-funnel"></i> Filtri
                             </button>
+
                         </div>
+
                     </div>
+
                 </div>
 
                 <div class="modal fade" id="modalFiltri" tabindex="-1" aria-labelledby="modalFiltriLabel" aria-hidden="true">
