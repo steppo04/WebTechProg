@@ -1,15 +1,16 @@
 <?php
 
 class DatabaseHelper {
-    public $db;
+    private $db;
 
     public function __construct($servername, $username, $password, $dbname, $port) {
         $this->db = new mysqli($servername, $username, $password, $dbname, $port);
         if ($this->db->connect_error) {
             die("Connection failed: " . $this->db->connect_error);
         }
+    }
 
-        public function getSpotInfo($idSpot){
+    public function getSpotInfo($idSpot){
             $query = "SELECT S.*, C.nome AS nomeCategoria, SC.nome AS nomeSottoCategoria, 
                         U.nome AS nomeAutore, U.cognome AS cognomeAutore
                         FROM SPOT S
@@ -24,9 +25,9 @@ class DatabaseHelper {
             $result = $stmt->get_result();
 
             return $result->fetch_assoc();
-        }
+    }
 
-        public function getComments($idSpot){
+    public function getComments($idSpot){
             $query = "SELECT C.*, U.nome, U.cognome 
               FROM COMMENTI C 
               JOIN UTENTI U ON C.usernameUtente = U.username 
@@ -39,7 +40,6 @@ class DatabaseHelper {
             $result = $stmt->get_result();
 
             return $result->fetch_all(MYSQLI_ASSOC);
-        }
     }
 
     public function getUsers(){
