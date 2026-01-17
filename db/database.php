@@ -18,7 +18,7 @@
         }
 
         public function getCategories(){
-            $stmt = $this->db->prepare("SELECT idCategoria, nome FROM CATEGORIE");
+            $stmt = $this->db->prepare("SELECT idCategoria,nome FROM CATEGORIE");
             $stmt->execute();
             $result = $stmt->get_result();
             return $result->fetch_all(MYSQLI_ASSOC);
@@ -35,5 +35,15 @@
             $stmt->bind_param('ssiis', $titolo, $testo, $idCategoria, $idSottocategoria, $username);
             return $stmt->execute();
         }
+
+        public function getLastSpots($n){
+            
+            $stmt = $this->db->prepare("SELECT * FROM spot WHERE stato='approvato' ORDER BY dataInserimento LIMIT ?");
+            $stmt->bind_param('i',$n);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            return $result->fetch_all(MYSQLI_ASSOC);
+        }        
     }
 ?>
