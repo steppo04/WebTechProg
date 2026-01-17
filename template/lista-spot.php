@@ -2,7 +2,6 @@
     <div class="row justify-content-center mb-5">
         <div class="col-md-8 col-lg-6">
             <form action="lista-categoria.php" method="GET">
-        
                 <div class="row justify-content-center mb-5">
                     <div class="col-md-8">
                         <div class="d-flex gap-2" role="search">
