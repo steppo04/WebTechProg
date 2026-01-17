@@ -19,8 +19,7 @@ function isAdminLoggedIn()
 function registerLoggedUser($user)
 {
     $_SESSION["username"] = $user["username"];
-    $_SESSION["id"] = $user["id"];
-    $_SESSION["admin"] = $user["admin"];
+    $_SESSION["admin"] = ($user["idTipo"] == 1); // 1 = Admin, 2 = Utente
     $_SESSION["logged"] = 1;
 }
 ?>

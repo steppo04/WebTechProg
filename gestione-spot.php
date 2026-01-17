@@ -1,14 +1,11 @@
 <?php
 require_once 'bootstrap.php';
 
-$_SESSION["username"] = "giaguaro04"; // utente di testing
-
 // controllo utente loggato
-// attualmente manca la parte del login quindi non funziona 
-/*if (!isset($_SESSION["username"])) {
+if (!isUserLoggedIn()) {
     header("location: login.php");
     exit();
-}*/
+}
 
 $idSpot = isset($_GET["id"]) ? $_GET["id"] : null;
 $spotEsistente = null;
@@ -32,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($azione == "pubblica") {
         $dbh->insertSpot($titolo, $testo, $idCat, $idSubCat, $_SESSION["username"]);
-        header("location: index.php"); 
+        header("location: index.php");
         exit();
     } elseif ($azione == "modifica" && $idSpot) {
         $dbh->updateSpot($idSpot, $titolo, $testo, $idCat, $idSubCat);

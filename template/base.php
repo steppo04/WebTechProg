@@ -38,6 +38,10 @@
         </ul>
         <?php if (!isUserLoggedIn() && !isAdminLoggedIn()): ?>
           <a href="login.php" class="btn btn-outline-light me-2">Accedi</a>
+        <?php else: ?>
+          <span class="text-light me-2">Benvenuto, <?php echo $_SESSION["username"]; ?></span>
+          <a href="profilo.php" class="btn btn-outline-info me-2">Profilo</a>
+          <a href="logout.php" class="btn btn-outline-danger me-2">Esci</a>
         <?php endif; ?>
         <form class="d-flex" role="search">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
