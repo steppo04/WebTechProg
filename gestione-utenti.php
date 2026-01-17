@@ -1,7 +1,10 @@
 <?php
 require_once 'bootstrap.php';
 
-// qua ci devo mettere il controllo dell'admin, se non è admin reindirizzo alla home
+if (!isset($_SESSION["admin"]) || $_SESSION["admin"] !== true) {
+    header("location: index.php");
+    exit();
+}
 
 // Gestione del cambio di stato
 if(isset($_POST["username"]) && isset($_POST["azione"])) {
