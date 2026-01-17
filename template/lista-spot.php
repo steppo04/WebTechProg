@@ -74,8 +74,10 @@
                             <p class="card-text"><?php echo $spot["testo"]; ?></p>
                         </div>
                         <div class="card-footer bg-transparent border-top-0">
-    <a href="gestione-spot.php?id=<?php echo $spot['idSpot']; ?>" class="btn btn-outline-primary btn-sm">Leggi di più</a>
-</div>
+                            <a href="dettaglio-spot.php?id=<?php echo $spot['idSpot']; ?>" class="btn btn-outline-primary btn-sm">
+                             Leggi di più
+                            </a>
+                        </div>
                     </div>
                 </div>
             <?php endforeach; ?>

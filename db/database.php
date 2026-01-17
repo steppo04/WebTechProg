@@ -8,6 +8,38 @@ class DatabaseHelper {
         if ($this->db->connect_error) {
             die("Connection failed: " . $this->db->connect_error);
         }
+
+        public function getSpotInfo($idSpot){
+            $query = "SELECT S.*, C.nome AS nomeCategoria, SC.nome AS nomeSottoCategoria, 
+                        U.nome AS nomeAutore, U.cognome AS cognomeAutore
+                        FROM SPOT S
+                        JOIN CATEGORIE C ON S.idCategoria = C.idCategoria
+                        LEFT JOIN SOTTOCATEGORIE SC ON S.idSottoCategoria = SC.idSottoCategoria
+                        LEFT JOIN UTENTI U ON S.usernameUtente = U.username
+                        WHERE S.stato = 'approvato' AND S.idSpot = ?";
+              
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param("i", $idSpot);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            return $result->fetch_assoc();
+        }
+
+        public function getComments($idSpot){
+            $query = "SELECT C.*, U.nome, U.cognome 
+              FROM COMMENTI C 
+              JOIN UTENTI U ON C.usernameUtente = U.username 
+              WHERE C.idSpot = ? 
+              ORDER BY C.dataPubblicazione ASC";
+              
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param("i", $idSpot);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            return $result->fetch_all(MYSQLI_ASSOC);
+        }
     }
 
     public function getUsers(){
