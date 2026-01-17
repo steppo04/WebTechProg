@@ -1,138 +1,152 @@
 <?php
 
-class DatabaseHelper {
+class DatabaseHelper
+{
     private $db;
 
-    public function __construct($servername, $username, $password, $dbname, $port) {
+    public function __construct($servername, $username, $password, $dbname, $port)
+    {
         $this->db = new mysqli($servername, $username, $password, $dbname, $port);
         if ($this->db->connect_error) {
             die("Connection failed: " . $this->db->connect_error);
         }
     }
 
-    public function getSpotInfo($idSpot){
-            $query = "SELECT S.*, C.nome AS nomeCategoria, SC.nome AS nomeSottoCategoria, 
+    public function getSpotInfo($idSpot)
+    {
+        $query = "SELECT S.*, C.nome AS nomeCategoria, SC.nome AS nomeSottoCategoria, 
                         U.nome AS nomeAutore, U.cognome AS cognomeAutore
                         FROM SPOT S
                         JOIN CATEGORIE C ON S.idCategoria = C.idCategoria
                         LEFT JOIN SOTTOCATEGORIE SC ON S.idSottoCategoria = SC.idSottoCategoria
                         LEFT JOIN UTENTI U ON S.usernameUtente = U.username
                         WHERE S.stato = 'approvato' AND S.idSpot = ?";
-              
-            $stmt = $this->db->prepare($query);
-            $stmt->bind_param("i", $idSpot);
-            $stmt->execute();
-            $result = $stmt->get_result();
 
-            return $result->fetch_assoc();
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("i", $idSpot);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_assoc();
     }
 
-    public function getComments($idSpot){
-            $query = "SELECT C.*, U.nome, U.cognome 
+    public function getComments($idSpot)
+    {
+        $query = "SELECT C.*, U.nome, U.cognome 
               FROM COMMENTI C 
               JOIN UTENTI U ON C.usernameUtente = U.username 
               WHERE C.idSpot = ? 
               ORDER BY C.dataPubblicazione ASC";
-              
-            $stmt = $this->db->prepare($query);
-            $stmt->bind_param("i", $idSpot);
-            $stmt->execute();
-            $result = $stmt->get_result();
 
-            return $result->fetch_all(MYSQLI_ASSOC);
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("i", $idSpot);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getUsers(){
+    public function getUsers()
+    {
         $stmt = $this->db->prepare("SELECT * FROM UTENTI");
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getCategories(){
+    public function getCategories()
+    {
         $stmt = $this->db->prepare("SELECT idCategoria,nome FROM CATEGORIE");
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getSubcategories(){
+    public function getSubcategories()
+    {
         $stmt = $this->db->prepare("SELECT idSottoCategoria, nome, idCategoria FROM SOTTOCATEGORIE");
         $stmt->execute();
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function insertSpot($titolo, $testo, $idCat, $idSubCat, $username) {
+    public function insertSpot($titolo, $testo, $idCat, $idSubCat, $username)
+    {
         $stmt = $this->db->prepare("INSERT INTO SPOT (titolo, testo, idCategoria, idSottoCategoria, usernameUtente, stato) VALUES (?, ?, ?, ?, ?, 'in_attesa')");
         $stmt->bind_param('ssiis', $titolo, $testo, $idCat, $idSubCat, $username);
         return $stmt->execute();
     }
 
-    public function getLastSpots($n){
-        
+    public function getLastSpots($n)
+    {
+
         $stmt = $this->db->prepare("SELECT * FROM spot WHERE stato='approvato' ORDER BY dataInserimento LIMIT ?");
-        $stmt->bind_param('i',$n);
+        $stmt->bind_param('i', $n);
         $stmt->execute();
         $result = $stmt->get_result();
 
         return $result->fetch_all(MYSQLI_ASSOC);
-    }     
-        
-    public function getSpotsByString($str){
-        
+    }
+
+    public function getSpotsByString($str)
+    {
+
         $query = "SELECT * FROM SPOT WHERE (titolo LIKE ? OR testo LIKE ?) 
             AND stato = 'approvato' 
             ORDER BY dataInserimento DESC";
 
         $stmt = $this->db->prepare($query);
-        $ricerca = "%".$str."%"; 
+        $ricerca = "%" . $str . "%";
         $stmt->bind_param("ss", $ricerca, $ricerca);
         $stmt->execute();
         $result = $stmt->get_result();
 
         return $result->fetch_all(MYSQLI_ASSOC);
-    }  
+    }
 
-    public function getSpotsByCategories($idCategorie){
+    public function getSpotsByCategories($idCategorie)
+    {
         $placeholders = implode(',', array_fill(0, count($idCategorie), '?'));
         $query = "SELECT * FROM SPOT 
                 WHERE idCategoria IN ($placeholders) 
                 AND stato = 'approvato'";
-        
+
         $stmt = $this->db->prepare($query);
         $types = str_repeat('i', count($idCategorie));
-        
+
         $stmt->bind_param($types, ...$idCategorie);
         $stmt->execute();
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getSpotsByCategoriesAndString($testo, $idCategorie) {
+    public function getSpotsByCategoriesAndString($testo, $idCategorie)
+    {
         $placeholders = implode(',', array_fill(0, count($idCategorie), '?'));
         $query = "SELECT * FROM SPOT 
                 WHERE (titolo LIKE ? OR testo LIKE ?) 
                 AND idCategoria IN ($placeholders) 
                 AND stato = 'approvato'";
-        
+
         $stmt = $this->db->prepare($query);
-        
+
         $parola = "%$testo%";
         $types = "ss" . str_repeat('i', count($idCategorie));
         $params = array_merge([$parola, $parola], $idCategorie);
-        
+
         $stmt->bind_param($types, ...$params);
         $stmt->execute();
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
 
-    public function getAllSubcategories() {
+    public function getAllSubcategories()
+    {
         $stmt = $this->db->prepare("SELECT idSottoCategoria, nome, idCategoria FROM SOTTOCATEGORIE ORDER BY nome ASC");
         $stmt->execute();
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getSpotById($idSpot) {
+    public function getSpotById($idSpot)
+    {
         $stmt = $this->db->prepare("SELECT * FROM SPOT WHERE idSpot = ?");
         $stmt->bind_param('i', $idSpot);
         $stmt->execute();
@@ -140,14 +154,16 @@ class DatabaseHelper {
     }
 
 
-    public function updateSpot($idSpot, $titolo, $testo, $idCat, $idSubCat) {
+    public function updateSpot($idSpot, $titolo, $testo, $idCat, $idSubCat)
+    {
         // Quando uno spot viene modificato, torna in stato in_attesa e deve essere riaprovato
         $stmt = $this->db->prepare("UPDATE SPOT SET titolo = ?, testo = ?, idCategoria = ?, idSottoCategoria = ?, stato = 'in_attesa' WHERE idSpot = ?");
         $stmt->bind_param('ssiii', $titolo, $testo, $idCat, $idSubCat, $idSpot);
         return $stmt->execute();
     }
 
-    public function deleteSpot($idSpot) {
+    public function deleteSpot($idSpot)
+    {
         $stmt = $this->db->prepare("DELETE FROM SPOT WHERE idSpot = ?");
         $stmt->bind_param('i', $idSpot);
         return $stmt->execute();
@@ -155,18 +171,47 @@ class DatabaseHelper {
 
     // query relative alla gestione degli utenti (bloccare o sbloccare users)
 
-    public function getUsersExceptAdmins(){
+    public function getUsersExceptAdmins()
+    {
         $query = "SELECT * FROM UTENTI u JOIN TIPI_UTENTI t ON u.idTipo = t.idTipo WHERE t.nomeTipo != 'admin' ";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function updateUserStatus($username, $nuovoStato) {
+    public function updateUserStatus($username, $nuovoStato)
+    {
         $stmt = $this->db->prepare("UPDATE UTENTI SET stato = ? WHERE username = ?");
         $stmt->bind_param('ss', $nuovoStato, $username);
         return $stmt->execute();
     }
-  
+
+    public function checkLogin($username, $password)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM UTENTI WHERE username = ?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            $user = $result->fetch_assoc();
+
+            if ($password === $user['password']) {
+
+                return $user;
+
+            }
+            return false;
+        }
+    }
+
+    public function insertUser($nome, $cognome, $username, $password)
+    {
+        $query = "INSERT INTO UTENTI (nome, cognome, username, password, stato, idTipo) VALUES (?, ?, ?, ?,'attivo',2)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('ssss', $nome, $cognome, $username, $password);
+        return $stmt->execute();
+    }
 }
+
 ?>
