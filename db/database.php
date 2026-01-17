@@ -67,7 +67,7 @@ class DatabaseHelper {
         $stmt->bind_param('ssiis', $titolo, $testo, $idCat, $idSubCat, $username);
         return $stmt->execute();
     }
-    
+
     public function getLastSpots($n){
         
         $stmt = $this->db->prepare("SELECT * FROM spot WHERE stato='approvato' ORDER BY dataInserimento LIMIT ?");
@@ -136,7 +136,7 @@ class DatabaseHelper {
         $stmt = $this->db->prepare("SELECT * FROM SPOT WHERE idSpot = ?");
         $stmt->bind_param('i', $idSpot);
         $stmt->execute();
-        return $stmt->get_result()->fetch_assoc();
+        return $stmt->get_result()->fetch_assoc(MYSQLI_ASSOC);
     }
 
 
@@ -150,6 +150,21 @@ class DatabaseHelper {
     public function deleteSpot($idSpot) {
         $stmt = $this->db->prepare("DELETE FROM SPOT WHERE idSpot = ?");
         $stmt->bind_param('i', $idSpot);
+        return $stmt->execute();
+    }
+
+    // query relative alla gestione degli utenti (bloccare o sbloccare users)
+
+    public function getUsersExceptAdmins(){
+        $query = "SELECT * FROM UTENTI u JOIN TIPI_UTENTI t ON u.idTipo = t.idTipo WHERE t.nomeTipo != 'admin' ";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function updateUserStatus($username, $nuovoStato) {
+        $stmt = $this->db->prepare("UPDATE UTENTI SET stato = ? WHERE username = ?");
+        $stmt->bind_param('ss', $nuovoStato, $username);
         return $stmt->execute();
     }
   
