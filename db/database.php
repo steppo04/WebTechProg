@@ -16,5 +16,24 @@
             $result = $stmt->get_result();
             return $result->fetch_all(MYSQLI_ASSOC);
         }
+
+        public function getCategories(){
+            $stmt = $this->db->prepare("SELECT idCategoria, nome FROM CATEGORIE");
+            $stmt->execute();
+            $result = $stmt->get_result();
+            return $result->fetch_all(MYSQLI_ASSOC);
+        }
+
+        public function getSubcategories(){
+            $stmt = $this->db->prepare("SELECT idSottoCategoria, nome, idCategoria FROM SOTTOCATEGORIE");
+            $stmt->execute();
+            return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        }
+
+        public function insertSpot($titolo, $testo, $idCategoria, $idSottocategoria, $username){
+            $stmt = $this->db->prepare("INSERT INTO SPOT (titolo, testo, idCategoria, idSottoCategoria, username) VALUES (?, ?, ?, ?, ?)");
+            $stmt->bind_param('ssiis', $titolo, $testo, $idCategoria, $idSottocategoria, $username);
+            return $stmt->execute();
+        }
     }
 ?>
