@@ -1,19 +1,22 @@
-INSERT INTO TIPI_UTENTI (Nome_tipo) VALUES 
-('Amministratore'),
-('Utente');
+USE spotted;
 
-INSERT INTO UTENTI (Username, Nome, Cognome, Password, Stato, Tipo_id) VALUES 
-('admin_max', 'Massimo', 'Decimo', 'adminpass123', 'attivo', 1),
-('luca_studente', 'Luca', 'Rossi', 'pizza123', 'attivo', 2),   
-('giulia_b', 'Giulia', 'Bianchi', 'gatto456', 'attivo', 2),
-('troll_account', 'Marco', 'Neri', '123456', 'bloccato', 2);   
+INSERT INTO TIPI_UTENTI (nomeTipo) VALUES 
+('admin'),
+('utente');
 
-INSERT INTO CATEGORIE (Nome) VALUES 
-('Aule'), 
+INSERT INTO UTENTI (username, nome, cognome, password, stato, idTipo) VALUES 
+('admin', 'Massimo', 'Decimo', 'admin', 'attivo', 1),
+('zleo24', 'Luca', 'Rossi', 'prova', 'attivo', 2),   
+('steppo04', 'Giulia', 'Bianchi', 'steps', 'attivo', 2),
+('giaguaro04', 'Leone', 'Bianchi', 'giags', 'attivo', 2),
+('utentebloccato', 'Marco', 'Neri', '123456', 'bloccato', 2);   
+
+INSERT INTO CATEGORIE (nome) VALUES 
+('Info Aule'), 
 ('Oggetti Smarriti'), 
 ('Info Universitarie');
 
-INSERT INTO SOTTOCATEGORIE (Nome, Categoria_id) VALUES 
+INSERT INTO SOTTOCATEGORIE (nome, idCategoria) VALUES 
 ('Biblioteca', 1),
 ('Mensa', 1),
 ('Aula Studio', 1),
@@ -21,28 +24,29 @@ INSERT INTO SOTTOCATEGORIE (Nome, Categoria_id) VALUES
 ('Libri/Appunti', 2),
 ('Esami', 3);
 
-INSERT INTO SPOT (Titolo, Testo_spot, Categoria_id, Sottocategoria_id, Utente_username, Admin_approvatore, Data_approvazione) 
+INSERT INTO SPOT (titolo, testo, stato, idCategoria, idSottoCategoria, usernameUtente, usernameAdminApprovato, dataApprovazione) 
 VALUES 
-('Aula Biblioteca', 'La polivalente è disponibile?', 1, 1, 'luca_studente', 'admin_max', NOW());
+('Aula Biblioteca', 'La polivalente è disponibile?', 'approvato', 1, 1, 'zleo24', 'admin', NOW());
 
-INSERT INTO SPOT (Titolo, Testo_spot, Categoria_id, Sottocategoria_id, Utente_username, Admin_approvatore, Data_approvazione) 
+INSERT INTO SPOT (titolo, testo, stato, idCategoria, idSottoCategoria, usernameUtente, usernameAdminApprovato, dataApprovazione) 
 VALUES 
-('Perso iPhone', 'Ho dimenticato il mio iPhone nero in mensa verso le 13:00. Aiuto!', 2, 4, 'giulia_b', NULL, NULL);
+('Perso iPhone', 'Ho dimenticato il mio iPhone nero in mensa verso le 13:00. Aiuto!', 'in_attesa', 2, 4, 'giaguaro04', NULL, NULL);
 
-INSERT INTO SPOT (Titolo, Testo_spot, Categoria_id, Sottocategoria_id, Utente_username, Admin_approvatore, Data_approvazione) 
+INSERT INTO SPOT (titolo, testo, stato, idCategoria, idSottoCategoria, usernameUtente, usernameAdminApprovato, dataApprovazione) 
 VALUES 
-('Domanda esame Basi di Dati', 'Qualcuno sa se il prof accetta i diagrammi fatti a mano?', 3, 6, 'luca_studente', 'admin_max', NOW());
+('Domanda esame Basi di Dati', 'Qualcuno sa se il prof accetta i diagrammi fatti a mano?', 'approvato', 3, 6, 'steppo04', 'admin', NOW());
 
-INSERT INTO COMMENTI (Testo, Spot_id, Utente_username) 
+INSERT INTO SPOT (titolo, testo, stato, idCategoria, idSottoCategoria, usernameUtente, usernameAdminApprovato, dataApprovazione) 
 VALUES 
-('Forse ero io, stavo studiando lì!', 1, 'giulia_b');
-
-INSERT INTO COMMENTI (Testo, Spot_id, Utente_username, Parent_id) 
+('Offerta illegale', 'Vendo risposte esame a 5 euro...', 'rifiutato', 3, 6, 'utentebloccato', 'admin', NOW());
+INSERT INTO COMMENTI (testo, idSpot, usernameUtente) 
 VALUES 
-('Scrivimi in privato!', 1, 'luca_studente', 1);
+('Forse ero io, stavo studiando lì!', 1, 'zleo24');
 
-INSERT INTO PREFERITI (Utente_username, Spot_id) VALUES 
-('giulia_b', 1),
-('luca_studente', 3);
+INSERT INTO COMMENTI (testo, idSpot, usernameUtente, idCommentoRisposto) 
+VALUES 
+('Scrivimi in privato!', 1, 'steppo04', 1);
 
-
+INSERT INTO PREFERITI (usernameUtente, idSpot) VALUES 
+('zleo24', 1),
+('steppo04', 3);

@@ -1,80 +1,81 @@
-DROP DATABASE IF EXISTS Spotted;
-CREATE DATABASE Spotted;
-USE Spotted;
+DROP DATABASE IF EXISTS spotted;
+CREATE DATABASE spotted;
+USE spotted;
 
 CREATE TABLE TIPI_UTENTI (
-    IDtipo INT AUTO_INCREMENT PRIMARY KEY, 
-    Nome_tipo VARCHAR(100) NOT NULL
+    idTipo INT AUTO_INCREMENT PRIMARY KEY, 
+    nomeTipo VARCHAR(100) NOT NULL
  )ENGINE=InnoDB;
 
 CREATE TABLE UTENTI (
-    Username VARCHAR(100) PRIMARY KEY,
-    Nome VARCHAR(100) NOT NULL,
-    Cognome VARCHAR(100) NOT NULL,
-    Password VARCHAR(255) NOT NULL,
-    Stato ENUM('attivo', 'bloccato') DEFAULT 'attivo',
-    Tipo_id INT NOT NULL, 
+    username VARCHAR(100) PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    cognome VARCHAR(100) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    stato ENUM('attivo', 'bloccato') DEFAULT 'attivo',
+    idTipo INT NOT NULL, 
 
-    FOREIGN KEY (Tipo_id) REFERENCES TIPI_UTENTI(IDtipo) ON DELETE CASCADE
+    FOREIGN KEY (idTipo) REFERENCES TIPI_UTENTI(idTipo) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 
 
 CREATE TABLE CATEGORIE (
-    Id INT AUTO_INCREMENT PRIMARY KEY,
-    Nome VARCHAR(100) UNIQUE NOT NULL
+    idCategoria INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) UNIQUE NOT NULL
 ) ENGINE=InnoDB;
 
 
 CREATE TABLE SOTTOCATEGORIE (
-    Id INT AUTO_INCREMENT PRIMARY KEY,
-    Nome VARCHAR(100) NOT NULL,
-    Categoria_id INT NOT NULL,
+    idSottoCategoria INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    idCategoria INT NOT NULL,
 
-    UNIQUE (Nome, Categoria_id),
-    FOREIGN KEY (Categoria_id) REFERENCES CATEGORIE(Id) ON DELETE CASCADE
+    UNIQUE (nome, idCategoria),
+    FOREIGN KEY (idCategoria) REFERENCES CATEGORIE(idCategoria) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 
 CREATE TABLE SPOT (
-    Id INT AUTO_INCREMENT PRIMARY KEY,
-    Titolo VARCHAR(255) NOT NULL,
-    Testo_spot TEXT NOT NULL,
-    Data_Inserimento DATETIME DEFAULT CURRENT_TIMESTAMP,
-    Categoria_id INT NOT NULL,
-    Sottocategoria_id INT,
-    Utente_username VARCHAR(100),
-    Admin_approvatore VARCHAR(100) NULL, 
-    Data_approvazione DATETIME NULL,
+    idSpot INT AUTO_INCREMENT PRIMARY KEY,
+    titolo VARCHAR(255) NOT NULL,
+    testo TEXT NOT NULL,
+    dataInserimento DATETIME DEFAULT CURRENT_TIMESTAMP,
+    stato ENUM('in_attesa', 'approvato', 'rifiutato') DEFAULT 'in_attesa',
+    idCategoria INT NOT NULL,
+    idSottoCategoria INT,
+    usernameUtente VARCHAR(100),
+    usernameAdminApprovato VARCHAR(100) NULL, 
+    dataApprovazione DATETIME NULL,
 
-    FOREIGN KEY (Categoria_id) REFERENCES CATEGORIE(Id),
-    FOREIGN KEY (Sottocategoria_id) REFERENCES SOTTOCATEGORIE(Id) ON DELETE SET NULL,
-    FOREIGN KEY (Utente_username) REFERENCES UTENTI(Username) ON DELETE SET NULL,
-    FOREIGN KEY (Admin_approvatore) REFERENCES UTENTI(Username) ON DELETE SET NULL
+    FOREIGN KEY (idCategoria) REFERENCES CATEGORIE(idCategoria),
+    FOREIGN KEY (idSottoCategoria) REFERENCES SOTTOCATEGORIE(idSottoCategoria) ON DELETE SET NULL,
+    FOREIGN KEY (usernameUtente) REFERENCES UTENTI(username) ON DELETE SET NULL,
+    FOREIGN KEY (usernameAdminApprovato) REFERENCES UTENTI(username) ON DELETE SET NULL
 ) ENGINE=InnoDB;
 
 
 CREATE TABLE PREFERITI (
-    Utente_username VARCHAR(100) NOT NULL,
-    Spot_id INT NOT NULL,
+    usernameUtente VARCHAR(100) NOT NULL,
+    idSpot INT NOT NULL,
 
-    PRIMARY KEY (Utente_username, Spot_id),
-    FOREIGN KEY (Utente_username) REFERENCES UTENTI(Username) ON DELETE CASCADE,
-    FOREIGN KEY (Spot_id) REFERENCES SPOT(Id) ON DELETE CASCADE
+    PRIMARY KEY (usernameUtente, idSpot),
+    FOREIGN KEY (usernameUtente) REFERENCES UTENTI(username) ON DELETE CASCADE,
+    FOREIGN KEY (idSpot) REFERENCES SPOT(idSpot) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 
 CREATE TABLE COMMENTI (
-    Id INT AUTO_INCREMENT PRIMARY KEY,
-    Testo TEXT NOT NULL,
-    Data DATETIME DEFAULT CURRENT_TIMESTAMP,
-    Spot_id INT NOT NULL,
-    Utente_username VARCHAR(100) NOT NULL,
-    Parent_id INT DEFAULT NULL,
+    idCommento INT AUTO_INCREMENT PRIMARY KEY,
+    testo TEXT NOT NULL,
+    dataPubblicazione DATETIME DEFAULT CURRENT_TIMESTAMP,
+    idSpot INT NOT NULL,
+    usernameUtente VARCHAR(100) NOT NULL,
+    idCommentoRisposto INT DEFAULT NULL,
 
-    FOREIGN KEY (Spot_id) REFERENCES SPOT(Id) ON DELETE CASCADE,
-    FOREIGN KEY (Utente_username) REFERENCES UTENTI(Username) ON DELETE CASCADE,
-    FOREIGN KEY (Parent_id) REFERENCES COMMENTI(Id) ON DELETE CASCADE
+    FOREIGN KEY (idSpot) REFERENCES SPOT(idSpot) ON DELETE CASCADE,
+    FOREIGN KEY (usernameUtente) REFERENCES UTENTI(username) ON DELETE CASCADE,
+    FOREIGN KEY (idCommentoRisposto) REFERENCES COMMENTI(idCommento) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 
