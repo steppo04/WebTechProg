@@ -13,7 +13,7 @@ $spotEsistente = null;
 if ($idSpot) {
     $spotEsistente = $dbh->getSpotById($idSpot);
     // Verifica che l'utente sia l'effettivo autore
-    if (!$spotEsistente /*|| $spotEsistente["usernameUtente"] != $_SESSION["username"]*/) {
+    if (!$spotEsistente || $spotEsistente["usernameUtente"] != $_SESSION["username"]) {
         header("location: index.php");
         exit();
     }

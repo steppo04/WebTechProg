@@ -214,6 +214,53 @@ class DatabaseHelper
         $stmt->bind_param('ssss', $nome, $cognome, $username, $password);
         return $stmt->execute();
     }
+
+    // In db/database.php
+
+public function getGeneralStats() {
+    $stats = [];
+    
+    // Conteggio spot per stato
+    $res = $this->db->query("SELECT stato, COUNT(*) as total FROM SPOT GROUP BY stato");
+    $results = $res->fetch_all(MYSQLI_ASSOC);
+    
+    // Inizializzo i valori di default
+    $stats['approvati'] = 0;
+    $stats['in_attesa'] = 0;
+    
+    foreach($results as $row) {
+        if($row['stato'] == 'approvato') $stats['approvati'] = $row['total'];
+        if($row['stato'] == 'in_attesa') $stats['in_attesa'] = $row['total'];
+    }
+    
+    // Totale Utenti Attivi
+    $res = $this->db->query("SELECT COUNT(*) as total FROM UTENTI WHERE stato = 'attivo'");
+    $stats['utenti_attivi'] = $res->fetch_assoc()['total'];
+    
+    return $stats;
+}
+
+public function getTopUser() {
+    // Query per trovare l'utente con più spot approvati (Fan più attivo)
+    $query = "SELECT usernameUtente, COUNT(*) as total 
+              FROM SPOT 
+              WHERE stato = 'approvato' 
+              GROUP BY usernameUtente 
+              ORDER BY total DESC LIMIT 1";
+    $res = $this->db->query($query);
+    return $res->fetch_assoc();
+}
+
+public function getTopCategory() {
+    // Query per trovare la categoria con più spot
+    $query = "SELECT C.nome, COUNT(S.idSpot) as total 
+              FROM CATEGORIE C 
+              LEFT JOIN SPOT S ON C.idCategoria = S.idCategoria 
+              GROUP BY C.idCategoria 
+              ORDER BY total DESC LIMIT 1";
+    $res = $this->db->query($query);
+    return $res->fetch_assoc();
+}
 }
 
 ?>

@@ -32,10 +32,16 @@
           <li class="nav-item">
             <a class="nav-link disabled" aria-disabled="true">Disabled</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="gestione-utenti.php">Gestione Utenti</a>
-          </li>
+          <?php if(isset($_SESSION["admin"]) && $_SESSION["admin"] === true): ?>
+        <li class="nav-item">
+            <a class="nav-link text-warning" href="gestione-utenti.php">Gestione Utenti</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-warning fw-bold" href="admin-stats.php">Statistiche</a>
+        </li>
+    <?php endif; ?>
         </ul>
+        
         <?php if (!isUserLoggedIn() && !isAdminLoggedIn()): ?>
           <a href="login.php" class="btn btn-outline-light me-2">Accedi</a>
         <?php else: ?>
