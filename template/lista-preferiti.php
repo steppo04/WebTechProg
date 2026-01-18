@@ -28,7 +28,7 @@
             <?php if(count($templateParams["spot"]) > 0): ?>
                 <?php foreach($templateParams["spot"] as $spot): ?>
                     <div class="col-12 col-md-6 col-lg-4">
-                        <div class="card h-100 shadow-sm">
+                        <div class="card h-100 shadow-sm card-spot">
                             <div class="card-header bg-danger text-white">
                                 <h5 class="card-title mb-0"><?php echo $spot["titolo"]; ?></h5>
                             </div>
