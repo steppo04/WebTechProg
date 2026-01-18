@@ -1,52 +1,157 @@
-<section class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-            <div class="card shadow rounded-3 border-0">
-                <div class="card-body p-5">
+<style>
+    /* Aesthetic Red Background */
+    .aesthetic-wrapper {
+        min-height: 100vh;
+        font-family: 'Outfit', sans-serif;
+        background-color: #b92b27;
+        color: #333;
+        overflow-x: hidden;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-                    <h1 class="h2 text-center mb-4 text-dark fw-bold">Login</h1>
+    .aesthetic-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #a71d31 0%, #3f0d12 100%);
+        z-index: -2;
+    }
 
-                    <?php if (isset($templateParams["errorelogin"])): ?>
-                        <div class="alert alert-danger" role="alert" aria-live="assertive">
-                            <?php echo $templateParams["errorelogin"]; ?>
-                        </div>
-                    <?php endif; ?>
+    .noise-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.05;
+        background: url('https://grainy-gradients.vercel.app/noise.svg');
+        pointer-events: none;
+        z-index: -1;
+    }
 
-                    <form action="login.php" method="POST">
+    .auth-card {
+        background: #ffffff;
+        border: 4px solid #1a1a1a;
+        border-radius: 16px;
+        padding: 3rem 2.5rem;
+        width: 100%;
+        max-width: 450px;
+        position: relative;
+        box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.2);
+        z-index: 10;
+        transform: rotate(-0.5deg);
+    }
 
-                        <div class="mb-4">
-                            <label for="username" class="form-label fw-semibold text-dark">Username</label>
-                            <input type="text" id="username" name="username"
-                                class="form-control form-control-lg border-secondary" required aria-required="true"
-                                autocomplete="username" />
-                        </div>
+    .auth-title {
+        font-size: 2.5rem;
+        font-weight: 900;
+        color: #b92b27;
+        text-transform: uppercase;
+        margin-bottom: 2rem;
+        text-align: center;
+        letter-spacing: -1px;
+    }
 
-                        <div class="mb-4">
-                            <label for="password" class="form-label fw-semibold text-dark">Password</label>
-                            <input type="password" id="password" name="password"
-                                class="form-control form-control-lg border-secondary" required aria-required="true"
-                                autocomplete="current-password" />
-                        </div>
+    .form-label {
+        font-weight: 700;
+        color: #333;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        letter-spacing: 0.5px;
+    }
 
-                        <div class="d-grid gap-2 mb-4">
-                            <button class="btn btn-primary btn-lg" type="submit">Accedi</button>
-                        </div>
+    .form-control {
+        border: 2px solid #1a1a1a;
+        border-radius: 8px;
+        padding: 10px 15px;
+        font-weight: 500;
+        background-color: #f9f9f9;
+        transition: all 0.2s;
+    }
 
-                        <hr class="my-4">
+    .form-control:focus {
+        background-color: #fff;
+        border-color: #b92b27;
+        box-shadow: 0 0 0 3px rgba(185, 43, 39, 0.1);
+    }
 
-                        <div class="text-center">
-                            <p class="mb-0 text-dark">
-                                Non sei ancora registrato?
-                                <br>
-                                <a href="sign-up.php" class="link-primary fw-bold text-decoration-underline">Registrati
-                                    qui</a>
-                            </p>
-                        </div>
+    .btn-auth {
+        background-color: #a71d31;
+        color: white;
+        border: 2px solid #a71d31;
+        border-radius: 50px;
+        font-weight: 700;
+        padding: 12px;
+        width: 100%;
+        text-transform: uppercase;
+        margin-top: 1rem;
+        transition: all 0.2s;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
 
-                    </form>
+    .btn-auth:hover {
+        background-color: #801020;
+        border-color: #801020;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        color: white;
+    }
 
-                </div>
+    .auth-link {
+        color: #b92b27;
+        font-weight: 700;
+        text-decoration: none;
+        border-bottom: 2px solid transparent;
+        transition: border-color 0.2s;
+    }
+
+    .auth-link:hover {
+        border-color: #b92b27;
+        color: #801020;
+    }
+</style>
+
+<div class="aesthetic-wrapper">
+    <div class="aesthetic-bg"></div>
+    <div class="noise-overlay"></div>
+
+    <div class="auth-card">
+        <h1 class="auth-title">Login</h1>
+
+        <?php if (isset($templateParams["errorelogin"])): ?>
+            <div class="alert alert-danger border-2 border-danger text-center fw-bold" role="alert">
+                <?php echo $templateParams["errorelogin"]; ?>
             </div>
-        </div>
+        <?php endif; ?>
+
+        <form action="login.php" method="POST">
+            <div class="mb-4">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" id="username" name="username" class="form-control" required
+                    autocomplete="username" />
+            </div>
+
+            <div class="mb-4">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" id="password" name="password" class="form-control" required
+                    autocomplete="current-password" />
+            </div>
+
+            <div class="d-grid mb-4">
+                <button class="btn btn-auth" type="submit">Accedi</button>
+            </div>
+
+            <div class="text-center mt-4">
+                <p class="mb-0 text-muted small fw-bold">
+                    Non sei ancora registrato? <br>
+                    <a href="sign-up.php" class="auth-link">CREA UN ACCOUNT</a>
+                </p>
+            </div>
+        </form>
     </div>
-</section>
+</div>

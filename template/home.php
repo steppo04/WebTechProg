@@ -1,5 +1,4 @@
 <style>
-    /* --- 1. SFONDO AESTHETIC (Noise + Gradiente) --- */
     .aesthetic-wrapper {
         min-height: 100vh;
         font-family: 'Outfit', sans-serif;
@@ -15,12 +14,10 @@
         left: 0;
         width: 100%;
         height: 100%;
-        /* Gradiente rosso intenso */
         background: linear-gradient(135deg, #a71d31 0%, #3f0d12 100%);
         z-index: -2;
     }
 
-    /* Effetto "Grana" (Noise) per renderlo premium */
     .noise-overlay {
         position: fixed;
         top: 0;
@@ -33,51 +30,45 @@
         z-index: -1;
     }
 
-    /* --- 3. IL CARTELLO (Geometrico & Pulito) --- */
+
     .hanging-system {
         position: relative;
         width: 100%;
         max-width: 650px;
         margin: 60px auto 40px;
-        /* Animazione delicata di galleggiamento verticale */
         animation: float 4s ease-in-out infinite alternate;
     }
 
-    /* I cavi di sospensione (DRITTI) */
     .wire {
         position: absolute;
         top: -100px;
         width: 4px;
         height: 100px;
         background-color: #1a1a1a;
-        /* Nero opaco */
         z-index: 1;
     }
 
     .wire.left {
         left: 18%;
+        height: 104px;
     }
 
     .wire.right {
         right: 23%;
     }
 
-    /* Il Cartello */
     .sign-board {
         position: relative;
         background: #ffffff;
-        /* BORDO SPESSO E DEFINITO */
         border: 4px solid #1a1a1a;
         border-radius: 16px;
         padding: 3rem 2rem;
         text-align: center;
-        /* Ombra dura per staccarlo dallo sfondo */
         box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.2);
         transform: rotate(-1deg);
-        /* Leggerissima inclinazione estetica fissa */
+        z-index: 2;
     }
 
-    /* Le clip che reggono il cartello */
     .clip {
         width: 20px;
         height: 30px;
@@ -88,20 +79,12 @@
         z-index: 2;
     }
 
-    .clip.left {
-        left: calc(18% - 8px);
-    }
 
-    .clip.right {
-        right: calc(23% - 13px);
-    }
 
-    /* Testi del Cartello */
     .title-main {
         font-size: 3rem;
         font-weight: 900;
         color: #b92b27;
-        /* Rosso Brand */
         text-transform: uppercase;
         letter-spacing: -1px;
         margin-bottom: 1rem;
@@ -115,7 +98,6 @@
         line-height: 1.6;
     }
 
-    /* Pulsanti (Stile pillola come nella foto ma moderni) */
     .btn-custom {
         padding: 12px 30px;
         border-radius: 50px;
@@ -125,7 +107,6 @@
         display: inline-block;
     }
 
-    /* Bottone 1: Scopri (Rosso Scuro) */
     .btn-scopri {
         background-color: #a71d31;
         color: white;
@@ -139,7 +120,6 @@
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     }
 
-    /* Bottone 2: Crea (Rosso Acceso / Outline) */
     .btn-crea {
         background-color: #d63031;
         color: white;
@@ -153,7 +133,6 @@
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     }
 
-    /* Bottone Accedi (Variante per coerenza) */
     .btn-accedi {
         background-color: transparent;
         color: #d63031;
@@ -168,7 +147,6 @@
     }
 
 
-    /* --- 4. LE CARD SOTTOSTANTI --- */
     .card-container {
         display: flex;
         justify-content: center;
@@ -180,13 +158,11 @@
     .info-box {
         background: white;
         border: 3px solid #1a1a1a;
-        /* Bordo coerente col cartello */
         border-radius: 12px;
         padding: 2rem 1.5rem;
         width: 300px;
         text-align: center;
         box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.15);
-        /* Ombra solida */
         transition: all 0.3s ease;
     }
 
@@ -220,7 +196,6 @@
         line-height: 1.5;
     }
 
-    /* Animazione galleggiamento */
     @keyframes float {
         0% {
             transform: translateY(0px);
@@ -243,8 +218,7 @@
             <div class="wire right"></div>
 
             <div class="sign-board">
-                <div class="clip left"></div>
-                <div class="clip right"></div>
+
 
                 <h1 class="title-main">SPOTTED CAMPUS</h1>
                 <p class="text-desc">
