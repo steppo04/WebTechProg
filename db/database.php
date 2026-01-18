@@ -169,8 +169,6 @@ class DatabaseHelper
         return $stmt->execute();
     }
 
-    // query relative alla gestione degli utenti (bloccare o sbloccare users)
-
     public function getUsersExceptAdmins()
     {
         $query = "SELECT * FROM UTENTI u JOIN TIPI_UTENTI t ON u.idTipo = t.idTipo WHERE t.nomeTipo != 'admin' ";
@@ -215,52 +213,46 @@ class DatabaseHelper
         return $stmt->execute();
     }
 
-    // In db/database.php
-
-public function getGeneralStats() {
-    $stats = [];
-    
-    // Conteggio spot per stato
-    $res = $this->db->query("SELECT stato, COUNT(*) as total FROM SPOT GROUP BY stato");
-    $results = $res->fetch_all(MYSQLI_ASSOC);
-    
-    // Inizializzo i valori di default
-    $stats['approvati'] = 0;
-    $stats['in_attesa'] = 0;
-    
-    foreach($results as $row) {
-        if($row['stato'] == 'approvato') $stats['approvati'] = $row['total'];
-        if($row['stato'] == 'in_attesa') $stats['in_attesa'] = $row['total'];
+    public function getGeneralStats() {
+        $stats = [];
+        
+        $res = $this->db->query("SELECT stato, COUNT(*) as total FROM SPOT GROUP BY stato");
+        $results = $res->fetch_all(MYSQLI_ASSOC);
+        
+        $stats['approvati'] = 0;
+        $stats['in_attesa'] = 0;
+        
+        foreach($results as $row) {
+            if($row['stato'] == 'approvato') $stats['approvati'] = $row['total'];
+            if($row['stato'] == 'in_attesa') $stats['in_attesa'] = $row['total'];
+        }
+        
+        $res = $this->db->query("SELECT COUNT(*) as total FROM UTENTI WHERE stato = 'attivo'");
+        $stats['utenti_attivi'] = $res->fetch_assoc()['total'];
+        
+        return $stats;
     }
-    
-    // Totale Utenti Attivi
-    $res = $this->db->query("SELECT COUNT(*) as total FROM UTENTI WHERE stato = 'attivo'");
-    $stats['utenti_attivi'] = $res->fetch_assoc()['total'];
-    
-    return $stats;
-}
 
-public function getTopUser() {
-    // Query per trovare l'utente con più spot approvati (Fan più attivo)
-    $query = "SELECT usernameUtente, COUNT(*) as total 
-              FROM SPOT 
-              WHERE stato = 'approvato' 
-              GROUP BY usernameUtente 
-              ORDER BY total DESC LIMIT 1";
-    $res = $this->db->query($query);
-    return $res->fetch_assoc();
-}
+    public function getTopUser() {
+        $query = "SELECT usernameUtente, COUNT(*) as total 
+                FROM SPOT 
+                WHERE stato = 'approvato' 
+                GROUP BY usernameUtente 
+                ORDER BY total DESC LIMIT 1";
+        $res = $this->db->query($query);
+        return $res->fetch_assoc();
+    }
 
-public function getTopCategory() {
-    // Query per trovare la categoria con più spot
-    $query = "SELECT C.nome, COUNT(S.idSpot) as total 
-              FROM CATEGORIE C 
-              LEFT JOIN SPOT S ON C.idCategoria = S.idCategoria 
-              GROUP BY C.idCategoria 
-              ORDER BY total DESC LIMIT 1";
-    $res = $this->db->query($query);
-    return $res->fetch_assoc();
-}
+    public function getTopCategory() {
+        $query = "SELECT C.nome, COUNT(S.idSpot) as total 
+                FROM CATEGORIE C 
+                LEFT JOIN SPOT S ON C.idCategoria = S.idCategoria 
+                GROUP BY C.idCategoria 
+                ORDER BY total DESC LIMIT 1";
+        $res = $this->db->query($query);
+        return $res->fetch_assoc();
+    }
+
     public function isSpotPreferito($usr,$idSpot)
     {
         $query = "SELECT * FROM PREFERITI 
@@ -294,20 +286,20 @@ public function getTopCategory() {
 
     public function getUserFavorites($username, $orderBy) {
     
-    $query = "SELECT S.*, C.nome AS nomeCategoria, U.nome, U.cognome 
-              FROM SPOT S
-              JOIN PREFERITI P ON S.idSpot = P.idSpot
-              JOIN CATEGORIE C ON S.idCategoria = C.idCategoria
-              JOIN UTENTI U ON S.usernameUtente = U.username
-              WHERE P.usernameUtente = ? AND S.stato = 'approvato'
-              ORDER BY $orderBy";
-              
-    $stmt = $this->db->prepare($query);
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $result = $stmt->get_result();
+        $query = "SELECT S.*, C.nome AS nomeCategoria, U.nome, U.cognome 
+                FROM SPOT S
+                JOIN PREFERITI P ON S.idSpot = P.idSpot
+                JOIN CATEGORIE C ON S.idCategoria = C.idCategoria
+                JOIN UTENTI U ON S.usernameUtente = U.username
+                WHERE P.usernameUtente = ? AND S.stato = 'approvato'
+                ORDER BY $orderBy";
+                
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-    return $result->fetch_all(MYSQLI_ASSOC);
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 
     public function insertComment($usr,$idSpot,$commento,$idPadre){
@@ -329,6 +321,25 @@ public function getTopCategory() {
         $result = $stmt->get_result();
         
         return $result->fetch_assoc();
+    }
+
+
+    public function getPendingSpots() {
+        $query = "SELECT S.*, C.nome AS nomeCategoria, U.nome AS nomeAutore, U.cognome AS cognomeAutore 
+                FROM SPOT S
+                JOIN CATEGORIE C ON S.idCategoria = C.idCategoria
+                JOIN UTENTI U ON S.usernameUtente = U.username
+                WHERE S.stato = 'in_attesa'
+                ORDER BY S.dataInserimento ASC";
+        $res = $this->db->query($query);
+        return $res->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function updateSpotStatus($idSpot, $nuovoStato, $adminUsername) {
+        $query = "UPDATE SPOT SET stato = ?, usernameAdminApprovato = ?, dataApprovazione = NOW() WHERE idSpot = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('ssi', $nuovoStato, $adminUsername, $idSpot);
+        return $stmt->execute();
     }
 }
 
