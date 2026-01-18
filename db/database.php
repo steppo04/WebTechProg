@@ -32,11 +32,11 @@ class DatabaseHelper
 
     public function getComments($idSpot)
     {
-        $query = "SELECT C.*, U.nome, U.cognome 
-              FROM COMMENTI C 
-              JOIN UTENTI U ON C.usernameUtente = U.username 
-              WHERE C.idSpot = ? 
-              ORDER BY C.dataPubblicazione ASC";
+        $query = "SELECT C1.*, C2.testo AS testoPadre, C2.usernameUtente AS autorePadre
+            FROM COMMENTI C1
+            LEFT JOIN COMMENTI C2 ON C1.idCommentoRisposto = C2.idCommento
+            WHERE C1.idSpot = ?
+            ORDER BY C1.dataPubblicazione ASC";
 
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i", $idSpot);
@@ -310,15 +310,25 @@ public function getTopCategory() {
     return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function insertComment($usr,$idSpot,$commento){
+    public function insertComment($usr,$idSpot,$commento,$idPadre){
         $query = "INSERT INTO COMMENTI(testo,dataPubblicazione,idSpot,usernameUtente,idCommentoRisposto)
-                    values (?,NOW(),?,?,NULL)";
+                    values (?,NOW(),?,?,?)";
               
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param("sis", $commento,$idSpot,$usr);
+        $stmt->bind_param("sisi", $commento,$idSpot,$usr,$idPadre);
         
 
-        return $stmt->execute();;
+        return $stmt->execute();
+    }
+
+    public function getCommentById($idCommento) {
+        $query = "SELECT usernameUtente, testo FROM COMMENTI WHERE idCommento = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("i", $idCommento);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        return $result->fetch_assoc();
     }
 }
 

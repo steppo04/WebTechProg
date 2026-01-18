@@ -71,11 +71,31 @@
                     <?php if(count($templateParams["commenti"]) > 0): ?>
                         <?php foreach($templateParams["commenti"] as $commento): ?>
                             <div class="list-group-item border-start border-danger border-4 mb-2 shadow-sm rounded">
+                                
+                                <?php if(!empty($commento["idCommentoRisposto"])): ?>
+                                    <div class="bg-light border-start border-secondary border-2 p-1 mb-2 rounded shadow-sm" style="font-size: 0.75rem; opacity: 0.8;">
+                                        <span class="text-muted fw-bold">
+                                            <i class="bi bi-quote"></i> In risposta a <?php echo htmlspecialchars($commento["autorePadre"] ?? 'utente'); ?>:
+                                        </span>
+                                        <p class="mb-0 text-truncate italic">
+                                            "<?php echo htmlspecialchars($commento["testoPadre"] ?? 'messaggio rimosso'); ?>"
+                                        </p>
+                                    </div>
+                                <?php endif; ?>
+
                                 <div class="d-flex justify-content-between">
                                     <h6 class="mb-1 fw-bold"><?php echo htmlspecialchars($commento["usernameUtente"]); ?></h6>
                                     <small class="text-muted"><?php echo date("H:i", strtotime($commento["dataPubblicazione"])); ?></small>
-                                </div>
+                                </div> 
+
                                 <p class="mb-1 small"><?php echo htmlspecialchars($commento["testo"]); ?></p>
+
+                                <div class="text-end">
+                                    <a href="?id=<?php echo $templateParams['spot']['idSpot']; ?>&rspTo=<?php echo $commento['idCommento']; ?>  " 
+                                    class="text-decoration-none small fw-bold text-danger" style="font-size: 0.75rem;">
+                                        <i class="bi bi-reply"></i> Rispondi
+                                    </a>
+                                </div>
                             </div>
                         <?php endforeach; ?>
                     <?php else: ?>
@@ -84,13 +104,35 @@
                 </div>
 
                 <div class="card card-body bg-light border-0">
+                    <?php if(isset($_GET["rspTo"])): 
+                        $commentoDaRispondere = $dbh->getCommentById($_GET["rspTo"]);
+                    ?>
+                        <div class="alert alert-white border-start border-danger border-4 shadow-sm mb-3 py-2 position-relative">
+                            <button type="button" class="btn-close position-absolute top-0 end-0 p-2" style="font-size: 0.6rem;" 
+                                    onclick="window.location.href='dettaglio-spot.php?id=<?php echo $templateParams['spot']['idSpot']; ?>'"></button>
+                            
+                            <small class="text-danger fw-bold d-block mb-1" style="font-size: 0.7rem;">
+                                <i class="bi bi-reply-fill"></i> Stai rispondendo a <?php echo htmlspecialchars($commentoDaRispondere["usernameUtente"]); ?>:
+                            </small>
+                            <p class="mb-0 text-muted small text-truncate">
+                                "<?php echo htmlspecialchars($commentoDaRispondere["testo"]); ?>"
+                            </p>
+                        </div>
+                    <?php endif; ?>
+
                     <form action="aggiungi-commento.php" method="POST">
                         <input type="hidden" name="idSpot" value="<?php echo $templateParams["spot"]["idSpot"]; ?>">
+                        
+                        <input type="hidden" name="idCommentoRisposto" value="<?php echo $_GET["rspTo"] ?? ''; ?>">
+
                         <div class="mb-3">
                             <label for="commento" class="visually-hidden">Scrivi un commento</label>
-                            <textarea class="form-control form-control-sm" name="testo" id="commento" rows="3" placeholder="Scrivi un commento..."></textarea>
+                            <textarea class="form-control form-control-sm" name="testo" id="commento" rows="3" 
+                                    placeholder="Scrivi un commento..."></textarea>
                         </div>
-                        <button type="submit" class="btn btn-danger btn-sm w-100">Invia</button>
+                        <button type="submit" class="btn btn-danger btn-sm w-100">
+                            Invia Commento
+                        </button>
                     </form>
                 </div>
             </aside>
