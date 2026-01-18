@@ -68,7 +68,7 @@
         </div>
     <?php endif; ?>
 
-    <div class="row g-4">
+    <div class="row g-4 border-top mt-2">
         <?php if(count($templateParams["spot"]) > 0): ?>
             <?php foreach($templateParams["spot"] as $spot): ?>
                 <div class="col-12 col-md-6 col-lg-4">

@@ -29,7 +29,8 @@
           </li>
           <li class="nav-item"><a class="nav-link" href="lista-categoria.php">Lista Spotted</a></li>
           <?php if((!isset($_SESSION["admin"]) || $_SESSION["admin"] === false) && isUserLoggedIn()): ?>
-        <li class="nav-item"><a class="nav-link" href="gestione-spot.php">Crea Spot</a></li>
+            <li class="nav-item"><a class="nav-link" href="gestione-spot.php">Crea Spot</a></li>
+            <li class="nav-item"><a class="nav-link" href="preferiti.php">I miei preferiti</a></li>
           <?php endif; ?>
           <li class="nav-item">
             <a class="nav-link disabled" aria-disabled="true">Disabled</a>

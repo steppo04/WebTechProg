@@ -292,6 +292,23 @@ public function getTopCategory() {
         return $stmt->execute();
     }
 
+    public function getUserFavorites($usr){
+        $query = "SELECT S.*, C.nome AS nomeCategoria, U.nome, U.cognome 
+              FROM SPOT S
+              JOIN PREFERITI P ON S.idSpot = P.idSpot
+              JOIN CATEGORIE C ON S.idCategoria = C.idCategoria
+              JOIN UTENTI U ON S.usernameUtente = U.username
+              WHERE P.usernameUtente = ? AND S.stato = 'approvato'
+              ORDER BY S.dataInserimento DESC";
+              
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("s", $usr);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
 }
 
 ?>
