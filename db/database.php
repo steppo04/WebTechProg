@@ -150,7 +150,7 @@ class DatabaseHelper
         $stmt = $this->db->prepare("SELECT * FROM SPOT WHERE idSpot = ?");
         $stmt->bind_param('i', $idSpot);
         $stmt->execute();
-        return $stmt->get_result()->fetch_assoc(MYSQLI_ASSOC);
+        return $stmt->get_result()->fetch_assoc();
     }
 
 

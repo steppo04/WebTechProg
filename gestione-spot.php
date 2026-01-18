@@ -7,7 +7,7 @@ if (!isUserLoggedIn()) {
     exit();
 }
 
-if (isset($_SESSION["admin"]) || $_SESSION["admin"] == true) {
+if (isset($_SESSION["admin"]) && $_SESSION["admin"] == true) {
     header("location: index.php");
     exit();
 }
