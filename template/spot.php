@@ -32,9 +32,15 @@
                     </div>
                 </div>
 
-                <div class="card-footer bg-transparent">
-                    <a href="lista-categoria.php" class="btn btn-outline-secondary btn-sm">Torna alla lista</a>
-                </div>
+                <div class="card-footer bg-transparent d-flex justify-content-between align-items-center">
+    <a href="lista-categoria.php" class="btn btn-outline-secondary btn-sm">Torna alla lista</a>
+    
+    <?php if(isUserLoggedIn() && $_SESSION["username"] == $templateParams["spot"]["usernameUtente"]): ?>
+        <a href="gestione-spot.php?id=<?php echo $templateParams["spot"]["idSpot"]; ?>" class="btn btn-warning btn-sm">
+            <i class="bi bi-pencil-square"></i> Modifica / Elimina
+        </a>
+    <?php endif; ?>
+</div>
             </article>
         </div>
 
