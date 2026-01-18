@@ -30,6 +30,15 @@ VALUES
 
 INSERT INTO SPOT (titolo, testo, stato, idCategoria, idSottoCategoria, usernameUtente, usernameAdminApprovato, dataApprovazione) 
 VALUES 
+('Spotto ragazza', 'Chi è la ragazza che si trova sempre in polivalente?', 'approvato', 1, 1, 'zleo24', 'admin', NOW());
+
+INSERT INTO SPOT (titolo, testo, stato, idCategoria, idSottoCategoria, usernameUtente, usernameAdminApprovato, dataApprovazione) 
+VALUES 
+('Spotto GymBro', 'Qualcuno vuole venire con me in palestra? ', 'approvato', 1, 1, 'zleo24', 'admin', NOW());
+
+
+INSERT INTO SPOT (titolo, testo, stato, idCategoria, idSottoCategoria, usernameUtente, usernameAdminApprovato, dataApprovazione) 
+VALUES 
 ('Perso iPhone', 'Ho dimenticato il mio iPhone nero in mensa verso le 13:00. Aiuto!', 'in_attesa', 2, 4, 'giaguaro04', NULL, NULL);
 
 INSERT INTO SPOT (titolo, testo, stato, idCategoria, idSottoCategoria, usernameUtente, usernameAdminApprovato, dataApprovazione) 

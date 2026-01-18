@@ -1,6 +1,6 @@
 <section class="container mt-5">
 
-    <div class="row justify-content-center mb-5">
+    <div class="row justify-content-center mb-3">
 
         <div class="col-md-8 col-lg-6">
 
@@ -68,7 +68,7 @@
         </div>
     <?php endif; ?>
 
-    <div class="row g-4 border-top mt-2">
+    <div class="row g-4 border-top mt-2 mb-4">
         <?php if(count($templateParams["spot"]) > 0): ?>
             <?php foreach($templateParams["spot"] as $spot): ?>
                 <div class="col-12 col-md-6 col-lg-4">
