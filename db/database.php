@@ -309,6 +309,17 @@ public function getTopCategory() {
 
     return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+    public function insertComment($usr,$idSpot,$commento){
+        $query = "INSERT INTO COMMENTI(testo,dataPubblicazione,idSpot,usernameUtente,idCommentoRisposto)
+                    values (?,NOW(),?,?,NULL)";
+              
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("sis", $commento,$idSpot,$usr);
+        
+
+        return $stmt->execute();;
+    }
 }
 
 ?>

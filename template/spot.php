@@ -67,7 +67,7 @@
             <aside>
                 <h3 class="h5 mb-3"><i class="bi bi-chat-dots"></i> Commenti (<?php echo count($templateParams["commenti"]); ?>)</h3>
                 
-                <div class="list-group mb-3">
+                <div class="list-group mb-3 overflow-auto" style="max-height: 50vh;">
                     <?php if(count($templateParams["commenti"]) > 0): ?>
                         <?php foreach($templateParams["commenti"] as $commento): ?>
                             <div class="list-group-item border-start border-danger border-4 mb-2 shadow-sm rounded">
