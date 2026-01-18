@@ -38,5 +38,38 @@
             </article>
         </div>
 
+        <div class="col-md-4 border-start">
+            <aside>
+                <h3 class="h5 mb-3"><i class="bi bi-chat-dots"></i> Commenti (<?php echo count($templateParams["commenti"]); ?>)</h3>
+                
+                <div class="list-group mb-3">
+                    <?php if(count($templateParams["commenti"]) > 0): ?>
+                        <?php foreach($templateParams["commenti"] as $commento): ?>
+                            <div class="list-group-item border-start border-danger border-4 mb-2 shadow-sm rounded">
+                                <div class="d-flex justify-content-between">
+                                    <h6 class="mb-1 fw-bold"><?php echo htmlspecialchars($commento["usernameUtente"]); ?></h6>
+                                    <small class="text-muted"><?php echo date("H:i", strtotime($commento["dataPubblicazione"])); ?></small>
+                                </div>
+                                <p class="mb-1 small"><?php echo htmlspecialchars($commento["testo"]); ?></p>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <p class="text-muted">Ancora nessun commento. Sii il primo!</p>
+                    <?php endif; ?>
+                </div>
+
+                <div class="card card-body bg-light border-0">
+                    <form action="aggiungi-commento.php" method="POST">
+                        <input type="hidden" name="idSpot" value="<?php echo $templateParams["spot"]["idSpot"]; ?>">
+                        <div class="mb-3">
+                            <label for="commento" class="visually-hidden">Scrivi un commento</label>
+                            <textarea class="form-control form-control-sm" name="testo" id="commento" rows="3" placeholder="Scrivi un commento..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-danger btn-sm w-100">Invia</button>
+                    </form>
+                </div>
+            </aside>
+        </div>
+
     </div>
 </section>
