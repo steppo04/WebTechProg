@@ -261,6 +261,37 @@ public function getTopCategory() {
     $res = $this->db->query($query);
     return $res->fetch_assoc();
 }
+    public function isSpotPreferito($usr,$idSpot)
+    {
+        $query = "SELECT * FROM PREFERITI 
+                    WHERE usernameUtente = ? AND idSpot = ?;";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("si", $usr, $idSpot);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        return $result->num_rows > 0;
+    }
+
+    public function aggiungiPreferito($usr,$idSpot){
+        $query = "INSERT INTO PREFERITI(usernameUtente,idSpot) values(?,?)";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("si", $usr, $idSpot);
+        
+        return $stmt->execute();
+    }
+
+    public function rimuoviPreferito($usr,$idSpot){
+        $query = "DELETE FROM PREFERITI WHERE usernameUtente=? AND idSpot=? ";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("si", $usr, $idSpot);
+        
+        return $stmt->execute();
+    }
+
 }
 
 ?>

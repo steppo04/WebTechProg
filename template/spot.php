@@ -5,9 +5,28 @@
             <article class="card shadow-sm mb-4" >
 
                 <div class="card-header bg-danger text-white d-flex justify-content-between align-items-center">
-                    <h1 class="h4"><?php echo htmlspecialchars($templateParams["spot"]["titolo"]); ?></h1>
-                    <span class="badge bg-light text-danger">#<?php echo $templateParams["spot"]["idSpot"]; ?></span>
-                </div>
+                <h1 class="h4 mb-0"><?php echo htmlspecialchars($templateParams["spot"]["titolo"]); ?></h1>
+
+                <?php 
+                $iconaClass = "bi-bookmark"; 
+                
+                //controllo se è tra i suoi prefe
+                if(isset($_SESSION["username"])) {
+                    if($dbh->isSpotPreferito($_SESSION["username"], $templateParams["spot"]["idSpot"])) {
+                        $iconaClass = "bi-bookmark-fill";
+                    }
+                }
+                ?>
+                <?php if(isset($_SESSION["username"])): ?>
+                    <a href="salva-spot.php?id=<?php echo $templateParams['spot']['idSpot']; ?>" class="text-white">
+                        <i class="bi <?php echo $iconaClass; ?> fs-3"></i>
+                    </a>
+                <?php else: ?>
+                    <a href="login.php" class="text-white opacity-75" title="Accedi per salvare">
+                        <i class="bi <?php echo $iconaClass; ?> fs-3"></i>
+                    </a>
+                <?php endif; ?>
+            </div>
                 
                 <div class="card-body">
                     <p class="lead border-bottom pb-3">
