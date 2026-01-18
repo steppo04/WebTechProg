@@ -1,6 +1,6 @@
     <section>
         <div class="container">
-            <div class="row pt-4">
+            <div class="row mt-5">
                 <?php if(isset($templateParams["titolo"])): ?>
             <div class="row mb-4">
                 <div class="col-12 text-center">

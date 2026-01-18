@@ -1,6 +1,14 @@
 <section class="container mt-5">
 
-    <div class="row justify-content-center mb-3">
+    <?php if(isset($templateParams["titolo"])): ?>
+        <div class="row mb-4 border-bottom pb-4">
+            <div class="col-12 text-center">
+                <h2 class="display-6"><?php echo $templateParams["titolo"]; ?></h2>
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <div class="row justify-content-center">
 
         <div class="col-md-8 col-lg-6">
 
@@ -60,15 +68,7 @@
         </div>
     </div>
 
-    <?php if(isset($templateParams["titolo"])): ?>
-        <div class="row mb-4">
-            <div class="col-12 text-center">
-                <h2 class="display-6"><?php echo $templateParams["titolo"]; ?></h2>
-            </div>
-        </div>
-    <?php endif; ?>
-
-    <div class="row g-4 border-top mt-2 mb-4">
+    <div class="row g-4 mb-4">
         <?php if(count($templateParams["spot"]) > 0): ?>
             <?php foreach($templateParams["spot"] as $spot): ?>
                 <div class="col-12 col-md-6 col-lg-4">
