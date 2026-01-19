@@ -93,6 +93,33 @@
       require($templateParams["nome"]);
     }
     ?>
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+      
+      <?php 
+          $msgFeedback = getMsg(); 
+          if($msgFeedback): 
+              $isSuccess = ($msgFeedback["tipo"] == "success");
+              $headerClass = $isSuccess ? "bg-success text-white" : "bg-danger text-white";
+              $icona = $isSuccess ? "bi-check-circle-fill" : "bi-exclamation-triangle-fill";
+              $titolo = $isSuccess ? "Operazione Completata" : "Errore";
+      ?>
+
+      <div id="liveToast" class="toast border-0 shadow" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-header <?php echo $headerClass; ?>">
+              <i class="bi <?php echo $icona; ?> me-2"></i>
+              <strong class="me-auto"><?php echo $titolo; ?></strong>
+              <small class="opacity-75">Adesso</small>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+          <div class="toast-body bg-white rounded-bottom">
+              <?php echo htmlspecialchars($msgFeedback["messaggio"]); ?>
+          </div>
+      </div>
+
+      <?php endif; ?>
+
+    </div>
   </main>
 
   <footer class="bg-white text-dark py-3 mt-auto mt-5 border-top border-4 border-danger shadow-sm">
@@ -127,7 +154,17 @@
     </div>
   </footer>
 
+  
 
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const toastEl = document.getElementById('liveToast');
+        if (toastEl) {
+            const toast = new bootstrap.Toast(toastEl, { delay: 4000 });
+            toast.show();
+        }
+    });
+  </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
