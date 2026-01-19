@@ -1,9 +1,28 @@
 <?php
-require_once 'bootstrap.php';
+    require_once 'bootstrap.php';
 
-//Base Template
-$templateParams["titolo"] = "Spotted - Profilo";
-$templateParams["nome"] = "template/profilo-page.php";
+    if (!isUserLoggedIn() && !isAdminLoggedIn()) {
+        header("location: login.php");
+        exit();
+    }
 
-require 'template/base.php';
+    $userLogged = $_SESSION["username"];
+    $userToShow = isset($_GET["user"]) ? $_GET["user"] : $userLogged;
+
+    $utente = $dbh->getUserInfo($userToShow);
+
+    if (!$utente) {
+        header("location: index.php");
+        exit();
+    }
+
+    $templateParams["utente"] = $utente;
+    $templateParams["isAdminProfile"] = ($utente["idTipo"] == 1);
+    $templateParams["spots"] = $templateParams["isAdminProfile"] ? [] : $dbh->getSpotsByUsername($userToShow);
+    $templateParams["isMine"] = ($userLogged == $userToShow);
+
+    $templateParams["titolo"] = "Spotted - Profilo di " . htmlspecialchars($utente["username"]);
+    $templateParams["nome"] = "template/profilo-page.php";
+
+    require 'template/base.php';
 ?>

@@ -341,6 +341,25 @@ class DatabaseHelper
         $stmt->bind_param('ssi', $nuovoStato, $adminUsername, $idSpot);
         return $stmt->execute();
     }
+
+    public function getUserInfo($username) {
+        $stmt = $this->db->prepare("SELECT nome, cognome, username, idTipo FROM UTENTI WHERE username = ?");
+        $stmt->bind_param('s', $username);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_assoc();
+    }
+    
+    public function getSpotsByUsername($username) {
+        $query = "SELECT S.*, C.nome AS nomeCategoria 
+                  FROM SPOT S 
+                  JOIN CATEGORIE C ON S.idCategoria = C.idCategoria 
+                  WHERE S.usernameUtente = ? 
+                  ORDER BY S.dataInserimento DESC";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $username);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
 }
 
 ?>
