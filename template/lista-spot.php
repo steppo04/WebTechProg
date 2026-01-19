@@ -3,7 +3,7 @@
     <?php if(isset($templateParams["titolo"])): ?>
         <div class="row mb-4 border-bottom pb-4">
             <div class="col-12 text-center">
-                <h2 class="display-6"><?php echo $templateParams["titolo"]; ?></h2>
+                <h1 class="display-6 fs-2"><?php echo $templateParams["titolo"]; ?></h1>
             </div>
         </div>
     <?php endif; ?>
@@ -41,7 +41,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="modalFiltriLabel">Filtra per Categoria</h5>
+                            <h2 class="modal-title fs-5" id="modalFiltriLabel">Filtra per Categoria</h2>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         
@@ -85,7 +85,7 @@
                 <div class="col-12 col-md-6 col-lg-4">
                     <div class="card h-100 shadow-sm card-spot">
                         <div class="card-header bg-danger text-white">
-                            <h5 class="card-title mb-0"><?php echo $spot["titolo"]; ?></h5>
+                            <h2 class="card-title mb-0 fs-5"><?php echo $spot["titolo"]; ?></h2>
                         </div>
                         <div class="card-body">
                             <p class="card-text text-muted small">

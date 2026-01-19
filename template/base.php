@@ -124,7 +124,7 @@
 
   <footer class="bg-white text-dark py-3 mt-auto mt-5 border-top border-4 border-danger shadow-sm">
     <div class="container">
-      <div class="row align-items-center">
+      <div c lass="row align-items-center">
 
         <div class="col-md-3 text-center text-md-start">
           <span class="d-block fw-bold text-danger">Spotted Campus</span>
