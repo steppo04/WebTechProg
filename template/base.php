@@ -144,9 +144,15 @@
         <div class="col-md-3 text-center text-md-end">
           <span class="d-block fw-bold small mb-1">Social</span>
           <div>
-            <a href="#" class="text-dark me-2 fs-5"><i class="bi bi-instagram"></i></a>
-            <a href="#" class="text-dark me-2 fs-5"><i class="bi bi-facebook"></i></a>
-            <a href="#" class="text-dark fs-5"><i class="bi bi-tiktok"></i></a>
+            <a href="#" class="text-dark me-2 fs-5 text-decoration-none" aria-label="Vai a Instagram">
+            <i class="bi bi-instagram"></i></a>
+            <a href="#" class="text-dark me-2 fs-5 text-decoration-none" aria-label="Vai a Facebook">
+    <i class="bi bi-facebook"></i>
+</a>
+
+<a href="#" class="text-dark fs-5 text-decoration-none" aria-label="Vai a TikTok">
+    <i class="bi bi-tiktok"></i>
+</a>
           </div>
         </div>
 

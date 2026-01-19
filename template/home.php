@@ -33,20 +33,20 @@
 
             <div class="info-box">
                 <div class="icon-wrapper"><i class="bi bi-megaphone-fill"></i></div>
-                <h3 class="box-title">Racconta</h3>
+                <h2 class="box-title">Racconta</h2>
                 <p class="box-text">Hai visto qualcosa di interessante? <br>Condividilo con la community in pochi click.
                 </p>
             </div>
 
             <div class="info-box">
                 <div class="icon-wrapper"><i class="bi bi-geo-alt-fill"></i></div>
-                <h3 class="box-title">Ritrova</h3>
+                <h2 class="box-title">Ritrova</h2>
                 <p class="box-text">Chiavi perse? Libri dimenticati? <br>Cerca nella categoria oggetti smarriti.</p>
             </div>
 
             <div class="info-box">
                 <div class="icon-wrapper"><i class="bi bi-people-fill"></i></div>
-                <h3 class="box-title">Connettiti</h3>
+                <h2 class="box-title">Connettiti</h2>
                 <p class="box-text">Rispondi agli spot e interagisci con gli altri studenti del campus.</p>
             </div>
 
