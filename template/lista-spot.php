@@ -46,7 +46,9 @@
                             </div>
                             <div class="modal-body">
                                 <p>Seleziona una o più categorie:</p>
+                                
                                 <?php foreach($templateParams["categorie"] as $categoria): ?>
+
                                     <div class="form-check mb-2">
                                         <input class="form-check-input" type="checkbox" name="cat[]" 
                                             value="<?php echo $categoria['idCategoria']; ?>" 
@@ -56,6 +58,7 @@
                                             <?php echo $categoria['nome']; ?>
                                         </label>
                                     </div>
+
                                 <?php endforeach; ?>
                             </div>
                             <div class="modal-footer">
@@ -69,8 +72,10 @@
     </div>
 
     <div class="row g-4 mb-4">
+
         <?php if(count($templateParams["spot"]) > 0): ?>
             <?php foreach($templateParams["spot"] as $spot): ?>
+
                 <div class="col-12 col-md-6 col-lg-4">
                     <div class="card h-100 shadow-sm card-spot">
                         <div class="card-header bg-danger text-white">
@@ -89,12 +94,16 @@
                         </div>
                     </div>
                 </div>
+
             <?php endforeach; ?>
+
         <?php else: ?>
+
             <div class="col-12 text-center my-5">
                 <p class="lead">Nessuno spot trovato.</p>
                 <a href="lista-categoria.php" class="btn btn-secondary">Resetta la ricerca</a>
             </div>
+
         <?php endif; ?>
     </div>
 </section>

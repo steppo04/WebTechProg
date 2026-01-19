@@ -2,7 +2,7 @@
 require_once 'bootstrap.php';
 
 // controllo sempre admin 
-if (!isset($_SESSION["admin"]) || $_SESSION["admin"] !== true) {
+if (!isAdminLoggedIn()) {
     header("location: index.php");
     exit();
 }

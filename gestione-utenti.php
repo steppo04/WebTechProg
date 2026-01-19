@@ -1,7 +1,7 @@
 <?php
 require_once 'bootstrap.php';
 
-if (!isset($_SESSION["admin"]) || $_SESSION["admin"] !== true) {
+if (!isAdminLoggedIn()) {
     header("location: index.php");
     exit();
 }

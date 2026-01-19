@@ -28,14 +28,13 @@
             <a class="nav-link active" aria-current="page" href="index.php">Home</a>
           </li>
           <li class="nav-item"><a class="nav-link" href="lista-categoria.php">Lista Spotted</a></li>
-          <?php if((!isset($_SESSION["admin"]) || $_SESSION["admin"] === false) && isUserLoggedIn()): ?>
+
+          <?php if(isUserLoggedIn()): ?>
             <li class="nav-item"><a class="nav-link" href="gestione-spot.php">Crea Spot</a></li>
             <li class="nav-item"><a class="nav-link" href="preferiti.php">I miei preferiti</a></li>
           <?php endif; ?>
-          <li class="nav-item">
-            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-          </li>
-          <?php if(isset($_SESSION["admin"]) && $_SESSION["admin"] === true): ?>
+
+          <?php if(isAdminLoggedIn()): ?>
               <li class="nav-item">
                   <a class="nav-link text-danger" href="revisione.php">Revisione Spot</a>
               </li>
@@ -43,7 +42,7 @@
                   <a class="nav-link text-danger" href="gestione-utenti.php">Gestione Utenti</a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link text-danger fw-bold" href="admin-stats.php">Statistiche</a>
+                  <a class="nav-link text-danger" href="admin-stats.php">Statistiche</a>
               </li>
           <?php endif; ?>
         </ul>
@@ -55,6 +54,7 @@
           <a href="profilo.php" class="btn btn-outline-info me-2">Profilo</a>
           <a href="logout.php" class="btn btn-outline-danger me-2">Esci</a>
         <?php endif; ?>
+        
         <form class="d-flex" role="search">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
           <button class="btn btn-outline-success" type="submit">

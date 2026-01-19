@@ -13,13 +13,14 @@ function isUserLoggedIn()
 
 function isAdminLoggedIn()
 {
-    return isset($_SESSION["logged"]) && isset($_SESSION["admin"]) && $_SESSION["logged"] && $_SESSION["admin"];
+    return isset($_SESSION["username"]) && isset($_SESSION["logged"]) && isset($_SESSION["admin"]) && $_SESSION["logged"] && $_SESSION["admin"];
 }
 
 function registerLoggedUser($user)
 {
     $_SESSION["username"] = $user["username"];
-    $_SESSION["admin"] = ($user["idTipo"] == 1); // 1 = Admin, 2 = Utente
+    $_SESSION["admin"] = ($user["idTipo"] == 1); // 1 = Admin, 0 = Utente
     $_SESSION["logged"] = 1;
-}
+}   
+
 ?>
