@@ -26,7 +26,7 @@ if ($idCommentoRisposto != null) {
         $destinatario = $commentoOriginale["usernameUtente"];
 
         if ($destinatario != $usernameUtente) {
-            $testoNotifica = "$usernameUtente ha risposto al tuo commento nello spot #$idSpot";
+            $testoNotifica = $usernameUtente . " ha risposto al tuo commento nello spot: " . $dbh->getTitoloBySpotId($idSpot);
             $link = "dettaglio-spot.php?id=$idSpot";
             $dbh->insertNotification($destinatario, $testoNotifica, $link);
         }

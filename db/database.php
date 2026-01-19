@@ -417,6 +417,23 @@ class DatabaseHelper
         $stmt->bind_param('s', $username);
         return $stmt->execute();
     }
+
+    public function getTitoloBySpotId($idSpot) {
+
+        $query = "SELECT titolo FROM SPOT WHERE idSpot = ?";
+        
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("i", $idSpot);
+        $stmt->execute();
+        
+        $result = $stmt->get_result();
+        
+        if ($row = $result->fetch_assoc()) {
+            return $row["titolo"];
+        }
+        
+        return null;
+    }
 }
 
 ?>

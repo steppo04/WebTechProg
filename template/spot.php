@@ -80,7 +80,7 @@
 
                                 <div class="d-flex justify-content-between">
                                     <h6 class="mb-1 fw-bold"><?php echo htmlspecialchars($commento["usernameUtente"]); ?></h6>
-                                    <small class="text-muted"><?php echo date("H:i", strtotime($commento["dataPubblicazione"])); ?></small>
+                                    <small class="text-muted"><?php echo $commento["dataPubblicazione"]; ?></small>
                                 </div> 
 
                                 <p class="mb-1 small"><?php echo htmlspecialchars($commento["testo"]); ?></p>
