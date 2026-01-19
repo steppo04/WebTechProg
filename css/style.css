@@ -132,7 +132,7 @@ body {
   position: relative;
   width: 100%;
   max-width: 650px;
-  margin: 20px auto 40px;
+  margin: 40px auto 40px;
   animation: float 4s ease-in-out infinite alternate;
 }
 
