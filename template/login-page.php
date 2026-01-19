@@ -1,4 +1,5 @@
-<div class="wrapper">
+<section>
+    <div class="wrapper">
     <div class="bg"></div>
     <div class="noise-overlay"></div>
 
@@ -37,3 +38,4 @@
         </form>
     </div>
 </div>
+</section>

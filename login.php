@@ -15,7 +15,7 @@ if (isset($_POST["username"]) && isset($_POST["password"])) {
 }
 
 $templateParams["titolo"] = "Spotted - Login";
-$templateParams["nome"] = "template/login-page.php";
+$templateParams["nome"] = "login-page.php";
 
 if (isUserLoggedIn() || isAdminLoggedIn()) {
     header("Location: index.php");

@@ -35,8 +35,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     } elseif ($azione == "modifica" && $idSpot) {
         $dbh->updateSpot($idSpot, $titolo, $testo, $idCat, $idSubCat);
-        header("location: dettaglio-spot.php?id=" . $idSpot);
-        setMsg("Spot modificato con successo", "success");
+        header("location: lista-categoria.php");
+        setMsg("Spot modificato con successo, attendi approvazione admin", "success");
         exit();
     } elseif ($azione == "elimina" && $idSpot) {
         $dbh->deleteSpot($idSpot);

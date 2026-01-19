@@ -3,7 +3,7 @@ require_once 'bootstrap.php';
 
 if(!isUserLoggedIn()) {
     header("location: login.php");
-    setMsg("Devi accedere per salvare lo spoto", "danger");
+    setMsg("Devi accedere per salvare lo spot", "danger");
     exit;
 }
 
