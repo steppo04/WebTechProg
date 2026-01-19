@@ -383,6 +383,13 @@ class DatabaseHelper
         
         return $stmt->num_rows > 0;
     }
+
+    public function getSubcategoriesByCategory($idCategoria) {
+        $stmt = $this->db->prepare("SELECT idSottoCategoria, nome FROM SOTTOCATEGORIE WHERE idCategoria = ? ORDER BY nome ASC");
+        $stmt->bind_param('i', $idCategoria);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
 }
 
 ?>

@@ -7,7 +7,7 @@
                     $spot = isset($templateParams["spot"]) ? $templateParams["spot"] : null; 
                     $isEdit = ($spot != null);
                     ?>
-                    <h2 class="h4 mb-0"><?php echo $isEdit ? "Modifica Spot" : "+ Crea il tuo Spot"; ?></h2>
+                    <h2 class="h4 mb-0"><?php echo $isEdit ? "Modifica Spot" : "Crea il tuo Spot"; ?></h2>
                 </div>
                 
                 <div class="card-body p-4">
@@ -20,12 +20,19 @@
                         <div class="mb-3">
                             <label for="categoria" class="form-label fw-bold">Categoria</label>
                             <select name="categoria" id="categoria" class="form-select" required>
-                                <option value="">Seleziona...</option>
+                                <option value="">Seleziona Categoria...</option>
                                 <?php foreach($templateParams["categorie"] as $cat): ?>
                                     <option value="<?php echo $cat['idCategoria']; ?>" <?php echo ($isEdit && $spot['idCategoria'] == $cat['idCategoria']) ? 'selected' : ''; ?>>
                                         <?php echo $cat['nome']; ?>
                                     </option>
                                 <?php endforeach; ?>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="sottocategoria" class="form-label fw-bold">Sottocategoria</label>
+                            <select name="sottocategoria" id="sottocategoria" class="form-select">
+                                <option value="">Seleziona prima una categoria...</option>
                             </select>
                         </div>
 
@@ -39,8 +46,8 @@
                                 <button type="submit" name="azione" value="pubblica" class="btn btn-danger w-100">Pubblica</button>
                             <?php else: ?>
                                 <div class="d-flex gap-2">
-                                    <button type="submit" name="azione" value="modifica" class="btn btn-warning flex-grow-1">Modifica</button>
-                                    <button type="submit" name="azione" value="elimina" class="btn btn-outline-danger flex-grow-1" onclick="return confirm('Vuoi eliminare definitivamente lo spot?')">Elimina</button>
+                                    <button type="submit" name="azione" value="modifica" class="btn btn-danger flex-grow-1">Conferma Modifica</button>
+                                    <button type="submit" name="azione" value="elimina" class="btn btn-outline-danger flex-grow-1" onclick="return confirm('Eliminare definitivamente?')">Elimina</button>
                                 </div>
                             <?php endif; ?>
                         </div>
@@ -50,3 +57,39 @@
         </div>
     </div>
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const categoriaSelect = document.getElementById("categoria");
+    const sottocategoriaSelect = document.getElementById("sottocategoria");
+
+    function caricaSottocategorie(idCategoria, idSelezionata = null) {
+        if (!idCategoria) {
+            sottocategoriaSelect.innerHTML = '<option value="">Seleziona categoria...</option>';
+            return;
+        }
+
+        fetch(`get-subcategories.php?id=${idCategoria}`)
+            .then(response => response.json())
+            .then(data => {
+                sottocategoriaSelect.innerHTML = '<option value="">Seleziona Sottocategoria...</option>';
+                data.forEach(sub => {
+                    const opt = document.createElement("option");
+                    opt.value = sub.idSottoCategoria;
+                    opt.textContent = sub.nome;
+                    if(idSelezionata && sub.idSottoCategoria == idSelezionata) opt.selected = true;
+                    sottocategoriaSelect.appendChild(opt);
+                });
+            })
+            .catch(err => console.error("Errore AJAX:", err));
+    }
+
+    categoriaSelect.addEventListener("change", function() {
+        caricaSottocategorie(this.value);
+    });
+
+    <?php if($isEdit): ?>
+        caricaSottocategorie("<?php echo $spot['idCategoria']; ?>", "<?php echo $spot['idSottoCategoria']; ?>");
+    <?php endif; ?>
+});
+</script>

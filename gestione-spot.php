@@ -1,11 +1,10 @@
 <?php
 require_once 'bootstrap.php';
 
-if (!isUserLoggedIn()) {
-    header("location: login.php");
+if (!isUserLoggedIn() || isAdminLoggedIn()) {
+    header("location: index.php");
     exit();
 }
-
 
 $idSpot = isset($_GET["id"]) ? $_GET["id"] : null;
 $spotEsistente = null;
@@ -19,7 +18,7 @@ if ($idSpot) {
     }
 }
 
-// Gestione dell'invio del form 
+// Gestione invio modulo
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $azione = $_POST["azione"];
     $titolo = $_POST["titolo"];
@@ -33,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     } elseif ($azione == "modifica" && $idSpot) {
         $dbh->updateSpot($idSpot, $titolo, $testo, $idCat, $idSubCat);
-        header("location: index.php?id=" . $idSpot);
+        header("location: dettaglio-spot.php?id=" . $idSpot);
         exit();
     } elseif ($azione == "elimina" && $idSpot) {
         $dbh->deleteSpot($idSpot);
@@ -45,7 +44,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $templateParams["titolo"] = "Spot The Bug - Gestione Spot";
 $templateParams["nome"] = "gestione-spot-page.php";
 $templateParams["categorie"] = $dbh->getCategories();
-$templateParams["sottocategorie"] = $dbh->getAllSubcategories();
 $templateParams["spot"] = $spotEsistente;
 
 require 'template/base.php';
