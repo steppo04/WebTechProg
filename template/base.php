@@ -45,6 +45,9 @@
                   <a class="nav-link text-danger" href="admin-stats.php">Statistiche</a>
               </li>
           <?php endif; ?>
+              <li class="nav-item">
+                  <a class="nav-link <?php isActive('chi-siamo.php'); ?>" href="chi-siamo.php">Chi Siamo</a>
+              </li>
         </ul>
         
         <?php if (!isUserLoggedIn() && !isAdminLoggedIn()): ?>
