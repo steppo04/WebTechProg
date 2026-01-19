@@ -3,6 +3,7 @@
 
     if(!isUserLoggedIn()){
         header("location: login.php");
+        setMsg("Devi prima effettuale l'accesso", "danger");
         exit;
     }
 

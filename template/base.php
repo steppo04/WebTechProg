@@ -105,14 +105,14 @@
               $titolo = $isSuccess ? "Operazione Completata" : "Errore";
       ?>
 
-      <div id="liveToast" class="toast border-0 shadow" role="alert" aria-live="assertive" aria-atomic="true">
+      <div id="liveToast" class="toast shadow" role="alert" aria-live="assertive" aria-atomic="true">
           <div class="toast-header <?php echo $headerClass; ?>">
               <i class="bi <?php echo $icona; ?> me-2"></i>
               <strong class="me-auto"><?php echo $titolo; ?></strong>
               <small class="opacity-75">Adesso</small>
               <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
           </div>
-          <div class="toast-body bg-white rounded-bottom">
+          <div class="toast-body bg-white rounded-bottom ">
               <?php echo htmlspecialchars($msgFeedback["messaggio"]); ?>
           </div>
       </div>

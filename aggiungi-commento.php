@@ -2,7 +2,8 @@
 require_once 'bootstrap.php';
 
 if(!isUserLoggedIn()) {
-    header("location: index.php");
+    header("location: dettaglio-spot.php?id=". $_POST["idSpot"]);
+    setMsg("Devi prima effettuale l'accesso", "danger");
     exit();
 }
 

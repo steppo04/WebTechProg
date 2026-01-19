@@ -38,17 +38,22 @@
                 </div>
 
                 <div class="modal fade" id="modalFiltri" tabindex="-1" aria-labelledby="modalFiltriLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="modalFiltriLabel">Filtra per Categoria</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalFiltriLabel">Filtra per Categoria</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        
+                        <form action="" method="GET" id="formFiltri">
+                        
+                                <?php if(isset($_GET["ricerca"])): ?>
+                                    <input type="hidden" name="ricerca" value="<?php echo htmlspecialchars($_GET["ricerca"]); ?>">
+                                <?php endif; ?>
+
                                 <p>Seleziona una o più categorie:</p>
                                 
                                 <?php foreach($templateParams["categorie"] as $categoria): ?>
-
                                     <div class="form-check mb-2">
                                         <input class="form-check-input" type="checkbox" name="cat[]" 
                                             value="<?php echo $categoria['idCategoria']; ?>" 
@@ -58,15 +63,16 @@
                                             <?php echo $categoria['nome']; ?>
                                         </label>
                                     </div>
-
                                 <?php endforeach; ?>
                             </div>
+
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi e Applica</button>
                             </div>
-                        </div>
-                    </div>
+                            
+                        </form> </div>
                 </div>
+</div>
             </form>
         </div>
     </div>

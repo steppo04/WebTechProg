@@ -3,6 +3,7 @@
 
     if (!isUserLoggedIn() && !isAdminLoggedIn()) {
         header("location: login.php");
+        setMsg("Devi prima effettuale l'accesso", "danger");
         exit();
     }
 
@@ -13,6 +14,7 @@
 
     if (!$utente) {
         header("location: index.php");
+        setMsg("Devi prima effettuale l'accesso", "danger");
         exit();
     }
 

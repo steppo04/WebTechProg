@@ -3,6 +3,7 @@ require_once 'bootstrap.php';
 
 if (!isUserLoggedIn() || isAdminLoggedIn()) {
     header("location: index.php");
+    setMsg("Non puoi modificare questo spot.", "danger");
     exit();
 }
 
@@ -14,6 +15,7 @@ if ($idSpot) {
     // Verifica che l'utente sia l'effettivo autore
     if (!$spotEsistente || $spotEsistente["usernameUtente"] != $_SESSION["username"]) {
         header("location: index.php");
+        setMsg("Solo il proprietario può modificare il post", "danger");
         exit();
     }
 }
@@ -28,15 +30,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($azione == "pubblica") {
         $dbh->insertSpot($titolo, $testo, $idCat, $idSubCat, $_SESSION["username"]);
-        header("location: index.php");
+        header("location: lista-categoria.php");
+        setMsg("Spot pubblicato con successo", "danger");
         exit();
     } elseif ($azione == "modifica" && $idSpot) {
         $dbh->updateSpot($idSpot, $titolo, $testo, $idCat, $idSubCat);
         header("location: dettaglio-spot.php?id=" . $idSpot);
+        setMsg("Spot modificato con successo", "success");
         exit();
     } elseif ($azione == "elimina" && $idSpot) {
         $dbh->deleteSpot($idSpot);
-        header("location: index.php");
+        header("location: lista-categoria.php");
+        setMsg("Spot eliminato", "success");
         exit();
     }
 }

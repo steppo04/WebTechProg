@@ -3,6 +3,7 @@ require_once 'bootstrap.php';
 
 if (!isAdminLoggedIn()) {
     header("location: index.php");
+    setMsg("Pagina riservata agli admin!", "danger");
     exit();
 }
 

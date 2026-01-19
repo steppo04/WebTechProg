@@ -11,12 +11,14 @@ $idRisposta = $_GET["rspTo"] ?? null;
 
 if (empty($idSpot) || !$dbh->isSpotActive($idSpot)) {
     header("Location: index.php");
+    setMsg("Questo spot non è disponibile.", "danger");
     exit(); 
 }
 
 if (!empty($idRisposta)) {
     if (!$dbh->checkCommentBelongsToSpot($idRisposta, $idSpot)) {
         header("Location: dettaglio-spot.php?id=" . $idSpot);
+        setMsg("Il messaggio a cui stai rispondendo non appartiene allo spot.", "danger");
         exit();
     }
 
