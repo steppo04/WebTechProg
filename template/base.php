@@ -15,55 +15,57 @@
   <header>
   </header>
 
-  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="index.php">Fixed navbar</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+  <nav
+    class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm py-3 border-bottom border-4 border-danger">
+    <div class="container-fluid px-4">
+      <a class="navbar-brand text-danger fw-bold fs-4" href="index.php">Spotted Campus</a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
         aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+            <a class="nav-link text-dark fw-bold hover-danger hover-underline" href="lista-categoria.php">Lista
+              Spotted</a>
           </li>
-          <li class="nav-item"><a class="nav-link" href="lista-categoria.php">Lista Spotted</a></li>
 
           <?php if (isUserLoggedIn()): ?>
-            <li class="nav-item"><a class="nav-link" href="gestione-spot.php">Crea Spot</a></li>
-            <li class="nav-item"><a class="nav-link" href="preferiti.php">I miei preferiti</a></li>
+            <li class="nav-item">
+              <a class="nav-link text-dark fw-bold hover-danger hover-underline" href="gestione-spot.php">Crea Spot</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark fw-bold hover-danger hover-underline" href="preferiti.php">I miei preferiti</a>
+            </li>
           <?php endif; ?>
 
           <?php if (isAdminLoggedIn()): ?>
             <li class="nav-item">
-              <a class="nav-link text-danger" href="revisione.php">Revisione Spot</a>
+              <a class="nav-link text-dark fw-bold hover-danger hover-underline" href="revisione.php">Revisione Spot</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-danger" href="gestione-utenti.php">Gestione Utenti</a>
+              <a class="nav-link text-dark fw-bold hover-danger hover-underline" href="gestione-utenti.php">Gestione
+                Utenti</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-danger" href="admin-stats.php">Statistiche</a>
+              <a class="nav-link text-dark fw-bold hover-danger hover-underline" href="admin-stats.php">Statistiche</a>
             </li>
           <?php endif; ?>
               <li class="nav-item">
-                  <a class="nav-link <?php isActive('chi-siamo.php'); ?>" href="chi-siamo.php">Chi Siamo</a>
+                  <a class="nav-link text-dark fw-bold hover-danger hover-underline" href="chi-siamo.php">Chi Siamo</a>
               </li>
         </ul>
 
-        <?php if (!isUserLoggedIn() && !isAdminLoggedIn()): ?>
-          <a href="login.php" class="btn btn-outline-light me-2">Accedi</a>
-        <?php else: ?>
-          <span class="text-light me-2">Benvenuto, <?php echo $_SESSION["username"]; ?></span>
-          <a href="profilo.php" class="btn btn-outline-info me-2">Profilo</a>
-          <a href="logout.php" class="btn btn-outline-danger me-2">Esci</a>
-        <?php endif; ?>
-
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-          <button class="btn btn-outline-success" type="submit">
-            Search
-          </button>
-        </form>
+        <div class="d-flex align-items-center gap-3">
+          <?php if (!isUserLoggedIn() && !isAdminLoggedIn()): ?>
+            <a href="login.php" class="btn btn-danger text-white rounded-pill px-4 fw-bold shadow-sm">Accedi</a>
+          <?php else: ?>
+            <span class="text-secondary fw-medium me-2 d-none d-lg-block">Ciao, <span
+                class="text-dark fw-bold"><?php echo $_SESSION["username"]; ?></span></span>
+            <a href="profilo.php" class="btn btn-outline-danger rounded-pill px-3 fw-bold btn-sm">Profilo</a>
+            <a href="logout.php" class="btn btn-link text-danger text-decoration-none fw-bold small">Esci</a>
+          <?php endif; ?>
+        </div>
       </div>
     </div>
   </nav>

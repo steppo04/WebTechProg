@@ -1,6 +1,7 @@
-main{
+main {
   padding: 60px 15px 0;
 }
+
 body {
   font-family: 'Outfit', sans-serif;
   background-color: #ffffff;
@@ -150,7 +151,7 @@ body {
 }
 
 .wire.right {
-  right: 23%;
+  right: 3%;
 }
 
 .sign-board {
@@ -299,10 +300,46 @@ body {
   }
 }
 
-div.card.card-spot{
+div.card.card-spot {
   transition: all 0.3s !important;
 }
 
-div.card.card-spot:hover{
+div.card.card-spot:hover {
   transform: scale(1.1) !important;
+}
+
+.navbar-brand {
+  font-family: 'Outfit', sans-serif;
+  letter-spacing: -0.5px;
+}
+
+.nav-link {
+  transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+  transform: translateY(-1px);
+}
+
+.hover-danger:hover {
+  color: #b92b27 !important;
+}
+
+.hover-underline {
+  position: relative;
+}
+
+.hover-underline::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0px;
+  left: 0;
+  background-color: #b92b27;
+  transition: width 0.3s;
+}
+
+.hover-underline:hover::after {
+  width: 100%;
 }

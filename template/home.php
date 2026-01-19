@@ -1,4 +1,3 @@
-
 <div class="aesthetic-wrapper">
     <div class="aesthetic-bg"></div>
     <div class="noise-overlay"></div>
