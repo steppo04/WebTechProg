@@ -12,7 +12,7 @@ $idCommentoRisposto = !empty($_POST["idCommentoRisposto"]) ? $_POST["idCommentoR
 $usernameUtente = $_SESSION["username"];
 
 
-$dbh->insertComment($testo, $idSpot, $usernameUtente, $idCommentoRisposto);
+$dbh->insertComment($usernameUtente, $idSpot, $testo, $idCommentoRisposto);
 
 if ($idCommentoRisposto != null) {
     $commentoOriginale = $dbh->getCommentById($idCommentoRisposto);
