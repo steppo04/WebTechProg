@@ -57,14 +57,30 @@
         </ul>
 
         <div class="d-flex align-items-center gap-3">
-          <?php if (!isUserLoggedIn() && !isAdminLoggedIn()): ?>
-            <a href="login.php" class="btn btn-danger text-white rounded-pill px-4 fw-bold shadow-sm">Accedi</a>
-          <?php else: ?>
-            <span class="text-secondary fw-medium me-2 d-none d-lg-block">Ciao, <span
-                class="text-dark fw-bold"><?php echo $_SESSION["username"]; ?></span></span>
+        <?php if (!isUserLoggedIn() && !isAdminLoggedIn()): ?>
+          <a href="login.php" class="btn btn-danger text-white rounded-pill px-4 fw-bold shadow-sm">Accedi</a>
+            <?php else: ?>
+              <span class="text-secondary fw-medium me-2 d-none d-lg-block">Ciao, 
+                <span class="text-dark fw-bold"><?php echo $_SESSION["username"]; ?></span>
+              </span>
+    
+              <?php if (isUserLoggedIn()): 
+                $unreadCount = $dbh->getUnreadNotificationsCount($_SESSION["username"]); 
+              ?>
+              <a href="notifiche.php" class="btn btn-link text-danger me-3 position-relative py-1 px-2 text-decoration-none">
+                  <i class="bi bi-bell-fill" style="font-size: 1.2rem;"></i>
+                  <?php if ($unreadCount > 0): ?>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.7rem;">
+                      <?php echo $unreadCount; ?>
+                        <span class="visually-hidden">notifiche non lette</span>
+                      </span>
+                    <?php endif; ?>
+              </a>
+              <?php endif; ?>
+
             <a href="profilo.php" class="btn btn-outline-danger rounded-pill px-3 fw-bold btn-sm">Profilo</a>
             <a href="logout.php" class="btn btn-link text-danger text-decoration-none fw-bold small">Esci</a>
-          <?php endif; ?>
+        <?php endif; ?>
         </div>
       </div>
     </div>

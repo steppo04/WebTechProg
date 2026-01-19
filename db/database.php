@@ -390,6 +390,33 @@ class DatabaseHelper
         $stmt->execute();
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
+
+
+    public function insertNotification($username, $testo, $link) {
+        $stmt = $this->db->prepare("INSERT INTO NOTIFICHE (usernameDestinatario, testo, link) VALUES (?, ?, ?)");
+        $stmt->bind_param('sss', $username, $testo, $link);
+        return $stmt->execute();
+    }
+    
+    public function getUnreadNotificationsCount($username) {
+        $stmt = $this->db->prepare("SELECT COUNT(*) as totale FROM NOTIFICHE WHERE usernameDestinatario = ? AND letta = FALSE");
+        $stmt->bind_param('s', $username);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_assoc()['totale'];
+    }
+    
+    public function getUserNotifications($username) {
+        $stmt = $this->db->prepare("SELECT * FROM NOTIFICHE WHERE usernameDestinatario = ? ORDER BY dataNotifica DESC LIMIT 20");
+        $stmt->bind_param('s', $username);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+    
+    public function markNotificationsAsRead($username) {
+        $stmt = $this->db->prepare("UPDATE NOTIFICHE SET letta = TRUE WHERE usernameDestinatario = ?");
+        $stmt->bind_param('s', $username);
+        return $stmt->execute();
+    }
 }
 
 ?>
