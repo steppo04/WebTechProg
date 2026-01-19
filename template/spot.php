@@ -79,7 +79,7 @@
                                 <?php endif; ?>
 
                                 <div class="d-flex justify-content-between">
-                                    <h4 class="mb-1 fw-bold fs-2"><?php echo htmlspecialchars($commento["usernameUtente"]); ?></h4>
+                                    <h4 class="mb-1 fw-bold fs-6"><?php echo htmlspecialchars($commento["usernameUtente"]); ?></h4>
                                     <small class="text-muted"><?php echo $commento["dataPubblicazione"]; ?></small>
                                 </div> 
 
