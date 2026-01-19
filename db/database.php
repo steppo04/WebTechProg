@@ -360,6 +360,29 @@ class DatabaseHelper
         $stmt->execute();
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
+    public function isSpotActive($idSpot){
+        $query = "SELECT idSpot FROM SPOT WHERE idSpot = ? AND stato = 'approvato'";
+    
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("i", $idSpot);
+        $stmt->execute();
+        
+        $stmt->store_result();
+        return $stmt->num_rows > 0;
+    }
+
+    public function checkCommentBelongsToSpot($idCommento, $idSpot) {
+    
+        $query = "SELECT idCommento FROM COMMENTI WHERE idCommento = ? AND idSpot = ?";
+        
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("ii", $idCommento, $idSpot); 
+        $stmt->execute();
+        
+        $stmt->store_result(); 
+        
+        return $stmt->num_rows > 0;
+    }
 }
 
 ?>

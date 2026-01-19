@@ -8,30 +8,25 @@
                 <h1 class="h4 mb-0"><?php echo htmlspecialchars($templateParams["spot"]["titolo"]); ?></h1>
 
                 <?php 
-                $iconaClass = "bi-bookmark"; 
-                
-                //controllo se è tra i suoi prefe
-                if(isset($_SESSION["username"])) {
-                    if($dbh->isSpotPreferito($_SESSION["username"], $templateParams["spot"]["idSpot"])) {
-                        $iconaClass = "bi-bookmark-fill";
-                    }
-                }
+                    
+                    $iconaClass = $templateParams["isPreferito"] ? "bi-bookmark-fill" : "bi-bookmark";
+
+                    $linkDestinazione = isUserLoggedIn() 
+                        ? "salva-spot.php?id=" . $templateParams['spot']['idSpot'] 
+                        : "login.php";
                 ?>
-                <?php if(isset($_SESSION["username"])): ?>
-                    <a href="salva-spot.php?id=<?php echo $templateParams['spot']['idSpot']; ?>" class="text-white">
+
+                <a href="<?php echo $linkDestinazione; ?>" class="text-white text-decoration-none" 
+                    title="<?php echo isUserLoggedIn() ? 'Salva nei preferiti' : 'Accedi per salvare'; ?>">
                         <i class="bi <?php echo $iconaClass; ?> fs-3"></i>
-                    </a>
-                <?php else: ?>
-                    <a href="login.php" class="text-white opacity-75" title="Accedi per salvare">
-                        <i class="bi <?php echo $iconaClass; ?> fs-3"></i>
-                    </a>
-                <?php endif; ?>
+                </a>
+
             </div>
                 
-                <div class="card-body">
-                    <p class="lead border-bottom pb-3">
+            <div class="card-body">
+                <p class="lead border-bottom pb-3">
                         <?php echo htmlspecialchars($templateParams["spot"]["testo"]); ?>
-                    </p>
+                </p>
 
                     <div class="row mt-4">
                         <div class="col-sm-6">
@@ -105,7 +100,7 @@
 
                 <div class="card card-body bg-light border-0">
                     <?php if(isset($_GET["rspTo"])): 
-                        $commentoDaRispondere = $dbh->getCommentById($_GET["rspTo"]);
+                        $commentoDaRispondere = $templateParams["rispostaAPadre"];
                     ?>
                         <div class="alert alert-white border-start border-danger border-4 shadow-sm mb-3 py-2 position-relative">
                             <button type="button" class="btn-close position-absolute top-0 end-0 p-2" style="font-size: 0.6rem;" 
