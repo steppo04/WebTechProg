@@ -29,24 +29,24 @@
           </li>
           <li class="nav-item"><a class="nav-link" href="lista-categoria.php">Lista Spotted</a></li>
 
-          <?php if(isUserLoggedIn()): ?>
+          <?php if (isUserLoggedIn()): ?>
             <li class="nav-item"><a class="nav-link" href="gestione-spot.php">Crea Spot</a></li>
             <li class="nav-item"><a class="nav-link" href="preferiti.php">I miei preferiti</a></li>
           <?php endif; ?>
 
-          <?php if(isAdminLoggedIn()): ?>
-              <li class="nav-item">
-                  <a class="nav-link text-danger" href="revisione.php">Revisione Spot</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link text-danger" href="gestione-utenti.php">Gestione Utenti</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link text-danger" href="admin-stats.php">Statistiche</a>
-              </li>
+          <?php if (isAdminLoggedIn()): ?>
+            <li class="nav-item">
+              <a class="nav-link text-danger" href="revisione.php">Revisione Spot</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-danger" href="gestione-utenti.php">Gestione Utenti</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-danger" href="admin-stats.php">Statistiche</a>
+            </li>
           <?php endif; ?>
         </ul>
-        
+
         <?php if (!isUserLoggedIn() && !isAdminLoggedIn()): ?>
           <a href="login.php" class="btn btn-outline-light me-2">Accedi</a>
         <?php else: ?>
@@ -54,7 +54,7 @@
           <a href="profilo.php" class="btn btn-outline-info me-2">Profilo</a>
           <a href="logout.php" class="btn btn-outline-danger me-2">Esci</a>
         <?php endif; ?>
-        
+
         <form class="d-flex" role="search">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
           <button class="btn btn-outline-success" type="submit">
@@ -66,7 +66,7 @@
   </nav>
 
 
-  <main class="flex-shrink-0">
+  <main class="flex-shrink-0 pb-5">
     <?php
     if (isset($templateParams["nome"])) {
       require($templateParams["nome"]);
@@ -74,9 +74,35 @@
     ?>
   </main>
 
-  <footer class="footer mt-auto py-3 bg-body-tertiary">
+  <footer class="bg-white text-dark py-3 mt-auto mt-5 border-top border-4 border-danger shadow-sm">
     <div class="container">
-      <span class="text-body-secondary">Place sticky footer content here.</span>
+      <div class="row align-items-center">
+
+        <div class="col-md-3 text-center text-md-start">
+          <span class="d-block fw-bold text-danger">Spotted Campus</span>
+          <small class="text-muted" style="font-size: 0.75rem;">&copy; <?php echo date("Y"); ?> All rights
+            reserved.</small>
+        </div>
+
+        <div class="col-md-6 text-center my-2 my-md-0">
+          <a href="chi-siamo.php" class="text-dark text-decoration-none fw-bold px-2 small">Chi Siamo</a>
+          <a href="lista-categoria.php" class="text-dark text-decoration-none fw-bold px-2 small">Lista Spotted</a>
+          <a href="mailto:spottedcampus@unibo.com"
+            class="text-dark text-decoration-none fw-bold px-2 small">Contattaci</a>
+          <a href="https://maps.app.goo.gl/dLQ2NFKTWv7YAmEy9"
+            class="text-dark text-decoration-none fw-bold px-2 small">Dove siamo</a>
+        </div>
+
+        <div class="col-md-3 text-center text-md-end">
+          <span class="d-block fw-bold small mb-1">Social</span>
+          <div>
+            <a href="#" class="text-dark me-2 fs-5"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="text-dark me-2 fs-5"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="text-dark fs-5"><i class="bi bi-tiktok"></i></a>
+          </div>
+        </div>
+
+      </div>
     </div>
   </footer>
 
