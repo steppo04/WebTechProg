@@ -10,8 +10,7 @@ $idRisposta = $_GET["rspTo"] ?? null;
 
 
 if (empty($idSpot) || !$dbh->isSpotActive($idSpot)) {
-    header("Location: index.php");
-    setMsg("Questo spot non è disponibile.", "danger");
+    header("Location: 404.php");
     exit(); 
 }
 

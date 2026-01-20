@@ -10,10 +10,7 @@
                 <?php 
                     
                     $iconaClass = $templateParams["isPreferito"] ? "bi-bookmark-fill" : "bi-bookmark";
-
-                    $linkDestinazione = isUserLoggedIn() 
-                        ? "salva-spot.php?id=" . $templateParams['spot']['idSpot'] 
-                        : "login.php";
+                    $linkDestinazione = "salva-spot.php?id=" . $templateParams['spot']['idSpot'];
                 ?>
 
                 <a href="<?php echo $linkDestinazione; ?>" class="text-white text-decoration-none" 
@@ -80,7 +77,7 @@
 
                                 <div class="d-flex justify-content-between">
                                     <h4 class="mb-1 fw-bold fs-6"><?php echo htmlspecialchars($commento["usernameUtente"]); ?></h4>
-                                    <small class="text-muted"><?php echo $commento["dataPubblicazione"]; ?></small>
+                                    <small class="text-muted"><?php echo date("d/m H:i", strtotime($commento['dataPubblicazione']));  ?></small>
                                 </div> 
 
                                 <p class="mb-1 small"><?php echo htmlspecialchars($commento["testo"]); ?></p>
