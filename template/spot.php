@@ -87,6 +87,22 @@
                                     class="text-decoration-none small fw-bold text-danger" style="font-size: 0.75rem;">
                                         <i class="bi bi-reply"></i> Rispondi
                                     </a>
+
+                                    <?php if(isAdminLoggedIn()): ?>
+                                        <form action="elimina-commento.php" method="POST" style="display:inline;">
+                                            
+                                            <input type="hidden" name="id" value="<?php echo $commento['idCommento']; ?>">
+                                            <input type="hidden" name="idSpot" value="<?php echo $templateParams['spot']['idSpot']; ?>">
+                                            
+                                            <button type="submit" 
+                                                    class="btn btn-link p-0 m-0 text-decoration-none small fw-bold text-danger" 
+                                                    style="font-size: 0.75rem;"
+                                                    onclick="return confirm('Sei sicuro di voler eliminare definitivamente questo commento?');">
+                                                <i class="bi bi-trash"></i> Elimina
+                                            </button>
+                                            
+                                        </form>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         <?php endforeach; ?>

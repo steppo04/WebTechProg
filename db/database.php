@@ -434,6 +434,13 @@ class DatabaseHelper
         
         return null;
     }
+
+    public function deleteComment($idCommento){
+        $query = "DELETE FROM COMMENTI WHERE idCommento = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("i", $idCommento);
+        $stmt->execute();
+    }
 }
 
 ?>
