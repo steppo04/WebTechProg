@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($azione == "pubblica") {
         $dbh->insertSpot($titolo, $testo, $idCat, $idSubCat, $_SESSION["username"]);
         header("location: lista-categoria.php");
-        setMsg("Spot pubblicato con successo", "danger");
+        setMsg("Spot pubblicato con successo", "success");
         exit();
     } elseif ($azione == "modifica" && $idSpot) {
         $dbh->updateSpot($idSpot, $titolo, $testo, $idCat, $idSubCat);
