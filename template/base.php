@@ -50,6 +50,9 @@
             <li class="nav-item">
               <a class="nav-link text-dark fw-bold hover-danger hover-underline" href="admin-stats.php">Statistiche</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark fw-bold hover-danger hover-underline" href="inserisci-categoria.php">Inserisci nuova categoria</a>
+            </li>
           <?php endif; ?>
           <li class="nav-item">
             <a class="nav-link text-dark fw-bold hover-danger hover-underline" href="chi-siamo.php">Chi Siamo</a>
