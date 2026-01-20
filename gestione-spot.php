@@ -1,10 +1,12 @@
 <?php
 require_once 'bootstrap.php';
 
-if (!isUserLoggedIn() || isAdminLoggedIn()) {
-    header("location: index.php");
-    setMsg("Non puoi modificare questo spot.", "danger");
-    exit();
+if (!isUserLoggedIn()) {
+    if(!isAdminLoggedIn()){
+        header("location: index.php");
+        setMsg("Non puoi modificare questo spot.", "danger");
+        exit();
+    }
 }
 
 $idSpot = isset($_GET["id"]) ? $_GET["id"] : null;
@@ -14,9 +16,11 @@ if ($idSpot) {
     $spotEsistente = $dbh->getSpotById($idSpot);
     // Verifica che l'utente sia l'effettivo autore
     if (!$spotEsistente || $spotEsistente["usernameUtente"] != $_SESSION["username"]) {
-        header("location: index.php");
-        setMsg("Solo il proprietario può modificare il post", "danger");
-        exit();
+        if(!isAdminLoggedIn()){
+            header("location: index.php");
+            setMsg("Solo il proprietario può modificare il post", "danger");
+            exit();
+        }
     }
 }
 
