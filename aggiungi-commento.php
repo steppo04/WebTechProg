@@ -19,6 +19,13 @@ if(isset($commento) && trim($commento) != ""){
     setMsg("Il commento non può essere vuoto.", "danger");
 }
 
+$spot = $dbh->getSpotById($idSpot);
+if ($spot && $spot["usernameUtente"] != $usernameUtente) {
+    $testoNotifica = $usernameUtente . " ha commentato il tuo spot: " . $spot["titolo"];
+    $link = "dettaglio-spot.php?id=$idSpot";
+    $dbh->insertNotification($spot["usernameUtente"], $testoNotifica, $link);
+}
+
 if ($idCommentoRisposto != null) {
     $commentoOriginale = $dbh->getCommentById($idCommentoRisposto);
 
@@ -33,6 +40,8 @@ if ($idCommentoRisposto != null) {
         }
     }
 }
+
+
 
 header("location: dettaglio-spot.php?id=" . $idSpot);
 ?>
