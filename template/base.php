@@ -65,18 +65,20 @@
               </span>
     
               <?php if (isUserLoggedIn()): 
-                $unreadCount = $dbh->getUnreadNotificationsCount($_SESSION["username"]); 
-              ?>
-              <a href="notifiche.php" class="btn btn-link text-danger me-3 position-relative py-1 px-2 text-decoration-none">
-                  <i class="bi bi-bell-fill" style="font-size: 1.2rem;"></i>
-                  <?php if ($unreadCount > 0): ?>
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.7rem;">
-                      <?php echo $unreadCount; ?>
-                        <span class="visually-hidden">notifiche non lette</span>
-                      </span>
-                    <?php endif; ?>
-              </a>
-              <?php endif; ?>
+    $unreadCount = $dbh->getUnreadNotificationsCount($_SESSION["username"]); 
+?>
+<a href="notifiche.php" id="notification-link" class="btn btn-link text-danger me-3 position-relative py-1 px-2 text-decoration-none">
+    <i class="bi bi-bell-fill" style="font-size: 1.2rem;"></i>
+    <span id="notification-badge-container">
+        <?php if ($unreadCount > 0): ?>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.7rem;">
+                <?php echo $unreadCount; ?>
+                <span class="visually-hidden">notifiche non lette</span>
+            </span>
+        <?php endif; ?>
+    </span>
+</a>
+<?php endif; ?>
 
             <a href="profilo.php" class="btn btn-outline-danger rounded-pill px-3 fw-bold btn-sm">Profilo</a>
             <a href="logout.php" class="btn btn-link text-danger text-decoration-none fw-bold small">Esci</a>
@@ -182,6 +184,33 @@
     });
 </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+document.addEventListener("DOMContentLoaded", function() {
+    const badgeContainer = document.getElementById("notification-badge-container");
+
+    function updateNotificationCount() {
+        fetch('notifiche-count.php')
+            .then(response => response.json())
+            .then(data => {
+                if (data.count > 0) {
+                    badgeContainer.innerHTML = `
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.7rem;">
+                            ${data.count}
+                            <span class="visually-hidden">notifiche non lette</span>
+                        </span>`;
+                } else {
+                    badgeContainer.innerHTML = "";
+                }
+            })
+            .catch(error => console.error("Errore nel recupero notifiche:", error));
+    }
+
+    if (badgeContainer) {
+        setInterval(updateNotificationCount, 30000);
+    }
+});
+</script>
 
 </body>
 
