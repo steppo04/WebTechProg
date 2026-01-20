@@ -6,12 +6,13 @@ if(!isUserLoggedIn()){
     exit();
 }
 
+$notifiche = $dbh->getUserNotifications($_SESSION["username"]);
+$templateParams["notifiche"] = $notifiche;
+
 $dbh->markNotificationsAsRead($_SESSION["username"]);
 
 $templateParams["titolo"] = "Spot The Bug - Notifiche";
 $templateParams["nome"] = "template/notifiche-page.php";
-$templateParams["notifiche"] = $dbh->getUserNotifications($_SESSION["username"]);
-
 
 require 'template/base.php';
 ?>
