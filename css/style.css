@@ -352,3 +352,35 @@ div.card.card-spot:hover {
 .hover-underline:hover::after {
   width: 100%;
 }
+
+
+.footer-link:hover {
+  color: #b92b27 !important;
+  transform: translateY(-2px);
+}
+
+.footer-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 50%;
+  background-color: #b92b27;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.footer-link:hover::after {
+  width: 80%;
+}
+
+.footer-social {
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: inline-block;
+}
+
+.footer-social:hover {
+  color: #b92b27 !important;
+  transform: scale(1.2) rotate(5deg);
+}

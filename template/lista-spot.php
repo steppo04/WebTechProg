@@ -65,8 +65,6 @@
                 <div class="col-12 col-md-6 col-lg-4">
                     <div class="card h-100 shadow-sm card-spot">
                         <div class="card-header bg-danger text-white d-flex align-items-center">
-                            <?php $imgSpot = !empty($spot["fotoProfilo"]) ? "upload/" . $spot["fotoProfilo"] : "upload/default.png"; ?>
-                            <img src="<?php echo htmlspecialchars($imgSpot); ?>" alt="Foto" class="rounded-circle me-2 border border-white" style="width: 35px; height: 35px; object-fit: cover;">
                             <h2 class="card-title mb-0 fs-5 text-truncate"><?php echo htmlspecialchars($spot["titolo"]); ?></h2>
                         </div>
                         <div class="card-body">

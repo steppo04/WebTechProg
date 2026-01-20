@@ -51,38 +51,40 @@
               <a class="nav-link text-dark fw-bold hover-danger hover-underline" href="admin-stats.php">Statistiche</a>
             </li>
           <?php endif; ?>
-              <li class="nav-item">
-                  <a class="nav-link text-dark fw-bold hover-danger hover-underline" href="chi-siamo.php">Chi Siamo</a>
-              </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark fw-bold hover-danger hover-underline" href="chi-siamo.php">Chi Siamo</a>
+          </li>
         </ul>
 
         <div class="d-flex align-items-center gap-3">
-        <?php if (!isUserLoggedIn() && !isAdminLoggedIn()): ?>
-          <a href="login.php" class="btn btn-danger text-white rounded-pill px-4 fw-bold shadow-sm">Accedi</a>
-            <?php else: ?>
-              <span class="text-secondary fw-medium me-2 d-none d-lg-block">Ciao, 
-                <span class="text-dark fw-bold"><?php echo $_SESSION["username"]; ?></span>
-              </span>
-    
-              <?php if (isUserLoggedIn()): 
-    $unreadCount = $dbh->getUnreadNotificationsCount($_SESSION["username"]); 
-?>
-<a href="notifiche.php" id="notification-link" class="btn btn-link text-danger me-3 position-relative py-1 px-2 text-decoration-none">
-    <i class="bi bi-bell-fill" style="font-size: 1.2rem;"></i>
-    <span id="notification-badge-container">
-        <?php if ($unreadCount > 0): ?>
-            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.7rem;">
-                <?php echo $unreadCount; ?>
-                <span class="visually-hidden">notifiche non lette</span>
+          <?php if (!isUserLoggedIn() && !isAdminLoggedIn()): ?>
+            <a href="login.php" class="btn btn-danger text-white rounded-pill px-4 fw-bold shadow-sm">Accedi</a>
+          <?php else: ?>
+            <span class="text-secondary fw-medium me-2 d-none d-lg-block">Ciao,
+              <span class="text-dark fw-bold"><?php echo $_SESSION["username"]; ?></span>
             </span>
-        <?php endif; ?>
-    </span>
-</a>
-<?php endif; ?>
+
+            <?php if (isUserLoggedIn()):
+              $unreadCount = $dbh->getUnreadNotificationsCount($_SESSION["username"]);
+              ?>
+              <a href="notifiche.php" id="notification-link"
+                class="btn btn-link text-danger me-3 position-relative py-1 px-2 text-decoration-none">
+                <i class="bi bi-bell-fill" style="font-size: 1.2rem;"></i>
+                <span id="notification-badge-container">
+                  <?php if ($unreadCount > 0): ?>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                      style="font-size: 0.7rem;">
+                      <?php echo $unreadCount; ?>
+                      <span class="visually-hidden">notifiche non lette</span>
+                    </span>
+                  <?php endif; ?>
+                </span>
+              </a>
+            <?php endif; ?>
 
             <a href="profilo.php" class="btn btn-outline-danger rounded-pill px-3 fw-bold btn-sm">Profilo</a>
             <a href="logout.php" class="btn btn-link text-danger text-decoration-none fw-bold small">Esci</a>
-        <?php endif; ?>
+          <?php endif; ?>
         </div>
       </div>
     </div>
@@ -97,27 +99,27 @@
     ?>
 
     <div class="toast-container position-fixed bottom-0 end-0 p-3">
-      
-      <?php 
-          $msgFeedback = getMsg(); 
-          if($msgFeedback): 
-              $isSuccess = ($msgFeedback["tipo"] == "success");
-              $headerClass = $isSuccess ? "bg-success text-white" : "bg-danger text-white";
-              $icona = $isSuccess ? "bi-check-circle-fill" : "bi-exclamation-triangle-fill";
-              $titolo = $isSuccess ? "Operazione Completata" : "Errore";
-      ?>
 
-      <div id="liveToast" class="toast shadow" role="alert" aria-live="assertive" aria-atomic="true">
+      <?php
+      $msgFeedback = getMsg();
+      if ($msgFeedback):
+        $isSuccess = ($msgFeedback["tipo"] == "success");
+        $headerClass = $isSuccess ? "bg-success text-white" : "bg-danger text-white";
+        $icona = $isSuccess ? "bi-check-circle-fill" : "bi-exclamation-triangle-fill";
+        $titolo = $isSuccess ? "Operazione Completata" : "Errore";
+        ?>
+
+        <div id="liveToast" class="toast shadow" role="alert" aria-live="assertive" aria-atomic="true">
           <div class="toast-header <?php echo $headerClass; ?>">
-              <i class="bi <?php echo $icona; ?> me-2"></i>
-              <strong class="me-auto"><?php echo $titolo; ?></strong>
-              <small class="opacity-75">Adesso</small>
-              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+            <i class="bi <?php echo $icona; ?> me-2"></i>
+            <strong class="me-auto"><?php echo $titolo; ?></strong>
+            <small class="opacity-75">Adesso</small>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
           </div>
           <div class="toast-body bg-white rounded-bottom ">
-              <?php echo htmlspecialchars($msgFeedback["messaggio"]); ?>
+            <?php echo htmlspecialchars($msgFeedback["messaggio"]); ?>
           </div>
-      </div>
+        </div>
 
       <?php endif; ?>
 
@@ -135,26 +137,27 @@
         </div>
 
         <div class="col-md-6 text-center my-2 my-md-0">
-          <a href="chi-siamo.php" class="text-dark text-decoration-none fw-bold px-2 small">Chi Siamo</a>
-          <a href="lista-categoria.php" class="text-dark text-decoration-none fw-bold px-2 small">Lista Spotted</a>
+          <a href="chi-siamo.php" class="text-dark text-decoration-none fw-bold px-2 small footer-link">Chi Siamo</a>
+          <a href="lista-categoria.php" class="text-dark text-decoration-none fw-bold px-2 small footer-link">Lista
+            Spotted</a>
           <a href="mailto:spottedcampus@unibo.com"
-            class="text-dark text-decoration-none fw-bold px-2 small">Contattaci</a>
+            class="text-dark text-decoration-none fw-bold px-2 small footer-link">Contattaci</a>
           <a href="https://maps.app.goo.gl/dLQ2NFKTWv7YAmEy9"
-            class="text-dark text-decoration-none fw-bold px-2 small">Dove siamo</a>
+            class="text-dark text-decoration-none fw-bold px-2 small footer-link">Dove siamo</a>
         </div>
 
         <div class="col-md-3 text-center text-md-end">
           <span class="d-block fw-bold small mb-1">Social</span>
           <div>
-            <a href="#" class="text-dark me-2 fs-5 text-decoration-none" aria-label="Vai a Instagram">
-            <i class="bi bi-instagram"></i></a>
-            <a href="#" class="text-dark me-2 fs-5 text-decoration-none" aria-label="Vai a Facebook">
-    <i class="bi bi-facebook"></i>
-</a>
+            <a href="#" class="text-dark me-2 fs-5 text-decoration-none footer-social" aria-label="Vai a Instagram">
+              <i class="bi bi-instagram"></i></a>
+            <a href="#" class="text-dark me-2 fs-5 text-decoration-none footer-social" aria-label="Vai a Facebook">
+              <i class="bi bi-facebook"></i>
+            </a>
 
-<a href="#" class="text-dark fs-5 text-decoration-none" aria-label="Vai a TikTok">
-    <i class="bi bi-tiktok"></i>
-</a>
+            <a href="#" class="text-dark fs-5 text-decoration-none footer-social" aria-label="Vai a TikTok">
+              <i class="bi bi-tiktok"></i>
+            </a>
           </div>
         </div>
 
@@ -162,55 +165,55 @@
     </div>
   </footer>
 
-  
+
 
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const toastEl = document.getElementById('liveToast');
-        if (toastEl) {
-            const toast = new bootstrap.Toast(toastEl, { delay: 4000 });
-            toast.show();
-        }
+    document.addEventListener("DOMContentLoaded", function () {
+      const toastEl = document.getElementById('liveToast');
+      if (toastEl) {
+        const toast = new bootstrap.Toast(toastEl, { delay: 4000 });
+        toast.show();
+      }
     });
   </script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-        var modalElement = document.getElementById('modalFiltri');
-        var formElement = document.getElementById('formFiltri');
+      var modalElement = document.getElementById('modalFiltri');
+      var formElement = document.getElementById('formFiltri');
 
-        modalElement.addEventListener('hide.bs.modal', function (event) {
-            formElement.submit();
-        });
+      modalElement.addEventListener('hide.bs.modal', function (event) {
+        formElement.submit();
+      });
     });
-</script>
+  </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
-document.addEventListener("DOMContentLoaded", function() {
-    const badgeContainer = document.getElementById("notification-badge-container");
+    document.addEventListener("DOMContentLoaded", function () {
+      const badgeContainer = document.getElementById("notification-badge-container");
 
-    function updateNotificationCount() {
+      function updateNotificationCount() {
         fetch('notifiche-count.php')
-            .then(response => response.json())
-            .then(data => {
-                if (data.count > 0) {
-                    badgeContainer.innerHTML = `
+          .then(response => response.json())
+          .then(data => {
+            if (data.count > 0) {
+              badgeContainer.innerHTML = `
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.7rem;">
                             ${data.count}
                             <span class="visually-hidden">notifiche non lette</span>
                         </span>`;
-                } else {
-                    badgeContainer.innerHTML = "";
-                }
-            })
-            .catch(error => console.error("Errore nel recupero notifiche:", error));
-    }
+            } else {
+              badgeContainer.innerHTML = "";
+            }
+          })
+          .catch(error => console.error("Errore nel recupero notifiche:", error));
+      }
 
-    if (badgeContainer) {
+      if (badgeContainer) {
         setInterval(updateNotificationCount, 30000);
-    }
-});
-</script>
+      }
+    });
+  </script>
 
 </body>
 

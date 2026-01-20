@@ -30,10 +30,6 @@
                             <h2 class="h6 text-muted small fw-bold">Dettagli Pubblicazione</h2>
                             <ul class="list-unstyled">
                                 <li class="d-flex align-items-center mb-2">
-                                    <?php $imgAutore = !empty($templateParams["spot"]["fotoProfilo"]) ? "upload/" . $templateParams["spot"]["fotoProfilo"] : "upload/default.png"; ?>
-                                    <img src="<?php echo htmlspecialchars($imgAutore); ?>" alt="Foto Profilo"
-                                        class="rounded-circle me-2"
-                                        style="width: 40px; height: 40px; object-fit: cover; border: 2px solid #dc3545;">
                                     <span><strong>Autore:</strong>
                                         <?php echo htmlspecialchars($templateParams["spot"]["nomeAutore"] . " " . $templateParams["spot"]["cognomeAutore"]); ?></span>
                                 </li>
@@ -95,10 +91,13 @@
                                 <div class="d-flex justify-content-between align-items-center mb-2">
                                     <div class="d-flex align-items-center">
                                         <?php $imgCommento = !empty($commento["fotoProfilo"]) ? "upload/" . $commento["fotoProfilo"] : "upload/default.png"; ?>
-                                        <img src="<?php echo htmlspecialchars($imgCommento); ?>" alt="Foto" class="rounded-circle me-2" style="width: 30px; height: 30px; object-fit: cover;">
-                                        <h4 class="mb-0 fw-bold fs-6"><?php echo htmlspecialchars($commento["usernameUtente"]); ?></h4>
+                                        <img src="<?php echo htmlspecialchars($imgCommento); ?>" alt="Foto"
+                                            class="rounded-circle me-2" style="width: 30px; height: 30px; object-fit: cover;">
+                                        <h4 class="mb-0 fw-bold fs-6">
+                                            <?php echo htmlspecialchars($commento["usernameUtente"]); ?></h4>
                                     </div>
-                                    <small class="text-muted"><?php echo date("d/m H:i", strtotime($commento['dataPubblicazione']));  ?></small>
+                                    <small
+                                        class="text-muted"><?php echo date("d/m H:i", strtotime($commento['dataPubblicazione'])); ?></small>
                                 </div>
 
                                 <p class="mb-1 small"><?php echo htmlspecialchars($commento["testo"]); ?></p>
@@ -109,19 +108,20 @@
                                         <i class="bi bi-reply"></i> Rispondi
                                     </a>
 
-                                    <?php if(isAdminLoggedIn()): ?>
+                                    <?php if (isAdminLoggedIn()): ?>
                                         <form action="elimina-commento.php" method="POST" style="display:inline;">
-                                            
+
                                             <input type="hidden" name="id" value="<?php echo $commento['idCommento']; ?>">
-                                            <input type="hidden" name="idSpot" value="<?php echo $templateParams['spot']['idSpot']; ?>">
-                                            
-                                            <button type="submit" 
-                                                    class="btn btn-link p-0 m-0 text-decoration-none small fw-bold text-danger" 
-                                                    style="font-size: 0.75rem;"
-                                                    onclick="return confirm('Sei sicuro di voler eliminare definitivamente questo commento?');">
+                                            <input type="hidden" name="idSpot"
+                                                value="<?php echo $templateParams['spot']['idSpot']; ?>">
+
+                                            <button type="submit"
+                                                class="btn btn-link p-0 m-0 text-decoration-none small fw-bold text-danger"
+                                                style="font-size: 0.75rem;"
+                                                onclick="return confirm('Sei sicuro di voler eliminare definitivamente questo commento?');">
                                                 <i class="bi bi-trash"></i> Elimina
                                             </button>
-                                            
+
                                         </form>
                                     <?php endif; ?>
                                 </div>
