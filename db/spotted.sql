@@ -14,6 +14,7 @@ CREATE TABLE UTENTI (
     password VARCHAR(255) NOT NULL,
     stato ENUM('attivo', 'bloccato') DEFAULT 'attivo',
     idTipo INT NOT NULL, 
+    fotoProfilo VARCHAR(255) DEFAULT 'default.png',
 
     FOREIGN KEY (idTipo) REFERENCES TIPI_UTENTI(idTipo) ON DELETE CASCADE
 ) ENGINE=InnoDB;

@@ -35,6 +35,15 @@ body {
   z-index: -2;
 }
 
+.profile-img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #dc3545;
+  /* Red border to match theme */
+}
+
 .noise-overlay {
   position: fixed;
   top: 0;

@@ -4,12 +4,12 @@ INSERT INTO TIPI_UTENTI (nomeTipo) VALUES
 ('admin'),
 ('utente');
 
-INSERT INTO UTENTI (username, nome, cognome, password, stato, idTipo) VALUES 
-('admin', 'Massimo', 'Decimo', 'admin', 'attivo', 1),
-('zleo24', 'Luca', 'Rossi', 'prova', 'attivo', 2),   
-('steppo04', 'Giulia', 'Bianchi', 'steps', 'attivo', 2),
-('giaguaro04', 'Leone', 'Bianchi', 'giags', 'attivo', 2),
-('utentebloccato', 'Marco', 'Neri', '123456', 'bloccato', 2);   
+INSERT INTO UTENTI (username, nome, cognome, password, stato, idTipo, fotoProfilo) VALUES 
+('admin', 'Massimo', 'Decimo', 'admin', 'attivo', 1, 'default.png'),
+('zleo24', 'Luca', 'Rossi', 'prova', 'attivo', 2, 'default.png'),   
+('steppo04', 'Giulia', 'Bianchi', 'steps', 'attivo', 2, 'default.png'),
+('giaguaro04', 'Leone', 'Bianchi', 'giags', 'attivo', 2, 'default.png'),
+('utentebloccato', 'Marco', 'Neri', '123456', 'bloccato', 2, 'default.png');   
 
 INSERT INTO CATEGORIE (nome) VALUES 
 ('Info Aule'), 

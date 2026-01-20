@@ -15,7 +15,7 @@ class DatabaseHelper
     public function getSpotInfo($idSpot)
     {
         $query = "SELECT S.*, C.nome AS nomeCategoria, SC.nome AS nomeSottoCategoria, 
-                        U.nome AS nomeAutore, U.cognome AS cognomeAutore
+                        U.nome AS nomeAutore, U.cognome AS cognomeAutore, U.fotoProfilo
                         FROM SPOT S
                         JOIN CATEGORIE C ON S.idCategoria = C.idCategoria
                         LEFT JOIN SOTTOCATEGORIE SC ON S.idSottoCategoria = SC.idSottoCategoria
@@ -32,9 +32,10 @@ class DatabaseHelper
 
     public function getComments($idSpot)
     {
-        $query = "SELECT C1.*, C2.testo AS testoPadre, C2.usernameUtente AS autorePadre
+        $query = "SELECT C1.*, C2.testo AS testoPadre, C2.usernameUtente AS autorePadre, U.fotoProfilo
             FROM COMMENTI C1
             LEFT JOIN COMMENTI C2 ON C1.idCommentoRisposto = C2.idCommento
+            JOIN UTENTI U ON C1.usernameUtente = U.username
             WHERE C1.idSpot = ?
             ORDER BY C1.dataPubblicazione ASC";
 
@@ -79,7 +80,7 @@ class DatabaseHelper
     public function getLastSpots($n)
     {
 
-        $stmt = $this->db->prepare("SELECT * FROM SPOT WHERE stato='approvato' ORDER BY dataInserimento LIMIT ?");
+        $stmt = $this->db->prepare("SELECT S.*, U.fotoProfilo FROM SPOT S JOIN UTENTI U ON S.usernameUtente = U.username WHERE S.stato='approvato' ORDER BY S.dataInserimento DESC LIMIT ?");
         $stmt->bind_param('i', $n);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -90,9 +91,11 @@ class DatabaseHelper
     public function getSpotsByString($str)
     {
 
-        $query = "SELECT * FROM SPOT WHERE (titolo LIKE ? OR testo LIKE ?) 
-            AND stato = 'approvato' 
-            ORDER BY dataInserimento DESC";
+        $query = "SELECT S.*, U.fotoProfilo FROM SPOT S 
+            JOIN UTENTI U ON S.usernameUtente = U.username
+            WHERE (S.titolo LIKE ? OR S.testo LIKE ?) 
+            AND S.stato = 'approvato' 
+            ORDER BY S.dataInserimento DESC";
 
         $stmt = $this->db->prepare($query);
         $ricerca = "%" . $str . "%";
@@ -106,9 +109,10 @@ class DatabaseHelper
     public function getSpotsByCategories($idCategorie)
     {
         $placeholders = implode(',', array_fill(0, count($idCategorie), '?'));
-        $query = "SELECT * FROM SPOT 
-                WHERE idCategoria IN ($placeholders) 
-                AND stato = 'approvato'";
+        $query = "SELECT S.*, U.fotoProfilo FROM SPOT S
+                JOIN UTENTI U ON S.usernameUtente = U.username
+                WHERE S.idCategoria IN ($placeholders) 
+                AND S.stato = 'approvato'";
 
         $stmt = $this->db->prepare($query);
         $types = str_repeat('i', count($idCategorie));
@@ -121,10 +125,11 @@ class DatabaseHelper
     public function getSpotsByCategoriesAndString($testo, $idCategorie)
     {
         $placeholders = implode(',', array_fill(0, count($idCategorie), '?'));
-        $query = "SELECT * FROM SPOT 
-                WHERE (titolo LIKE ? OR testo LIKE ?) 
-                AND idCategoria IN ($placeholders) 
-                AND stato = 'approvato'";
+        $query = "SELECT S.*, U.fotoProfilo FROM SPOT S
+                JOIN UTENTI U ON S.usernameUtente = U.username
+                WHERE (S.titolo LIKE ? OR S.testo LIKE ?) 
+                AND S.idCategoria IN ($placeholders) 
+                AND S.stato = 'approvato'";
 
         $stmt = $this->db->prepare($query);
 
@@ -213,27 +218,31 @@ class DatabaseHelper
         return $stmt->execute();
     }
 
-    public function getGeneralStats() {
+    public function getGeneralStats()
+    {
         $stats = [];
-        
+
         $res = $this->db->query("SELECT stato, COUNT(*) as total FROM SPOT GROUP BY stato");
         $results = $res->fetch_all(MYSQLI_ASSOC);
-        
+
         $stats['approvati'] = 0;
         $stats['in_attesa'] = 0;
-        
-        foreach($results as $row) {
-            if($row['stato'] == 'approvato') $stats['approvati'] = $row['total'];
-            if($row['stato'] == 'in_attesa') $stats['in_attesa'] = $row['total'];
+
+        foreach ($results as $row) {
+            if ($row['stato'] == 'approvato')
+                $stats['approvati'] = $row['total'];
+            if ($row['stato'] == 'in_attesa')
+                $stats['in_attesa'] = $row['total'];
         }
-        
+
         $res = $this->db->query("SELECT COUNT(*) as total FROM UTENTI WHERE stato = 'attivo'");
         $stats['utenti_attivi'] = $res->fetch_assoc()['total'];
-        
+
         return $stats;
     }
 
-    public function getTopUser() {
+    public function getTopUser()
+    {
         $query = "SELECT usernameUtente, COUNT(*) as total 
                 FROM SPOT 
                 WHERE stato = 'approvato' 
@@ -243,7 +252,8 @@ class DatabaseHelper
         return $res->fetch_assoc();
     }
 
-    public function getTopCategory() {
+    public function getTopCategory()
+    {
         $query = "SELECT C.nome, COUNT(S.idSpot) as total 
                 FROM CATEGORIE C 
                 LEFT JOIN SPOT S ON C.idCategoria = S.idCategoria 
@@ -253,7 +263,7 @@ class DatabaseHelper
         return $res->fetch_assoc();
     }
 
-    public function isSpotPreferito($usr,$idSpot)
+    public function isSpotPreferito($usr, $idSpot)
     {
         $query = "SELECT * FROM PREFERITI 
                     WHERE usernameUtente = ? AND idSpot = ?;";
@@ -262,30 +272,33 @@ class DatabaseHelper
         $stmt->bind_param("si", $usr, $idSpot);
         $stmt->execute();
         $result = $stmt->get_result();
-        
+
         return $result->num_rows > 0;
     }
 
-    public function aggiungiPreferito($usr,$idSpot){
+    public function aggiungiPreferito($usr, $idSpot)
+    {
         $query = "INSERT INTO PREFERITI(usernameUtente,idSpot) values(?,?)";
 
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("si", $usr, $idSpot);
-        
+
         return $stmt->execute();
     }
 
-    public function rimuoviPreferito($usr,$idSpot){
+    public function rimuoviPreferito($usr, $idSpot)
+    {
         $query = "DELETE FROM PREFERITI WHERE usernameUtente=? AND idSpot=? ";
 
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("si", $usr, $idSpot);
-        
+
         return $stmt->execute();
     }
 
-    public function getUserFavorites($username, $orderBy) {
-    
+    public function getUserFavorites($username, $orderBy)
+    {
+
         $query = "SELECT S.*, C.nome AS nomeCategoria, U.nome, U.cognome 
                 FROM SPOT S
                 JOIN PREFERITI P ON S.idSpot = P.idSpot
@@ -293,7 +306,7 @@ class DatabaseHelper
                 JOIN UTENTI U ON S.usernameUtente = U.username
                 WHERE P.usernameUtente = ? AND S.stato = 'approvato'
                 ORDER BY $orderBy";
-                
+
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("s", $username);
         $stmt->execute();
@@ -302,29 +315,32 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function insertComment($usr,$idSpot,$commento,$idPadre){
+    public function insertComment($usr, $idSpot, $commento, $idPadre)
+    {
         $query = "INSERT INTO COMMENTI(testo,dataPubblicazione,idSpot,usernameUtente,idCommentoRisposto)
                     values (?,NOW(),?,?,?)";
-              
+
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param("sisi", $commento,$idSpot,$usr,$idPadre);
-        
+        $stmt->bind_param("sisi", $commento, $idSpot, $usr, $idPadre);
+
 
         return $stmt->execute();
     }
 
-    public function getCommentById($idCommento) {
+    public function getCommentById($idCommento)
+    {
         $query = "SELECT usernameUtente, testo FROM COMMENTI WHERE idCommento = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i", $idCommento);
         $stmt->execute();
         $result = $stmt->get_result();
-        
+
         return $result->fetch_assoc();
     }
 
 
-    public function getPendingSpots() {
+    public function getPendingSpots()
+    {
         $query = "SELECT S.*, C.nome AS nomeCategoria, U.nome AS nomeAutore, U.cognome AS cognomeAutore 
                 FROM SPOT S
                 JOIN CATEGORIE C ON S.idCategoria = C.idCategoria
@@ -335,21 +351,24 @@ class DatabaseHelper
         return $res->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function updateSpotStatus($idSpot, $nuovoStato, $adminUsername) {
+    public function updateSpotStatus($idSpot, $nuovoStato, $adminUsername)
+    {
         $query = "UPDATE SPOT SET stato = ?, usernameAdminApprovato = ?, dataApprovazione = NOW() WHERE idSpot = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('ssi', $nuovoStato, $adminUsername, $idSpot);
         return $stmt->execute();
     }
 
-    public function getUserInfo($username) {
-        $stmt = $this->db->prepare("SELECT nome, cognome, username, idTipo FROM UTENTI WHERE username = ?");
+    public function getUserInfo($username)
+    {
+        $stmt = $this->db->prepare("SELECT nome, cognome, username, idTipo, fotoProfilo FROM UTENTI WHERE username = ?");
         $stmt->bind_param('s', $username);
         $stmt->execute();
         return $stmt->get_result()->fetch_assoc();
     }
-    
-    public function getSpotsByUsername($username) {
+
+    public function getSpotsByUsername($username)
+    {
         $query = "SELECT S.*, C.nome AS nomeCategoria 
                   FROM SPOT S 
                   JOIN CATEGORIE C ON S.idCategoria = C.idCategoria 
@@ -360,31 +379,34 @@ class DatabaseHelper
         $stmt->execute();
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
-    public function isSpotActive($idSpot){
+    public function isSpotActive($idSpot)
+    {
         $query = "SELECT idSpot FROM SPOT WHERE idSpot = ? AND stato = 'approvato'";
-    
+
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i", $idSpot);
         $stmt->execute();
-        
+
         $stmt->store_result();
         return $stmt->num_rows > 0;
     }
 
-    public function checkCommentBelongsToSpot($idCommento, $idSpot) {
-    
+    public function checkCommentBelongsToSpot($idCommento, $idSpot)
+    {
+
         $query = "SELECT idCommento FROM COMMENTI WHERE idCommento = ? AND idSpot = ?";
-        
+
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param("ii", $idCommento, $idSpot); 
+        $stmt->bind_param("ii", $idCommento, $idSpot);
         $stmt->execute();
-        
-        $stmt->store_result(); 
-        
+
+        $stmt->store_result();
+
         return $stmt->num_rows > 0;
     }
 
-    public function getSubcategoriesByCategory($idCategoria) {
+    public function getSubcategoriesByCategory($idCategoria)
+    {
         $stmt = $this->db->prepare("SELECT idSottoCategoria, nome FROM SOTTOCATEGORIE WHERE idCategoria = ? ORDER BY nome ASC");
         $stmt->bind_param('i', $idCategoria);
         $stmt->execute();
@@ -392,46 +414,51 @@ class DatabaseHelper
     }
 
 
-    public function insertNotification($username, $testo, $link) {
+    public function insertNotification($username, $testo, $link)
+    {
         $stmt = $this->db->prepare("INSERT INTO NOTIFICHE (usernameDestinatario, testo, link) VALUES (?, ?, ?)");
         $stmt->bind_param('sss', $username, $testo, $link);
         return $stmt->execute();
     }
-    
-    public function getUnreadNotificationsCount($username) {
+
+    public function getUnreadNotificationsCount($username)
+    {
         $stmt = $this->db->prepare("SELECT COUNT(*) as totale FROM NOTIFICHE WHERE usernameDestinatario = ? AND letta = FALSE");
         $stmt->bind_param('s', $username);
         $stmt->execute();
         return $stmt->get_result()->fetch_assoc()['totale'];
     }
-    
-    public function getUserNotifications($username) {
+
+    public function getUserNotifications($username)
+    {
         $stmt = $this->db->prepare("SELECT * FROM NOTIFICHE WHERE usernameDestinatario = ? ORDER BY dataNotifica DESC LIMIT 20");
         $stmt->bind_param('s', $username);
         $stmt->execute();
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
-    
-    public function markNotificationsAsRead($username) {
+
+    public function markNotificationsAsRead($username)
+    {
         $stmt = $this->db->prepare("UPDATE NOTIFICHE SET letta = TRUE WHERE usernameDestinatario = ?");
         $stmt->bind_param('s', $username);
         return $stmt->execute();
     }
 
-    public function getTitoloBySpotId($idSpot) {
+    public function getTitoloBySpotId($idSpot)
+    {
 
         $query = "SELECT titolo FROM SPOT WHERE idSpot = ?";
-        
+
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i", $idSpot);
         $stmt->execute();
-        
+
         $result = $stmt->get_result();
-        
+
         if ($row = $result->fetch_assoc()) {
             return $row["titolo"];
         }
-        
+
         return null;
     }
 
@@ -440,6 +467,12 @@ class DatabaseHelper
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i", $idCommento);
         $stmt->execute();
+    }
+    public function updateUserImage($username, $imageName)
+    {
+        $stmt = $this->db->prepare("UPDATE UTENTI SET fotoProfilo = ? WHERE username = ?");
+        $stmt->bind_param('ss', $imageName, $username);
+        return $stmt->execute();
     }
 }
 
