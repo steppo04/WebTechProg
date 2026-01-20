@@ -23,6 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if ($result) {
         header("Location: ../login.php");
+        setMsg("Registrazione avvenuta con successo, accedi ora", "success");
         exit;
     } else {
         $_SESSION['error_message'] = "Errore: Registrazione fallita. Username potrebbe essere già in uso.";

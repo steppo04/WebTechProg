@@ -42,8 +42,9 @@
 
             <div class="text-center mt-4">
                 <p class="mb-0 text-muted small fw-bold">
-                    Sei già registrato? <br>
+                    Sei già registrato?
                     <a href="login.php" class="auth-link">ACCEDI QUI</a>
+
                 </p>
             </div>
         </form>

@@ -31,7 +31,7 @@
 
             <div class="text-center mt-4">
                 <p class="mb-0 text-muted small fw-bold">
-                    Non sei ancora registrato? <br>
+                    Non sei ancora registrato?
                     <a href="sign-up.php" class="auth-link">CREA UN ACCOUNT</a>
                 </p>
             </div>
