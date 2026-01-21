@@ -1,11 +1,11 @@
-<section class="container mt-5">
+<div class="container mt-5">
     <div class="row">
 
         <div class="col-md-8">
             <article class="card shadow-sm mb-4">
 
                 <div class="card-header bg-danger text-white d-flex justify-content-between align-items-center">
-                    <h1 class="h4 mb-0"><?php echo htmlspecialchars($templateParams["spot"]["titolo"]); ?></h1>
+                    <h2 class="h4 mb-0"><?php echo htmlspecialchars($templateParams["spot"]["titolo"]); ?></h2>
 
                     <?php
 
@@ -30,15 +30,14 @@
                             <h2 class="h6 text-muted small fw-bold">Dettagli Pubblicazione</h2>
                             <ul class="list-unstyled">
                                 <li class="d-flex align-items-center mb-2">
-                                    <span><strong>Autore:</strong>
-                                        <?php
-                                        if ($templateParams["spot"]["isAnonymous"]) {
-                                            echo '<span class="fst-italic text-secondary">Anonimo <i class="bi bi-incognito"></i></span>';
-                                        } else {
-                                            echo htmlspecialchars($templateParams["spot"]["nomeAutore"] . " " . $templateParams["spot"]["cognomeAutore"]);
-                                        }
-                                        ?>
-                                    </span>
+                                    <strong>Autore:</strong>
+                                    <?php
+                                    if ($templateParams["spot"]["isAnonymous"]) {
+                                        echo '<span class="fst-italic text-secondary">Anonimo <i class="bi bi-incognito"></i></span>';
+                                    } else {
+                                        echo htmlspecialchars($templateParams["spot"]["nomeAutore"] . " " . $templateParams["spot"]["cognomeAutore"]);
+                                    }
+                                    ?>
                                 </li>
                                 <li><strong>Data:</strong>
                                     <?php echo date("d/m/Y H:i", strtotime($templateParams["spot"]["dataInserimento"])); ?>
@@ -98,7 +97,7 @@
                                 <div class="d-flex justify-content-between align-items-center mb-2">
                                     <div class="d-flex align-items-center">
                                         <?php $imgCommento = !empty($commento["fotoProfilo"]) ? "upload/" . $commento["fotoProfilo"] : "upload/default.png"; ?>
-                                        <img src="<?php echo htmlspecialchars($imgCommento); ?>" alt="Foto"
+                                        <img src="<?php echo htmlspecialchars($imgCommento); ?>" alt="Foto Profilo Utente"
                                             class="rounded-circle me-2" style="width: 30px; height: 30px; object-fit: cover;">
                                         <h4 class="mb-0 fw-bold fs-6">
                                             <?php echo htmlspecialchars($commento["usernameUtente"]); ?>
@@ -143,7 +142,7 @@
                 <div class="card card-body bg-light border-0">
                     <?php if (isset($_GET["rspTo"])):
                         $commentoDaRispondere = $templateParams["rispostaAPadre"];
-                        ?>
+                    ?>
                         <div
                             class="alert alert-white border-start border-danger border-4 shadow-sm mb-3 py-2 position-relative">
                             <button type="button" class="btn-close position-absolute top-0 end-0 p-2"
@@ -179,4 +178,4 @@
         </div>
 
     </div>
-</section>
+</div>

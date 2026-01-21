@@ -5,9 +5,9 @@
         </div>
     </div>
 
-    <?php if(count($templateParams["spotInAttesa"]) > 0): ?>
+    <?php if (count($templateParams["spotInAttesa"]) > 0): ?>
         <div class="row g-4">
-            <?php foreach($templateParams["spotInAttesa"] as $spot): ?>
+            <?php foreach ($templateParams["spotInAttesa"] as $spot): ?>
                 <div class="col-12">
                     <div class="card shadow-sm border-0">
                         <div class="card-header bg-danger text-white fw-bold d-flex justify-content-between">
@@ -17,7 +17,7 @@
                         <div class="card-body">
                             <p class="mb-1 text-muted small"><strong>Categoria:</strong> <?php echo htmlspecialchars($spot["nomeCategoria"]); ?></p>
                             <p class="card-text"><?php echo htmlspecialchars($spot["testo"]); ?></p>
-                            
+
                             <div class="d-flex justify-content-end gap-2 mt-3">
                                 <form method="POST" action="revisione.php">
                                     <input type="hidden" name="idSpot" value="<?php echo $spot["idSpot"]; ?>">

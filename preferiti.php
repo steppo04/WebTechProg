@@ -1,26 +1,26 @@
 <?php
-    require_once 'bootstrap.php';
+require_once 'bootstrap.php';
 
-    if(!isUserLoggedIn()){
-        header("location: login.php");
-        setMsg("Devi prima effettuale l'accesso", "danger");
-        exit;
-    }
+if (!isUserLoggedIn()) {
+    header("location: login.php");
+    setMsg("Devi prima effettuale l'accesso", "danger");
+    exit;
+}
 
-    $templateParams["titolo"] = "Spotted - I miei Preferiti";
-    $templateParams["nome"] = "lista-preferiti.php";
-    $username = $_SESSION["username"];
-    $filter = $_GET["filter"] ?? "recente";
+$templateParams["titolo"] = "Spotted - I miei Preferiti";
+$templateParams["nome"] = "lista-preferiti.php";
+$username = $_SESSION["username"];
+$filter = $_GET["filter"] ?? "recente";
 
-    if ($filter == "newest") {
-        $templateParams["spot"] = $dbh->getUserFavorites($username, "S.dataInserimento DESC");
-    } elseif ($filter == "oldest") {
-        $templateParams["spot"] = $dbh->getUserFavorites($username, "S.dataInserimento ASC");
-    } elseif ($filter == "az") {
-        $templateParams["spot"] = $dbh->getUserFavorites($username, "S.titolo ASC");
-    } else {
-        $templateParams["spot"] = $dbh->getUserFavorites($username, "S.dataInserimento DESC");
-    }
+if ($filter == "newest") {
+    $templateParams["spot"] = $dbh->getUserFavorites($username, "S.dataInserimento DESC");
+} elseif ($filter == "oldest") {
+    $templateParams["spot"] = $dbh->getUserFavorites($username, "S.dataInserimento ASC");
+} elseif ($filter == "az") {
+    $templateParams["spot"] = $dbh->getUserFavorites($username, "S.titolo ASC");
+} else {
+    $templateParams["spot"] = $dbh->getUserFavorites($username, "S.dataInserimento DESC");
+}
 
-    require 'template/base.php';
+require 'template/base.php';
 ?>

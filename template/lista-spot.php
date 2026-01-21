@@ -1,6 +1,6 @@
 <section class="container mt-5">
 
-    <?php if(isset($templateParams["titolo"])): ?>
+    <?php if (isset($templateParams["titolo"])): ?>
         <div class="row mb-4 border-bottom pb-4">
             <div class="col-12 text-center">
                 <h1 class="display-6"><?php echo $templateParams["titolo"]; ?></h1>
@@ -15,41 +15,41 @@
                     <div class="col-md-8">
                         <div class="d-flex gap-2" role="search">
                             <label for="ricerca" class="visually-hidden">Ricerca</label>
-                            <input type="text" class="form-control form-control-lg" name="ricerca" id="ricerca" 
-                                placeholder="Cerca uno spot..." 
+                            <input type="text" class="form-control form-control-lg" name="ricerca" id="ricerca"
+                                placeholder="Cerca uno spot..."
                                 value="<?php echo isset($_GET['ricerca']) ? htmlspecialchars($_GET['ricerca']) : ''; ?>">
-                            
+
                             <button type="submit" class="btn btn-danger">Cerca</button>
-                            
+
                             <button type="button" class="btn btn-outline-dark d-flex gap-2 align-items-center" data-bs-toggle="modal" data-bs-target="#modalFiltri">
                                 <i class="bi bi-funnel"></i> Filtri
                             </button>
                         </div>
                     </div>
                 </div>
-            </form> 
-            
-            <div class="modal fade" id="modalFiltri" tabindex="-1" aria-labelledby="modalFiltriLabel" aria-hidden="true">
+            </form>
+
+            <div class="modal fade" id="modalFiltri" tabindex="-1" role="dialog" aria-labelledby="modalFiltriLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h2 class="modal-title fs-5" id="modalFiltriLabel">Filtra per Categoria</h2>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body"> 
+                        <div class="modal-body">
                             <p>Seleziona una o più categorie:</p>
-                            <?php foreach($templateParams["categorie"] as $categoria): ?>
+                            <?php foreach ($templateParams["categorie"] as $categoria): ?>
                                 <div class="form-check mb-2">
-                                    <input class="form-check-input check-filtro" type="checkbox" name="cat[]" 
-                                        value="<?php echo $categoria['idCategoria']; ?>" 
+                                    <input class="form-check-input check-filtro" type="checkbox" name="cat[]"
+                                        value="<?php echo $categoria['idCategoria']; ?>"
                                         id="cat<?php echo $categoria['idCategoria']; ?>"
-                                        <?php if(isset($_GET["cat"]) && in_array($categoria['idCategoria'], $_GET["cat"])) echo "checked"; ?>>
+                                        <?php if (isset($_GET["cat"]) && in_array($categoria['idCategoria'], $_GET["cat"])) echo "checked"; ?>>
                                     <label class="form-check-label" for="cat<?php echo $categoria['idCategoria']; ?>">
                                         <?php echo $categoria['nome']; ?>
                                     </label>
                                 </div>
                             <?php endforeach; ?>
-                        </div> 
+                        </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
                         </div>
@@ -60,8 +60,8 @@
     </div>
 
     <div class="row g-4 mb-4" id="container-spot">
-        <?php if(count($templateParams["spot"]) > 0): ?>
-            <?php foreach($templateParams["spot"] as $spot): ?>
+        <?php if (count($templateParams["spot"]) > 0): ?>
+            <?php foreach ($templateParams["spot"] as $spot): ?>
                 <div class="col-12 col-md-6 col-lg-4">
                     <div class="card h-100 shadow-sm card-spot">
                         <div class="card-header bg-danger text-white d-flex align-items-center">
@@ -87,25 +87,27 @@
 </section>
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    const inputRicerca = document.getElementById("ricerca");
-    const containerSpot = document.getElementById("container-spot");
-    const formRicerca = document.getElementById("form-ricerca");
+    document.addEventListener("DOMContentLoaded", function() {
+        const inputRicerca = document.getElementById("ricerca");
+        const containerSpot = document.getElementById("container-spot");
+        const formRicerca = document.getElementById("form-ricerca");
 
-    function eseguiRicerca() {
-        const query = inputRicerca.value;
-        const categories = Array.from(document.querySelectorAll('.check-filtro:checked')).map(cb => cb.value);
-        
-        let url = `ricerca.php?ricerca=${encodeURIComponent(query)}`;
-        categories.forEach(cat => { url += `&cat[]=${cat}`; });
+        function eseguiRicerca() {
+            const query = inputRicerca.value;
+            const categories = Array.from(document.querySelectorAll('.check-filtro:checked')).map(cb => cb.value);
 
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                containerSpot.innerHTML = ""; 
-                if (data.length > 0) {
-                    data.forEach(spot => {
-                        containerSpot.innerHTML += `
+            let url = `ricerca.php?ricerca=${encodeURIComponent(query)}`;
+            categories.forEach(cat => {
+                url += `&cat[]=${cat}`;
+            });
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    containerSpot.innerHTML = "";
+                    if (data.length > 0) {
+                        data.forEach(spot => {
+                            containerSpot.innerHTML += `
                             <div class="col-12 col-md-6 col-lg-4">
                                 <div class="card h-100 shadow-sm card-spot">
                                     <div class="card-header bg-danger text-white">
@@ -120,22 +122,22 @@ document.addEventListener("DOMContentLoaded", function() {
                                     </div>
                                 </div>
                             </div>`;
-                    });
-                } else {
-                    containerSpot.innerHTML = '<div class="col-12 text-center my-5"><p class="lead">Nessuno spot trovato.</p></div>';
-                }
-            })
-            .catch(error => console.error("Errore AJAX:", error));
-    }
+                        });
+                    } else {
+                        containerSpot.innerHTML = '<div class="col-12 text-center my-5"><p class="lead">Nessuno spot trovato.</p></div>';
+                    }
+                })
+                .catch(error => console.error("Errore AJAX:", error));
+        }
 
-    inputRicerca.addEventListener("input", eseguiRicerca);
-    document.querySelectorAll('.check-filtro').forEach(checkbox => {
-        checkbox.addEventListener("change", eseguiRicerca);
-    });
+        inputRicerca.addEventListener("input", eseguiRicerca);
+        document.querySelectorAll('.check-filtro').forEach(checkbox => {
+            checkbox.addEventListener("change", eseguiRicerca);
+        });
 
-    formRicerca.addEventListener("submit", function(e) {
-        e.preventDefault();
-        eseguiRicerca();
+        formRicerca.addEventListener("submit", function(e) {
+            e.preventDefault();
+            eseguiRicerca();
+        });
     });
-});
 </script>

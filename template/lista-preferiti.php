@@ -2,7 +2,7 @@
         <div class="container">
             <div class="row mt-5">
 
-                <?php if(isset($templateParams["titolo"])): ?>
+                <?php if (isset($templateParams["titolo"])): ?>
 
                     <div class="row mb-4">
                         <div class="col-12 text-center">
@@ -27,9 +27,9 @@
                 </div>
 
                 <div class="row g-4 mt-1">
-                    
-                    <?php if(count($templateParams["spot"]) > 0): ?>
-                        <?php foreach($templateParams["spot"] as $spot): ?>
+
+                    <?php if (count($templateParams["spot"]) > 0): ?>
+                        <?php foreach ($templateParams["spot"] as $spot): ?>
 
                             <div class="col-12 col-md-6 col-lg-4">
                                 <div class="card h-100 shadow-sm card-spot">
@@ -44,7 +44,7 @@
                                     </div>
                                     <div class="card-footer bg-transparent border-top-0">
                                         <a href="dettaglio-spot.php?id=<?php echo $spot['idSpot']; ?>" class="btn btn-outline-primary btn-sm">
-                                        Leggi di più
+                                            Leggi di più
                                         </a>
                                     </div>
                                 </div>

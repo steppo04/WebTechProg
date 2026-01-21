@@ -12,12 +12,12 @@ $templateParams["nome"] = "template/admin-categoria.php";
 $templateParams["categoriePrincipali"] = $dbh->getCategoriePrincipali();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    
+
     $nomeInput = trim($_POST["nomeCategoria"]);
     $idPadre = $_POST["idCategoriaPadre"];
 
     if (strlen($nomeInput) > 0) {
-        
+
         if (empty($idPadre)) {
             try {
                 $dbh->insertCategoria($nomeInput);
@@ -33,10 +33,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 setMsg("Errore durante l'inserimento.", "danger");
             }
         }
-        
+
         header("Location: inserisci-categoria.php");
         exit();
-
     } else {
         setMsg("Il nome non può essere vuoto.", "danger");
     }

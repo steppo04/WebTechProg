@@ -69,7 +69,7 @@
 
             <?php if (isUserLoggedIn()):
               $unreadCount = $dbh->getUnreadNotificationsCount($_SESSION["username"]);
-              ?>
+            ?>
               <a href="notifiche.php" id="notification-link"
                 class="btn btn-link text-danger me-3 position-relative py-1 px-2 text-decoration-none">
                 <i class="bi bi-bell-fill" style="font-size: 1.2rem;"></i>
@@ -110,7 +110,7 @@
         $headerClass = $isSuccess ? "bg-success text-white" : "bg-danger text-white";
         $icona = $isSuccess ? "bi-check-circle-fill" : "bi-exclamation-triangle-fill";
         $titolo = $isSuccess ? "Operazione Completata" : "Errore";
-        ?>
+      ?>
 
         <div id="liveToast" class="toast shadow" role="alert" aria-live="assertive" aria-atomic="true">
           <div class="toast-header <?php echo $headerClass; ?>">
@@ -171,20 +171,22 @@
 
 
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function() {
       const toastEl = document.getElementById('liveToast');
       if (toastEl) {
-        const toast = new bootstrap.Toast(toastEl, { delay: 4000 });
+        const toast = new bootstrap.Toast(toastEl, {
+          delay: 4000
+        });
         toast.show();
       }
     });
   </script>
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
       var modalElement = document.getElementById('modalFiltri');
       var formElement = document.getElementById('formFiltri');
 
-      modalElement.addEventListener('hide.bs.modal', function (event) {
+      modalElement.addEventListener('hide.bs.modal', function(event) {
         formElement.submit();
       });
     });
@@ -192,7 +194,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function() {
       const badgeContainer = document.getElementById("notification-badge-container");
 
       function updateNotificationCount() {

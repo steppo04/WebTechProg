@@ -461,7 +461,8 @@ class DatabaseHelper
         return null;
     }
 
-    public function deleteComment($idCommento){
+    public function deleteComment($idCommento)
+    {
         $query = "DELETE FROM COMMENTI WHERE idCommento = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i", $idCommento);
@@ -474,26 +475,27 @@ class DatabaseHelper
         return $stmt->execute();
     }
 
-    public function insertCategoria($nome){
+    public function insertCategoria($nome)
+    {
         $query = "INSERT INTO CATEGORIE (nome) VALUES (?)";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("s", $nome);
         $stmt->execute();
     }
 
-    public function insertSottoCategoria($nome, $idCategoriaPadre){
+    public function insertSottoCategoria($nome, $idCategoriaPadre)
+    {
         $query = "INSERT INTO SOTTOCATEGORIE (nome, idCategoria) VALUES (?, ?)";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("si", $nome, $idCategoriaPadre);
         $stmt->execute();
     }
 
-    public function getCategoriePrincipali(){
+    public function getCategoriePrincipali()
+    {
         $query = "SELECT * FROM CATEGORIE ORDER BY nome ASC";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 }
-
-?>

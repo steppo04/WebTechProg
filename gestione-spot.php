@@ -2,7 +2,7 @@
 require_once 'bootstrap.php';
 
 if (!isUserLoggedIn()) {
-    if(!isAdminLoggedIn()){
+    if (!isAdminLoggedIn()) {
         header("location: index.php");
         setMsg("Non puoi modificare questo spot.", "danger");
         exit();
@@ -15,7 +15,7 @@ $spotEsistente = null;
 if ($idSpot) {
     $spotEsistente = $dbh->getSpotById($idSpot);
     if (!$spotEsistente || $spotEsistente["usernameUtente"] != $_SESSION["username"]) {
-        if(!isAdminLoggedIn()){
+        if (!isAdminLoggedIn()) {
             header("location: index.php");
             setMsg("Solo il proprietario può modificare il post", "danger");
             exit();

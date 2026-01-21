@@ -11,7 +11,7 @@ $idRisposta = $_GET["rspTo"] ?? null;
 
 if (empty($idSpot) || !$dbh->isSpotActive($idSpot)) {
     header("Location: 404.php");
-    exit(); 
+    exit();
 }
 
 if (!empty($idRisposta)) {
@@ -22,17 +22,17 @@ if (!empty($idRisposta)) {
     }
 
     $commentoPadre = $dbh->getCommentById($idRisposta);
-    if($commentoPadre){
-         $templateParams["rispostaAPadre"] = $commentoPadre;
+    if ($commentoPadre) {
+        $templateParams["rispostaAPadre"] = $commentoPadre;
     }
 }
 
 $templateParams["spot"] = $dbh->getSpotInfo($idSpot);
 $templateParams["commenti"] = $dbh->getComments($idSpot);
 
-$templateParams["isPreferito"] = false; 
+$templateParams["isPreferito"] = false;
 
-if(isUserLoggedIn()){
+if (isUserLoggedIn()) {
     $templateParams["isPreferito"] = $dbh->isSpotPreferito($_SESSION["username"], $idSpot);
 }
 

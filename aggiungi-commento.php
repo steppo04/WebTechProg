@@ -1,8 +1,8 @@
 <?php
 require_once 'bootstrap.php';
 
-if(!isUserLoggedIn()) {
-    header("location: dettaglio-spot.php?id=". $_POST["idSpot"]);
+if (!isUserLoggedIn()) {
+    header("location: dettaglio-spot.php?id=" . $_POST["idSpot"]);
     setMsg("Devi prima effettuale l'accesso", "danger");
     exit();
 }
@@ -12,7 +12,7 @@ $commento = $_POST["testo"];
 $idCommentoRisposto = !empty($_POST["idCommentoRisposto"]) ? $_POST["idCommentoRisposto"] : null;
 $usernameUtente = $_SESSION["username"];
 
-if(isset($commento) && trim($commento) != ""){
+if (isset($commento) && trim($commento) != "") {
     $dbh->insertComment($_SESSION["username"], $idSpot, $commento, $idCommentoRisposto);
     setMsg("Commento inserito con successo!", "success");
 } else {
@@ -29,7 +29,7 @@ if ($spot && $spot["usernameUtente"] != $usernameUtente) {
 if ($idCommentoRisposto != null) {
     $commentoOriginale = $dbh->getCommentById($idCommentoRisposto);
 
-    
+
     if ($commentoOriginale && isset($commentoOriginale["usernameUtente"])) {
         $destinatario = $commentoOriginale["usernameUtente"];
 

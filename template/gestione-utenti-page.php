@@ -21,7 +21,7 @@
                                 <td class="ps-4">
                                     <div class="d-flex align-items-center">
                                         <?php $imgUser = !empty($utente["fotoProfilo"]) ? "upload/" . $utente["fotoProfilo"] : "upload/default.png"; ?>
-                                        <img src="<?php echo htmlspecialchars($imgUser); ?>" alt="Foto"
+                                        <img src="<?php echo htmlspecialchars($imgUser); ?>" alt="Foto profilo utente"
                                             class="rounded-circle me-2"
                                             style="width: 30px; height: 30px; object-fit: cover;">
                                         <strong><?php echo htmlspecialchars($utente["username"]); ?></strong>

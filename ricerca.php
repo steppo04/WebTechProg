@@ -19,3 +19,4 @@ if (!empty($ricerca) && !empty($categorie)) {
 header('Content-Type: application/json');
 echo json_encode($risultati);
 exit;
+?>

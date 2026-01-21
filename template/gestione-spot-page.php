@@ -77,7 +77,7 @@
 </div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function() {
         const categoriaSelect = document.getElementById("categoria");
         const sottocategoriaSelect = document.getElementById("sottocategoria");
 
@@ -102,7 +102,7 @@
                 .catch(err => console.error("Errore AJAX:", err));
         }
 
-        categoriaSelect.addEventListener("change", function () {
+        categoriaSelect.addEventListener("change", function() {
             caricaSottocategorie(this.value);
         });
 

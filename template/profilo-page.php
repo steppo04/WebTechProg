@@ -22,11 +22,11 @@
                         </button>
                     </form>
                     <script>
-                        document.getElementById('btnChangePhoto').addEventListener('click', function () {
+                        document.getElementById('btnChangePhoto').addEventListener('click', function() {
                             document.getElementById('fileToUpload').click();
                         });
 
-                        document.getElementById('fileToUpload').addEventListener('change', function () {
+                        document.getElementById('fileToUpload').addEventListener('change', function() {
                             if (this.files && this.files[0]) {
                                 document.getElementById('profileForm').submit();
                             }
@@ -62,7 +62,7 @@
                                     <span class="small"><?php echo htmlspecialchars($spot["nomeCategoria"]); ?></span>
                                 </div>
                                 <div class="card-body">
-                                    <h5 class="card-title"><?php echo htmlspecialchars($spot["titolo"]); ?></h5>
+                                    <h3 class="card-title"><?php echo htmlspecialchars($spot["titolo"]); ?></h3>
                                     <p class="card-text text-truncate"><?php echo htmlspecialchars($spot["testo"]); ?></p>
                                     <div class="d-flex justify-content-between mt-3">
                                         <a href="dettaglio-spot.php?id=<?php echo $spot["idSpot"]; ?>"

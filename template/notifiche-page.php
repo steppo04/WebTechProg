@@ -4,22 +4,22 @@
             <h2 class="mb-4 text-danger border-bottom border-danger pb-2">
                 <i class="bi bi-bell-fill"></i> Nuove Notifiche
             </h2>
-            
-            <?php 
-            $nuoveNotifiche = array_filter($templateParams["notifiche"], function($n) {
+
+            <?php
+            $nuoveNotifiche = array_filter($templateParams["notifiche"], function ($n) {
                 return $n["letta"] == 0;
             });
             ?>
 
-            <?php if(empty($nuoveNotifiche)): ?>
+            <?php if (empty($nuoveNotifiche)): ?>
                 <div class="alert alert-light text-center shadow-sm mb-5">
                     Non ci sono nuove notifiche.
                 </div>
             <?php else: ?>
                 <div class="list-group shadow-sm mb-5">
-                    <?php foreach($nuoveNotifiche as $notifica): ?>
-                        <a href="<?php echo $notifica['link']; ?>" 
-                           class="list-group-item list-group-item-action d-flex justify-content-between align-items-center border-start-danger">
+                    <?php foreach ($nuoveNotifiche as $notifica): ?>
+                        <a href="<?php echo $notifica['link']; ?>"
+                            class="list-group-item list-group-item-action d-flex justify-content-between align-items-center border-start-danger">
                             <div>
                                 <p class="mb-1 fw-bold text-dark"><?php echo htmlspecialchars($notifica['testo']); ?></p>
                                 <small class="text-danger"><i class="bi bi-arrow-right"></i> Vai allo spot</small>
@@ -31,18 +31,18 @@
             <?php endif; ?>
 
             <h2 class="mb-4 text-danger border-bottom border-secondary pb-2 mt-5">
-                <i class="bi bi-archive-fill"></i> Tutte le Notifiche 
+                <i class="bi bi-archive-fill"></i> Tutte le Notifiche
             </h2>
 
-            <?php if(empty($templateParams["notifiche"])): ?>
+            <?php if (empty($templateParams["notifiche"])): ?>
                 <div class="alert alert-dark text-center shadow-sm">
                     Storico notifiche vuoto.
                 </div>
             <?php else: ?>
                 <div class="list-group shadow-sm opacity-75">
-                    <?php foreach($templateParams["notifiche"] as $notifica): ?>
-                        <a href="<?php echo $notifica['link']; ?>" 
-                           class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    <?php foreach ($templateParams["notifiche"] as $notifica): ?>
+                        <a href="<?php echo $notifica['link']; ?>"
+                            class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                             <div>
                                 <p class="mb-1 text-muted"><?php echo htmlspecialchars($notifica['testo']); ?></p>
                             </div>
