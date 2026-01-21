@@ -11,7 +11,12 @@
                 </div>
 
                 <div class="card-body p-4">
-                    <form action="gestione-spot.php<?php echo $isEdit ? '?id=' . $spot['idSpot'] : ''; ?>"
+                <form id="form-spot" 
+      action="gestione-spot.php<?php echo $isEdit ? '?id=' . $spot['idSpot'] : ''; ?>" 
+      method="POST"
+      data-is-edit="<?php echo $isEdit ? 'true' : 'false'; ?>"
+      data-init-cat="<?php echo $isEdit ? $spot['idCategoria'] : ''; ?>"
+      data-init-subcat="<?php echo $isEdit ? $spot['idSottoCategoria'] : ''; ?>"
                         method="POST">
                         <div class="mb-3">
                             <label for="titolo" class="form-label fw-bold">Titolo</label>
@@ -76,38 +81,4 @@
     </div>
 </div>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const categoriaSelect = document.getElementById("categoria");
-        const sottocategoriaSelect = document.getElementById("sottocategoria");
-
-        function caricaSottocategorie(idCategoria, idSelezionata = null) {
-            if (!idCategoria) {
-                sottocategoriaSelect.innerHTML = '<option value="">Seleziona categoria...</option>';
-                return;
-            }
-
-            fetch(`get-subcategories.php?id=${idCategoria}`)
-                .then(response => response.json())
-                .then(data => {
-                    sottocategoriaSelect.innerHTML = '<option value="">Seleziona Sottocategoria...</option>';
-                    data.forEach(sub => {
-                        const opt = document.createElement("option");
-                        opt.value = sub.idSottoCategoria;
-                        opt.textContent = sub.nome;
-                        if (idSelezionata && sub.idSottoCategoria == idSelezionata) opt.selected = true;
-                        sottocategoriaSelect.appendChild(opt);
-                    });
-                })
-                .catch(err => console.error("Errore AJAX:", err));
-        }
-
-        categoriaSelect.addEventListener("change", function() {
-            caricaSottocategorie(this.value);
-        });
-
-        <?php if ($isEdit): ?>
-            caricaSottocategorie("<?php echo $spot['idCategoria']; ?>", "<?php echo $spot['idSottoCategoria']; ?>");
-        <?php endif; ?>
-    });
-</script>
+<script src="js/gestione-spot.js"></script>

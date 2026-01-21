@@ -13,25 +13,15 @@
                 <p class="text-muted">@<?php echo htmlspecialchars($templateParams["utente"]["username"]); ?></p>
 
                 <?php if ($templateParams["isMine"]): ?>
-                    <form action="upload-profile-pic.php" method="post" enctype="multipart/form-data" id="profileForm"
-                        class="mb-3">
-                        <input type="file" name="fileToUpload" id="fileToUpload" class="d-none"
-                            accept="image/x-png,image/gif,image/jpeg">
+                    <form action="upload-profile-pic.php" method="post" enctype="multipart/form-data" id="profileForm" class="mb-3">
+                        <input type="file" name="fileToUpload" id="fileToUpload" class="d-none" accept="image/x-png,image/gif,image/jpeg">
                         <button type="button" class="btn btn-outline-danger btn-sm" id="btnChangePhoto">
                             <i class="bi bi-pencil-square me-1"></i> Modifica Foto
                         </button>
                     </form>
-                    <script>
-                        document.getElementById('btnChangePhoto').addEventListener('click', function() {
-                            document.getElementById('fileToUpload').click();
-                        });
 
-                        document.getElementById('fileToUpload').addEventListener('change', function() {
-                            if (this.files && this.files[0]) {
-                                document.getElementById('profileForm').submit();
-                            }
-                        });
-                    </script>
+                    <script src="js/profilo.js"></script>
+                    
                 <?php endif; ?>
 
                 <?php if ($templateParams["isAdminProfile"]): ?>

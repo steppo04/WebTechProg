@@ -122,13 +122,9 @@
                                             <input type="hidden" name="idSpot"
                                                 value="<?php echo $templateParams['spot']['idSpot']; ?>">
 
-                                            <button type="submit"
-                                                class="btn btn-link p-0 m-0 text-decoration-none small fw-bold text-danger"
-                                                style="font-size: 0.75rem;"
-                                                onclick="return confirm('Sei sicuro di voler eliminare definitivamente questo commento?');">
-                                                <i class="bi bi-trash"></i> Elimina
-                                            </button>
-
+                                                <button type="submit" class="btn btn-link ... btn-confirm-delete" data-confirm-msg="Sei sicuro di voler eliminare questo commento?">
+    <i class="bi bi-trash"></i> Elimina
+</button>
                                         </form>
                                     <?php endif; ?>
                                 </div>

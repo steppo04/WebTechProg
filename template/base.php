@@ -7,7 +7,6 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="./css/style.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-
 </head>
 
 <body class="d-flex flex-column h-100">
@@ -15,8 +14,7 @@
   <header>
   </header>
 
-  <nav
-    class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm py-3 border-bottom border-4 border-danger">
+  <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm py-3 border-bottom border-4 border-danger">
     <div class="container-fluid px-4">
       <a class="navbar-brand text-danger fw-bold fs-4" href="index.php">Spotted Campus</a>
       <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
@@ -26,8 +24,7 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link text-dark fw-bold hover-danger hover-underline" href="lista-categoria.php">Lista
-              Spotted</a>
+            <a class="nav-link text-dark fw-bold hover-danger hover-underline" href="lista-categoria.php">Lista Spotted</a>
           </li>
 
           <?php if (isUserLoggedIn()): ?>
@@ -44,8 +41,7 @@
               <a class="nav-link text-dark fw-bold hover-danger hover-underline" href="revisione.php">Revisione Spot</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-dark fw-bold hover-danger hover-underline" href="gestione-utenti.php">Gestione
-                Utenti</a>
+              <a class="nav-link text-dark fw-bold hover-danger hover-underline" href="gestione-utenti.php">Gestione Utenti</a>
             </li>
             <li class="nav-item">
               <a class="nav-link text-dark fw-bold hover-danger hover-underline" href="admin-stats.php">Statistiche</a>
@@ -102,7 +98,6 @@
     ?>
 
     <div class="toast-container position-fixed bottom-0 end-0 p-3">
-
       <?php
       $msgFeedback = getMsg();
       if ($msgFeedback):
@@ -111,7 +106,6 @@
         $icona = $isSuccess ? "bi-check-circle-fill" : "bi-exclamation-triangle-fill";
         $titolo = $isSuccess ? "Operazione Completata" : "Errore";
       ?>
-
         <div id="liveToast" class="toast shadow" role="alert" aria-live="assertive" aria-atomic="true">
           <div class="toast-header <?php echo $headerClass; ?>">
             <i class="bi <?php echo $icona; ?> me-2"></i>
@@ -123,9 +117,7 @@
             <?php echo htmlspecialchars($msgFeedback["messaggio"]); ?>
           </div>
         </div>
-
       <?php endif; ?>
-
     </div>
   </main>
 
@@ -135,18 +127,14 @@
 
         <div class="col-md-3 text-center text-md-start">
           <span class="d-block fw-bold text-danger">Spotted Campus</span>
-          <small class="text-muted" style="font-size: 0.75rem;">&copy; <?php echo date("Y"); ?> All rights
-            reserved.</small>
+          <small class="text-muted" style="font-size: 0.75rem;">© <?php echo date("Y"); ?> All rights reserved.</small>
         </div>
 
         <div class="col-md-6 text-center my-2 my-md-0">
           <a href="chi-siamo.php" class="text-dark text-decoration-none fw-bold px-2 small footer-link">Chi Siamo</a>
-          <a href="lista-categoria.php" class="text-dark text-decoration-none fw-bold px-2 small footer-link">Lista
-            Spotted</a>
-          <a href="mailto:spottedcampus@unibo.com"
-            class="text-dark text-decoration-none fw-bold px-2 small footer-link">Contattaci</a>
-          <a href="https://maps.app.goo.gl/dLQ2NFKTWv7YAmEy9"
-            class="text-dark text-decoration-none fw-bold px-2 small footer-link">Dove siamo</a>
+          <a href="lista-categoria.php" class="text-dark text-decoration-none fw-bold px-2 small footer-link">Lista Spotted</a>
+          <a href="mailto:spottedcampus@unibo.com" class="text-dark text-decoration-none fw-bold px-2 small footer-link">Contattaci</a>
+          <a href="https://maps.app.goo.gl/dLQ2NFKTWv7YAmEy9" class="text-dark text-decoration-none fw-bold px-2 small footer-link">Dove siamo</a>
         </div>
 
         <div class="col-md-3 text-center text-md-end">
@@ -157,7 +145,6 @@
             <a href="#" class="text-dark me-2 fs-5 text-decoration-none footer-social" aria-label="Vai a Facebook">
               <i class="bi bi-facebook"></i>
             </a>
-
             <a href="#" class="text-dark fs-5 text-decoration-none footer-social" aria-label="Vai a TikTok">
               <i class="bi bi-tiktok"></i>
             </a>
@@ -168,58 +155,9 @@
     </div>
   </footer>
 
-
-
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      const toastEl = document.getElementById('liveToast');
-      if (toastEl) {
-        const toast = new bootstrap.Toast(toastEl, {
-          delay: 4000
-        });
-        toast.show();
-      }
-    });
-  </script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      var modalElement = document.getElementById('modalFiltri');
-      var formElement = document.getElementById('formFiltri');
-
-      modalElement.addEventListener('hide.bs.modal', function(event) {
-        formElement.submit();
-      });
-    });
-  </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      const badgeContainer = document.getElementById("notification-badge-container");
-
-      function updateNotificationCount() {
-        fetch('notifiche-count.php')
-          .then(response => response.json())
-          .then(data => {
-            if (data.count > 0) {
-              badgeContainer.innerHTML = `
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.7rem;">
-                            ${data.count}
-                            <span class="visually-hidden">notifiche non lette</span>
-                        </span>`;
-            } else {
-              badgeContainer.innerHTML = "";
-            }
-          })
-          .catch(error => console.error("Errore nel recupero notifiche:", error));
-      }
-
-      if (badgeContainer) {
-        setInterval(updateNotificationCount, 30000);
-      }
-    });
-  </script>
+  
+  <script src="js/main.js"></script>
 
 </body>
-
 </html>
