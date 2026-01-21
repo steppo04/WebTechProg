@@ -49,3 +49,6 @@
         </form>
     </div>
 </div>
+
+
+<script src="js/signup.js"></script>

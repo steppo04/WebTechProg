@@ -514,4 +514,14 @@ class DatabaseHelper
     
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+    public function isUsernameTaken($username) {
+        $stmt = $this->db->prepare("SELECT COUNT(*) as count FROM UTENTI WHERE username = ?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        
+        return $row['count'] > 0;
+    }
 }
