@@ -498,4 +498,20 @@ class DatabaseHelper
         $stmt->execute();
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
+
+    public function getSpotsPagination($offset, $limit) {
+        $sql = "SELECT S.*, U.fotoProfilo 
+                FROM SPOT S 
+                JOIN UTENTI U ON S.usernameUtente = U.username 
+                WHERE S.stato = 'approvato' 
+                ORDER BY S.dataInserimento DESC 
+                LIMIT ? OFFSET ?";
+        
+        $stmt = $this->db->prepare($sql);
+        $stmt->bind_param("ii", $limit, $offset);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
 }
