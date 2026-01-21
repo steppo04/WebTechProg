@@ -79,7 +79,7 @@
                 <h3 class="h5 mb-3"><i class="bi bi-chat-dots"></i> Commenti
                     (<?php echo count($templateParams["commenti"]); ?>)</h3>
 
-                <div class="list-group mb-3 overflow-auto" style="max-height: 50vh;">
+                <div id="containerCommenti" class="list-group mb-3 overflow-auto" style="max-height: 35vh;">
                     <?php if (count($templateParams["commenti"]) > 0): ?>
                         <?php foreach ($templateParams["commenti"] as $commento): ?>
                             <div class="list-group-item border-start border-danger border-4 mb-2 shadow-sm rounded">
@@ -113,8 +113,8 @@
                                 <p class="mb-1 small"><?php echo htmlspecialchars($commento["testo"]); ?></p>
 
                                 <div class="text-end">
-                                    <a href="?id=<?php echo $templateParams['spot']['idSpot']; ?>&rspTo=<?php echo $commento['idCommento']; ?>  "
-                                        class="text-decoration-none small fw-bold text-danger" style="font-size: 0.75rem;">
+                                    <a href="?id=<?php echo $templateParams['spot']['idSpot']; ?>&rspTo=<?php echo $commento['idCommento']; ?>#formCommento"
+                                        class="text-decoration-none  fw-bold text-danger">
                                         <i class="bi bi-reply"></i> Rispondi
                                     </a>
 
@@ -125,8 +125,7 @@
                                             <input type="hidden" name="idSpot"
                                                 value="<?php echo $templateParams['spot']['idSpot']; ?>">
 
-                                            <button type="submit" class="btn btn-link ... btn-confirm-delete"
-                                                data-confirm-msg="Sei sicuro di voler eliminare questo commento?">
+                                            <button type="submit" class="btn btn-link text-decoration-none small fw-bold text-danger btn-confirm-delete" data-confirm-msg="Sei sicuro di voler eliminare questo commento?">
                                                 <i class="bi bi-trash"></i> Elimina
                                             </button>
                                         </form>
@@ -144,7 +143,7 @@
                         $commentoDaRispondere = $templateParams["rispostaAPadre"];
                         ?>
                         <div
-                            class="alert alert-white border-start border-danger border-4 shadow-sm mb-3 py-2 position-relative">
+                            id="alertRisposta" class="alert alert-white border-start border-danger border-4 shadow-sm mb-3 py-2 position-relative">
                             <button type="button" class="btn-close position-absolute top-0 end-0 p-2"
                                 style="font-size: 0.6rem;"
                                 onclick="window.location.href='dettaglio-spot.php?id=<?php echo $templateParams['spot']['idSpot']; ?>'"></button>
@@ -159,7 +158,18 @@
                         </div>
                     <?php endif; ?>
 
-                    <form action="aggiungi-commento.php" method="POST">
+                    <div id="alertMessageContainer"
+                        class="alert alert-dismissible fade show d-none shadow-sm"
+                        role="alert">
+
+                        <i id="alertIcon" class="bi me-2"></i>
+
+                        <span id="alertText"></span>
+
+                        <button type="button" class="btn-close" onclick="chiudiAlert()" aria-label="Close"></button>
+                    </div>
+
+                    <form id="formCommento" action="aggiungi-commento.php" method="POST">
                         <input type="hidden" name="idSpot" value="<?php echo $templateParams["spot"]["idSpot"]; ?>">
 
                         <input type="hidden" name="idCommentoRisposto" value="<?php echo $_GET["rspTo"] ?? ''; ?>">
@@ -179,3 +189,5 @@
 
     </div>
 </div>
+
+<script src="js/commenti.js"></script>

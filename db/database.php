@@ -314,16 +314,13 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function insertComment($usr, $idSpot, $commento, $idPadre)
-    {
-        $query = "INSERT INTO COMMENTI(testo,dataPubblicazione,idSpot,usernameUtente,idCommentoRisposto)
-                    values (?,NOW(),?,?,?)";
-
+    public function insertComment($username, $idSpot, $testo, $idRisposto = null){
+        $query = "INSERT INTO COMMENTI (usernameUtente, idSpot, testo, dataPubblicazione, idCommentoRisposto) VALUES (?, ?, ?, NOW(), ?)";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param("sisi", $commento, $idSpot, $usr, $idPadre);
-
-
-        return $stmt->execute();
+        $stmt->bind_param("sisi", $username, $idSpot, $testo, $idRisposto);
+        $stmt->execute();
+    
+        return $stmt->insert_id; 
     }
 
     public function getCommentById($idCommento)
@@ -523,5 +520,12 @@ class DatabaseHelper
         $row = $result->fetch_assoc();
         
         return $row['count'] > 0;
+    }
+
+    public function getUsersData($username) {
+        $stmt = $this->db->prepare("SELECT fotoProfilo FROM UTENTI WHERE username = ?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 }
