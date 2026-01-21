@@ -31,7 +31,14 @@
                             <ul class="list-unstyled">
                                 <li class="d-flex align-items-center mb-2">
                                     <span><strong>Autore:</strong>
-                                        <?php echo htmlspecialchars($templateParams["spot"]["nomeAutore"] . " " . $templateParams["spot"]["cognomeAutore"]); ?></span>
+                                        <?php
+                                        if ($templateParams["spot"]["isAnonymous"]) {
+                                            echo '<span class="fst-italic text-secondary">Anonimo <i class="bi bi-incognito"></i></span>';
+                                        } else {
+                                            echo htmlspecialchars($templateParams["spot"]["nomeAutore"] . " " . $templateParams["spot"]["cognomeAutore"]);
+                                        }
+                                        ?>
+                                    </span>
                                 </li>
                                 <li><strong>Data:</strong>
                                     <?php echo date("d/m/Y H:i", strtotime($templateParams["spot"]["dataInserimento"])); ?>
@@ -94,7 +101,8 @@
                                         <img src="<?php echo htmlspecialchars($imgCommento); ?>" alt="Foto"
                                             class="rounded-circle me-2" style="width: 30px; height: 30px; object-fit: cover;">
                                         <h4 class="mb-0 fw-bold fs-6">
-                                            <?php echo htmlspecialchars($commento["usernameUtente"]); ?></h4>
+                                            <?php echo htmlspecialchars($commento["usernameUtente"]); ?>
+                                        </h4>
                                     </div>
                                     <small
                                         class="text-muted"><?php echo date("d/m H:i", strtotime($commento['dataPubblicazione'])); ?></small>

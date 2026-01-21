@@ -70,10 +70,10 @@ class DatabaseHelper
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function insertSpot($titolo, $testo, $idCat, $idSubCat, $username)
+    public function insertSpot($titolo, $testo, $idCat, $idSubCat, $username, $isAnonymous)
     {
-        $stmt = $this->db->prepare("INSERT INTO SPOT (titolo, testo, idCategoria, idSottoCategoria, usernameUtente, stato) VALUES (?, ?, ?, ?, ?, 'in_attesa')");
-        $stmt->bind_param('ssiis', $titolo, $testo, $idCat, $idSubCat, $username);
+        $stmt = $this->db->prepare("INSERT INTO SPOT (titolo, testo, idCategoria, idSottoCategoria, usernameUtente, stato, isAnonymous) VALUES (?, ?, ?, ?, ?, 'in_attesa', ?)");
+        $stmt->bind_param('ssiisi', $titolo, $testo, $idCat, $idSubCat, $username, $isAnonymous);
         return $stmt->execute();
     }
 
@@ -159,11 +159,10 @@ class DatabaseHelper
     }
 
 
-    public function updateSpot($idSpot, $titolo, $testo, $idCat, $idSubCat)
+    public function updateSpot($idSpot, $titolo, $testo, $idCat, $idSubCat, $isAnonymous)
     {
-        // Quando uno spot viene modificato, torna in stato in_attesa e deve essere riaprovato
-        $stmt = $this->db->prepare("UPDATE SPOT SET titolo = ?, testo = ?, idCategoria = ?, idSottoCategoria = ?, stato = 'in_attesa' WHERE idSpot = ?");
-        $stmt->bind_param('ssiii', $titolo, $testo, $idCat, $idSubCat, $idSpot);
+        $stmt = $this->db->prepare("UPDATE SPOT SET titolo = ?, testo = ?, idCategoria = ?, idSottoCategoria = ?, isAnonymous = ?, stato = 'in_attesa' WHERE idSpot = ?");
+        $stmt->bind_param('ssiiii', $titolo, $testo, $idCat, $idSubCat, $isAnonymous, $idSpot);
         return $stmt->execute();
     }
 

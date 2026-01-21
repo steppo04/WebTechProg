@@ -43,6 +43,7 @@ CREATE TABLE SPOT (
     testo TEXT NOT NULL,
     dataInserimento DATETIME DEFAULT CURRENT_TIMESTAMP,
     stato ENUM('in_attesa', 'approvato', 'rifiutato') DEFAULT 'in_attesa',
+    isAnonymous BOOLEAN DEFAULT 0,
     idCategoria INT NOT NULL,
     idSottoCategoria INT,
     usernameUtente VARCHAR(100),
@@ -88,6 +89,8 @@ CREATE TABLE NOTIFICHE (
     dataNotifica DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (usernameDestinatario) REFERENCES UTENTI(username) ON DELETE CASCADE
 ) ENGINE=InnoDB;
+
+ALTER TABLE SPOT ADD COLUMN isAnonymous BOOLEAN DEFAULT 0;
 
 
 

@@ -3,25 +3,27 @@
         <div class="col-md-8">
             <div class="card shadow-sm border-0">
                 <div class="card-header bg-danger text-white py-3">
-                    <?php 
-                    $spot = isset($templateParams["spot"]) ? $templateParams["spot"] : null; 
+                    <?php
+                    $spot = isset($templateParams["spot"]) ? $templateParams["spot"] : null;
                     $isEdit = ($spot != null);
                     ?>
                     <h2 class="h4 mb-0"><?php echo $isEdit ? "Modifica Spot" : "Crea il tuo Spot"; ?></h2>
                 </div>
-                
+
                 <div class="card-body p-4">
-                    <form action="gestione-spot.php<?php echo $isEdit ? '?id=' . $spot['idSpot'] : ''; ?>" method="POST">
+                    <form action="gestione-spot.php<?php echo $isEdit ? '?id=' . $spot['idSpot'] : ''; ?>"
+                        method="POST">
                         <div class="mb-3">
                             <label for="titolo" class="form-label fw-bold">Titolo</label>
-                            <input type="text" name="titolo" class="form-control" id="titolo" value="<?php echo $isEdit ? htmlspecialchars($spot['titolo']) : ''; ?>" required>
+                            <input type="text" name="titolo" class="form-control" id="titolo"
+                                value="<?php echo $isEdit ? htmlspecialchars($spot['titolo']) : ''; ?>" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="categoria" class="form-label fw-bold">Categoria</label>
                             <select name="categoria" id="categoria" class="form-select" required>
                                 <option value="">Seleziona Categoria...</option>
-                                <?php foreach($templateParams["categorie"] as $cat): ?>
+                                <?php foreach ($templateParams["categorie"] as $cat): ?>
                                     <option value="<?php echo $cat['idCategoria']; ?>" <?php echo ($isEdit && $spot['idCategoria'] == $cat['idCategoria']) ? 'selected' : ''; ?>>
                                         <?php echo $cat['nome']; ?>
                                     </option>
@@ -38,16 +40,32 @@
 
                         <div class="mb-3">
                             <label for="testo" class="form-label fw-bold">Descrizione dello Spotted</label>
-                            <textarea name="testo" class="form-control" id="testo" rows="5" required><?php echo $isEdit ? htmlspecialchars($spot['testo']) : ''; ?></textarea>
+                            <textarea name="testo" class="form-control" id="testo" rows="5"
+                                required><?php echo $isEdit ? htmlspecialchars($spot['testo']) : ''; ?></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" name="isAnonymous" id="isAnonymous"
+                                    value="1" <?php echo ($isEdit && isset($spot['isAnonymous']) && $spot['isAnonymous']) ? 'checked' : ''; ?>>
+                                <label class="form-check-label fw-bold" for="isAnonymous">
+                                    Pubblica in anonimo
+                                </label>
+                                <div class="form-text">Il tuo nome non verrà mostrato pubblicamente.</div>
+                            </div>
                         </div>
 
                         <div class="mt-4">
                             <?php if (!$isEdit): ?>
-                                <button type="submit" name="azione" value="pubblica" class="btn btn-danger w-100">Pubblica</button>
+                                <button type="submit" name="azione" value="pubblica"
+                                    class="btn btn-danger w-100">Pubblica</button>
                             <?php else: ?>
                                 <div class="d-flex gap-2">
-                                    <button type="submit" name="azione" value="modifica" class="btn btn-danger flex-grow-1">Conferma Modifica</button>
-                                    <button type="submit" name="azione" value="elimina" class="btn btn-outline-danger flex-grow-1" onclick="return confirm('Eliminare definitivamente?')">Elimina</button>
+                                    <button type="submit" name="azione" value="modifica"
+                                        class="btn btn-danger flex-grow-1">Conferma Modifica</button>
+                                    <button type="submit" name="azione" value="elimina"
+                                        class="btn btn-outline-danger flex-grow-1"
+                                        onclick="return confirm('Eliminare definitivamente?')">Elimina</button>
                                 </div>
                             <?php endif; ?>
                         </div>
@@ -59,37 +77,37 @@
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    const categoriaSelect = document.getElementById("categoria");
-    const sottocategoriaSelect = document.getElementById("sottocategoria");
+    document.addEventListener("DOMContentLoaded", function () {
+        const categoriaSelect = document.getElementById("categoria");
+        const sottocategoriaSelect = document.getElementById("sottocategoria");
 
-    function caricaSottocategorie(idCategoria, idSelezionata = null) {
-        if (!idCategoria) {
-            sottocategoriaSelect.innerHTML = '<option value="">Seleziona categoria...</option>';
-            return;
+        function caricaSottocategorie(idCategoria, idSelezionata = null) {
+            if (!idCategoria) {
+                sottocategoriaSelect.innerHTML = '<option value="">Seleziona categoria...</option>';
+                return;
+            }
+
+            fetch(`get-subcategories.php?id=${idCategoria}`)
+                .then(response => response.json())
+                .then(data => {
+                    sottocategoriaSelect.innerHTML = '<option value="">Seleziona Sottocategoria...</option>';
+                    data.forEach(sub => {
+                        const opt = document.createElement("option");
+                        opt.value = sub.idSottoCategoria;
+                        opt.textContent = sub.nome;
+                        if (idSelezionata && sub.idSottoCategoria == idSelezionata) opt.selected = true;
+                        sottocategoriaSelect.appendChild(opt);
+                    });
+                })
+                .catch(err => console.error("Errore AJAX:", err));
         }
 
-        fetch(`get-subcategories.php?id=${idCategoria}`)
-            .then(response => response.json())
-            .then(data => {
-                sottocategoriaSelect.innerHTML = '<option value="">Seleziona Sottocategoria...</option>';
-                data.forEach(sub => {
-                    const opt = document.createElement("option");
-                    opt.value = sub.idSottoCategoria;
-                    opt.textContent = sub.nome;
-                    if(idSelezionata && sub.idSottoCategoria == idSelezionata) opt.selected = true;
-                    sottocategoriaSelect.appendChild(opt);
-                });
-            })
-            .catch(err => console.error("Errore AJAX:", err));
-    }
+        categoriaSelect.addEventListener("change", function () {
+            caricaSottocategorie(this.value);
+        });
 
-    categoriaSelect.addEventListener("change", function() {
-        caricaSottocategorie(this.value);
+        <?php if ($isEdit): ?>
+            caricaSottocategorie("<?php echo $spot['idCategoria']; ?>", "<?php echo $spot['idSottoCategoria']; ?>");
+        <?php endif; ?>
     });
-
-    <?php if($isEdit): ?>
-        caricaSottocategorie("<?php echo $spot['idCategoria']; ?>", "<?php echo $spot['idSottoCategoria']; ?>");
-    <?php endif; ?>
-});
 </script>

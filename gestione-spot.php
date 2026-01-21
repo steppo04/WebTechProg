@@ -14,7 +14,6 @@ $spotEsistente = null;
 
 if ($idSpot) {
     $spotEsistente = $dbh->getSpotById($idSpot);
-    // Verifica che l'utente sia l'effettivo autore
     if (!$spotEsistente || $spotEsistente["usernameUtente"] != $_SESSION["username"]) {
         if(!isAdminLoggedIn()){
             header("location: index.php");
@@ -24,21 +23,21 @@ if ($idSpot) {
     }
 }
 
-// Gestione invio modulo
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $azione = $_POST["azione"];
     $titolo = $_POST["titolo"];
     $testo = $_POST["testo"];
     $idCat = $_POST["categoria"];
     $idSubCat = !empty($_POST["sottocategoria"]) ? $_POST["sottocategoria"] : null;
+    $isAnonymous = isset($_POST["isAnonymous"]) ? 1 : 0;
 
     if ($azione == "pubblica") {
-        $dbh->insertSpot($titolo, $testo, $idCat, $idSubCat, $_SESSION["username"]);
+        $dbh->insertSpot($titolo, $testo, $idCat, $idSubCat, $_SESSION["username"], $isAnonymous);
         header("location: lista-categoria.php");
         setMsg("Spot pubblicato con successo", "success");
         exit();
     } elseif ($azione == "modifica" && $idSpot) {
-        $dbh->updateSpot($idSpot, $titolo, $testo, $idCat, $idSubCat);
+        $dbh->updateSpot($idSpot, $titolo, $testo, $idCat, $idSubCat, $isAnonymous);
         header("location: lista-categoria.php");
         setMsg("Spot modificato con successo, attendi approvazione admin", "success");
         exit();
