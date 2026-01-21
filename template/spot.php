@@ -8,16 +8,19 @@
                     <h2 class="h4 mb-0"><?php echo htmlspecialchars($templateParams["spot"]["titolo"]); ?></h2>
 
                     <?php
-
                     $iconaClass = $templateParams["isPreferito"] ? "bi-bookmark-fill" : "bi-bookmark";
-                    $linkDestinazione = "salva-spot.php?id=" . $templateParams['spot']['idSpot'];
                     ?>
 
-                    <a href="<?php echo $linkDestinazione; ?>" class="text-white text-decoration-none"
-                        title="<?php echo isUserLoggedIn() ? 'Salva nei preferiti' : 'Accedi per salvare'; ?>">
-                        <i class="bi <?php echo $iconaClass; ?> fs-3"></i>
-                    </a>
-
+                    <?php if (isUserLoggedIn()): ?>
+                        <button type="button" class="btn btn-link text-white p-0 btn-toggle-preferito"
+                            data-id="<?php echo $templateParams['spot']['idSpot']; ?>" title="Salva nei preferiti">
+                            <i class="bi <?php echo $iconaClass; ?> fs-3"></i>
+                        </button>
+                    <?php else: ?>
+                        <a href="login.php" class="text-white" title="Accedi per salvare">
+                            <i class="bi bi-bookmark fs-3"></i>
+                        </a>
+                    <?php endif; ?>
                 </div>
 
                 <div class="card-body">
@@ -122,9 +125,10 @@
                                             <input type="hidden" name="idSpot"
                                                 value="<?php echo $templateParams['spot']['idSpot']; ?>">
 
-                                                <button type="submit" class="btn btn-link ... btn-confirm-delete" data-confirm-msg="Sei sicuro di voler eliminare questo commento?">
-    <i class="bi bi-trash"></i> Elimina
-</button>
+                                            <button type="submit" class="btn btn-link ... btn-confirm-delete"
+                                                data-confirm-msg="Sei sicuro di voler eliminare questo commento?">
+                                                <i class="bi bi-trash"></i> Elimina
+                                            </button>
                                         </form>
                                     <?php endif; ?>
                                 </div>
@@ -138,7 +142,7 @@
                 <div class="card card-body bg-light border-0">
                     <?php if (isset($_GET["rspTo"])):
                         $commentoDaRispondere = $templateParams["rispostaAPadre"];
-                    ?>
+                        ?>
                         <div
                             class="alert alert-white border-start border-danger border-4 shadow-sm mb-3 py-2 position-relative">
                             <button type="button" class="btn-close position-absolute top-0 end-0 p-2"

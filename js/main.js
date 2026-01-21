@@ -55,4 +55,46 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     });
+
+    document.addEventListener('click', function(e) {
+        
+        const button = e.target.closest('.btn-toggle-preferito');
+        
+        if (button) {
+            e.preventDefault(); 
+            
+            const idSpot = button.getAttribute('data-id');
+            const icon = button.querySelector('i');
+            
+            const isFilled = icon.classList.contains('bi-bookmark-fill');
+            if (isFilled) {
+                icon.classList.replace('bi-bookmark-fill', 'bi-bookmark');
+            } else {
+                icon.classList.replace('bi-bookmark', 'bi-bookmark-fill');
+            }
+            const formData = new FormData();
+            formData.append('idSpot', idSpot);
+
+            fetch('api-toggle-preferiti.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (!data.success) {
+                    alert("Errore: " + (data.error || "Impossibile salvare"));
+                    if (isFilled) {
+                        icon.classList.replace('bi-bookmark', 'bi-bookmark-fill');
+                    } else {
+                        icon.classList.replace('bi-bookmark-fill', 'bi-bookmark');
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Errore di rete:', error);
+                if (isFilled) icon.classList.replace('bi-bookmark', 'bi-bookmark-fill');
+                else icon.classList.replace('bi-bookmark-fill', 'bi-bookmark');
+            });
+        }
+    });
 });

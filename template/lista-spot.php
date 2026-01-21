@@ -64,9 +64,32 @@
             <?php foreach ($templateParams["spot"] as $spot): ?>
                 <div class="col-12 col-md-6 col-lg-4 spot-item">
                     <div class="card h-100 shadow-sm card-spot">
-                        <div class="card-header bg-danger text-white d-flex align-items-center">
-                            <h2 class="card-title mb-0 fs-5 text-truncate"><?php echo htmlspecialchars($spot["titolo"]); ?></h2>
-                        </div>
+                    <div class="card-header bg-danger text-white d-flex justify-content-between align-items-center">
+        <h2 class="card-title mb-0 fs-5 text-truncate" style="max-width: 80%;">
+            <?php echo htmlspecialchars($spot["titolo"]); ?>
+        </h2>
+
+        <?php 
+        $isPreferito = false;
+        if (isUserLoggedIn()) {
+            $isPreferito = $dbh->isSpotPreferito($_SESSION["username"], $spot["idSpot"]);
+        }
+        
+        $iconaClass = $isPreferito ? "bi-bookmark-fill" : "bi-bookmark"; 
+        ?>
+
+        <?php if (isUserLoggedIn()): ?>
+            <button type="button" class="btn btn-link text-white p-0 btn-toggle-preferito" 
+                    data-id="<?php echo $spot['idSpot']; ?>"
+                    title="Salva nei preferiti">
+                <i class="bi <?php echo $iconaClass; ?> fs-4"></i>
+            </button>
+        <?php else: ?>
+            <a href="login.php" class="text-white" title="Accedi per salvare">
+                <i class="bi bi-bookmark fs-4"></i>
+            </a>
+        <?php endif; ?>
+    </div>
                         <div class="card-body">
                             <p class="card-text text-muted small"><i class="bi bi-chat-left-text"></i> Spot:</p>
                             <p class="card-text"><?php echo htmlspecialchars($spot["testo"]); ?></p>

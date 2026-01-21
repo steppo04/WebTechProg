@@ -1,43 +1,61 @@
 <?php
 require_once 'bootstrap.php';
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    exit; 
-}
-
-$offset = isset($_POST['offset']) ? intval($_POST['offset']) : 0;
-$limit = 6; // Carico 6 spot alla volta 
-
-$spots = $dbh->getSpotsPagination($offset, $limit);
-
-if (empty($spots)) {
-    echo json_encode(['html' => '', 'hasMore' => false]);
+if (!isset($_POST['offset'])) {
+    echo json_encode(['html' => '', 'count' => 0]);
     exit;
 }
 
-$htmlOutput = '';
-foreach ($spots as $spot) {
-    $titolo = htmlspecialchars($spot["titolo"]);
-    $testo = htmlspecialchars($spot["testo"]);
-    $id = $spot['idSpot'];
-    
-    $htmlOutput .= '
-    <div class="col-12 col-md-6 col-lg-4 spot-item">
-        <div class="card h-100 shadow-sm card-spot">
-            <div class="card-header bg-danger text-white d-flex align-items-center">
-                <h2 class="card-title mb-0 fs-5 text-truncate">'.$titolo.'</h2>
-            </div>
-            <div class="card-body">
-                <p class="card-text text-muted small"><i class="bi bi-chat-left-text"></i> Spot:</p>
-                <p class="card-text">'.$testo.'</p>
-            </div>
-            <div class="card-footer bg-transparent border-top-0">
-                <a href="dettaglio-spot.php?id='.$id.'" class="btn btn-outline-primary btn-sm">Leggi di più</a>
-            </div>
-        </div>
-    </div>';
+$offset = intval($_POST['offset']);
+$limit = 5;
+
+$newSpots = $dbh->getSpotsPagination($offset, $limit);
+
+$html = '';
+
+foreach ($newSpots as $spot) {
+    $isPreferito = false;
+    if (isUserLoggedIn()) {
+        $isPreferito = $dbh->isSpotPreferito($_SESSION["username"], $spot["idSpot"]);
+    }
+    $iconaClass = $isPreferito ? "bi-bookmark-fill" : "bi-bookmark";
+
+    $html .= '<div class="col-12 col-md-6 col-lg-4 spot-item mb-4">';
+    $html .= '  <div class="card h-100 shadow-sm card-spot">';
+
+    $html .= '      <div class="card-header bg-danger text-white d-flex justify-content-between align-items-center">';
+
+    $html .= '          <h2 class="card-title mb-0 fs-5 text-truncate" style="max-width: 80%;">' . htmlspecialchars($spot["titolo"]) . '</h2>';
+
+    if (isUserLoggedIn()) {
+        $html .= '      <button type="button" class="btn btn-link text-white p-0 btn-toggle-preferito" 
+                                data-id="' . $spot['idSpot'] . '" 
+                                title="Salva nei preferiti">';
+        $html .= '          <i class="bi ' . $iconaClass . ' fs-4"></i>';
+        $html .= '      </button>';
+    } else {
+        $html .= '      <a href="login.php" class="text-white" title="Accedi per salvare">';
+        $html .= '          <i class="bi bi-bookmark fs-4"></i>';
+        $html .= '      </a>';
+    }
+    $html .= '      </div>';
+
+    $html .= '      <div class="card-body">';
+    $html .= '          <p class="card-text text-muted small"><i class="bi bi-chat-left-text"></i> Spot:</p>';
+    $html .= '          <p class="card-text">' . htmlspecialchars($spot["testo"]) . '</p>';
+    $html .= '      </div>';
+
+    $html .= '      <div class="card-footer bg-transparent border-top-0">';
+    $html .= '          <a href="dettaglio-spot.php?id=' . $spot['idSpot'] . '" class="btn btn-outline-primary btn-sm">Leggi di più</a>';
+    $html .= '      </div>';
+
+    $html .= '  </div>';
+    $html .= '</div>';
 }
 
 header('Content-Type: application/json');
-echo json_encode(['html' => $htmlOutput, 'hasMore' => count($spots) === $limit]);
+echo json_encode([
+    'html' => $html,
+    'count' => count($newSpots)
+]);
 ?>

@@ -11,13 +11,11 @@
                 </div>
 
                 <div class="card-body p-4">
-                <form id="form-spot" 
-      action="gestione-spot.php<?php echo $isEdit ? '?id=' . $spot['idSpot'] : ''; ?>" 
-      method="POST"
-      data-is-edit="<?php echo $isEdit ? 'true' : 'false'; ?>"
-      data-init-cat="<?php echo $isEdit ? $spot['idCategoria'] : ''; ?>"
-      data-init-subcat="<?php echo $isEdit ? $spot['idSottoCategoria'] : ''; ?>"
-                        method="POST">
+                    <form id="form-spot"
+                        action="gestione-spot.php<?php echo $isEdit ? '?id=' . $spot['idSpot'] : ''; ?>" method="POST"
+                        data-is-edit="<?php echo $isEdit ? 'true' : 'false'; ?>"
+                        data-init-cat="<?php echo $isEdit ? $spot['idCategoria'] : ''; ?>"
+                        data-init-subcat="<?php echo $isEdit ? $spot['idSottoCategoria'] : ''; ?>" method="POST">
                         <div class="mb-3">
                             <label for="titolo" class="form-label fw-bold">Titolo</label>
                             <input type="text" name="titolo" class="form-control" id="titolo"
