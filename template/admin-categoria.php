@@ -20,28 +20,27 @@
                     <form action="#" method="POST">
 
                         <div class="mb-3">
-                            <label class="form-label fw-bold text-secondary">Nome Categoria</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control ps-3"
-                                    name="nomeCategoria"
-                                    placeholder="Es. Calcio, Cucina..." required>
-                            </div>
+                            <label for="nomeCategoria" class="form-label fw-bold text-secondary">Nome Categoria</label>
+                            
+                            <input type="text" class="form-control ps-3"
+                                id="nomeCategoria"
+                                name="nomeCategoria"
+                                placeholder="Es. Calcio, Cucina..." required>
                         </div>
 
                         <div class="mb-4">
-                            <label class="form-label fw-bold text-secondary">Appartiene a (Opzionale)</label>
-                            <div class="input-group">
+                            <label for="idCategoriaPadre" class="form-label fw-bold text-secondary">Appartiene a (Opzionale)</label>
+                            
+                            <select id="idCategoriaPadre" class="form-select" name="idCategoriaPadre">
+                                <option value="" selected class="text-muted">-- Nessuna (Crea Categoria Principale) --</option>
 
-                                <select class="form-select border-start-0" name="idCategoriaPadre">
-                                    <option value="" selected class="text-muted">-- Nessuna (Crea Categoria Principale) --</option>
-
-                                    <?php foreach ($templateParams["categoriePrincipali"] as $cat): ?>
-                                        <?php foreach ($templateParams["categoriePrincipali"] as $cat): ?>
-                                            <option value="<?php echo $cat['idCategoria']; ?>" label="<?php echo htmlspecialchars($cat['nome']); ?>"><?php echo htmlspecialchars($cat['nome']); ?></option>
-                                        <?php endforeach; ?>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
+                                <?php foreach ($templateParams["categoriePrincipali"] as $cat): ?>
+                                    <option value="<?php echo $cat['idCategoria']; ?>">
+                                        <?php echo htmlspecialchars($cat['nome']); ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                            
                             <div class="form-text text-muted mt-2 small">
                                 <i class="bi bi-info-circle-fill text-danger opacity-75"></i>
                                 Seleziona un genitore per creare una <strong>Sottocategoria</strong>, altrimenti lascialo vuoto.
@@ -65,4 +64,4 @@
 
         </div>
     </div>
-</section>
+</section>  

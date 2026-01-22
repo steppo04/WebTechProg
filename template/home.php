@@ -1,19 +1,19 @@
-<div class="aesthetic-wrapper">
-    <div class="aesthetic-bg"></div>
-    <div class="noise-overlay"></div>
+<section class="aesthetic-wrapper">
+    <div class="aesthetic-bg" aria-hidden="true"></div>
+    <div class="noise-overlay" aria-hidden="true"></div>
 
     <div class="container">
 
         <div class="hanging-system">
-            <div class="wire left"></div>
-            <div class="wire right"></div>
+            <div class="wire left" aria-hidden="true"></div>
+            <div class="wire right" aria-hidden="true"></div>
 
             <div class="sign-board">
 
 
                 <h1 class="title-main">SPOTTED CAMPUS</h1>
                 <p class="text-desc">
-                    "Il punto di riferimento per la tua vita universitaria.<br>
+                    "Il punto di riferimento per la tua vita universitaria.
                     Ritrova oggetti smarriti, scopri info utili e condividi le tue esperienze."
                 </p>
 
@@ -32,20 +32,20 @@
         <div class="card-container">
 
             <div class="info-box">
-                <div class="icon-wrapper"><i class="bi bi-megaphone-fill"></i></div>
+                <div class="icon-wrapper" aria-hidden="true"><i class="bi bi-megaphone-fill" aria-hidden="true"></i></div>
                 <h2 class="box-title">Racconta</h2>
-                <p class="box-text">Hai visto qualcosa di interessante? <br>Condividilo con la community in pochi click.
+                <p class="box-text">Hai visto qualcosa di interessante?Condividilo con la community in pochi click.
                 </p>
             </div>
 
             <div class="info-box">
-                <div class="icon-wrapper"><i class="bi bi-geo-alt-fill"></i></div>
+                <div class="icon-wrapper" aria-hidden="true"><i class="bi bi-geo-alt-fill" aria-hidden="true"></i></div>
                 <h2 class="box-title">Ritrova</h2>
-                <p class="box-text">Chiavi perse? Libri dimenticati? <br>Cerca nella categoria oggetti smarriti.</p>
+                <p class="box-text">Chiavi perse? Libri dimenticati?Cerca nella categoria oggetti smarriti.</p>
             </div>
 
             <div class="info-box">
-                <div class="icon-wrapper"><i class="bi bi-people-fill"></i></div>
+                <div class="icon-wrapper" aria-hidden="true"><i class="bi bi-people-fill"></i></div>
                 <h2 class="box-title">Connettiti</h2>
                 <p class="box-text">Rispondi agli spot e interagisci con gli altri studenti del campus.</p>
             </div>
@@ -53,4 +53,4 @@
         </div>
 
     </div>
-</div>
+</section>

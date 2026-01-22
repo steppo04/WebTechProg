@@ -87,7 +87,7 @@
                                 <?php if (!empty($commento["idCommentoRisposto"])): ?>
                                     <div class="bg-light border-start border-secondary border-2 p-1 mb-2 rounded shadow-sm"
                                         style="font-size: 0.75rem; opacity: 0.8;">
-                                        <span class="text-muted fw-bold">
+                                        <span class="text fw-bold">
                                             <i class="bi bi-quote"></i> In risposta a
                                             <?php echo htmlspecialchars($commento["autorePadre"] ?? 'utente'); ?>:
                                         </span>
