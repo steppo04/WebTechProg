@@ -41,41 +41,41 @@
     </div>
 
     <?php if (!$templateParams["isAdminProfile"]): ?>
-        <div class="row">
+        <div class="row g-4">
             <div class="col-12 mb-3">
                 <h3 class="border-bottom pb-2">I miei Spotted</h3>
             </div>
-
-            <?php if (count($templateParams["spots"]) > 0): ?>
-                <div class="row g-4">
-                    <?php foreach ($templateParams["spots"] as $spot): ?>
-                        <div class="col-md-6 col-lg-4">
-                            <article class="card h-100 shadow-sm">
-                                <div class="card-header bg-danger text-white">
-                                    <span><?php echo htmlspecialchars($spot["nomeCategoria"]); ?></span>
-                                </div>
-                                <div class="card-body">
-                                    <h3 class="card-title"><?php echo htmlspecialchars($spot["titolo"]); ?></h3>
-                                    <p class="card-text text-truncate"><?php echo htmlspecialchars($spot["testo"]); ?></p>
-                                    <div class="d-flex justify-content-between mt-3">
-                                        <a href="dettaglio-spot.php?id=<?php echo $spot["idSpot"]; ?>"
-                                            class="btn btn-sm btn-outline-danger"
-                                            aria-label="Leggi lo spot: <?php echo htmlspecialchars($spot["titolo"]); ?>">Leggi</a>
-
-                                        <?php if ($templateParams["isMine"]): ?>
-                                            <span class="badge bg-secondary"><?php echo strtoupper($spot["stato"]); ?></span>
-                                        <?php endif; ?>
-                                    </div>
-                                </div>
-                            </article>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
-            <?php else: ?>
-                <div class="text-center mt-4">
-                    <p class="text-muted">Nessuno spot pubblicato.</p>
-                </div>
-            <?php endif; ?>
         </div>
+
+        <?php if (count($templateParams["spots"]) > 0): ?>
+            <div class="row g-4">
+                <?php foreach ($templateParams["spots"] as $spot): ?>
+                    <div class="col-md-6 col-lg-4">
+                        <article class="card h-100 shadow-sm">
+                            <div class="card-header bg-danger text-white">
+                                <span><?php echo htmlspecialchars($spot["nomeCategoria"]); ?></span>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="card-title"><?php echo htmlspecialchars($spot["titolo"]); ?></h3>
+                                <p class="card-text text-truncate"><?php echo htmlspecialchars($spot["testo"]); ?></p>
+                                <div class="d-flex justify-content-between mt-3">
+                                    <a href="dettaglio-spot.php?id=<?php echo $spot["idSpot"]; ?>"
+                                        class="btn btn-sm btn-outline-danger"
+                                        aria-label="Leggi lo spot: <?php echo htmlspecialchars($spot["titolo"]); ?>">Leggi</a>
+
+                                    <?php if ($templateParams["isMine"]): ?>
+                                        <span class="badge bg-secondary"><?php echo strtoupper($spot["stato"]); ?></span>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php else: ?>
+            <div class="text-center mt-4">
+                <p class="text-muted">Nessuno spot pubblicato.</p>
+            </div>
+        <?php endif; ?>
     <?php endif; ?>
 </section>
