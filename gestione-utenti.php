@@ -7,7 +7,7 @@ if (!isAdminLoggedIn()) {
     exit();
 }
 
-// Gestione del cambio di stato
+// gestione del cambio di stato
 if (isset($_POST["username"]) && isset($_POST["azione"])) {
     $nuovoStato = ($_POST["azione"] == "blocca") ? "bloccato" : "attivo";
     $dbh->updateUserStatus($_POST["username"], $nuovoStato);

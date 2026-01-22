@@ -1,7 +1,6 @@
 <?php
 require_once 'bootstrap.php';
 
-// Base Template
 $templateParams["titolo"] = "Spotted - Dettaglio spot";
 $templateParams["nome"] = "spot.php";
 
