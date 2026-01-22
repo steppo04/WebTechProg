@@ -5,11 +5,11 @@ INSERT INTO TIPI_UTENTI (nomeTipo) VALUES
 ('utente');
 
 INSERT INTO UTENTI (username, nome, cognome, password, stato, idTipo, fotoProfilo) VALUES 
-('admin', 'Massimo', 'Decimo', 'admin', 'attivo', 1, 'default.png'),
-('zleo24', 'Luca', 'Rossi', 'prova', 'attivo', 2, 'default.png'),   
-('steppo04', 'Giulia', 'Bianchi', 'steps', 'attivo', 2, 'default.png'),
-('giaguaro04', 'Leone', 'Bianchi', 'giags', 'attivo', 2, 'default.png'),
-('utentebloccato', 'Marco', 'Neri', '123456', 'bloccato', 2, 'default.png');   
+('admin', 'Massimo', 'Decimo', '$2y$10$K2Jdvdl4Jegtwk5ufgFoDuE1W5s9malDt.8rwuSGXQzMlYtv7o6Cy', 'attivo', 1, 'default.png'),
+('zleo24', 'Luca', 'Rossi', '$2y$10$K2Jdvdl4Jegtwk5ufgFoDuE1W5s9malDt.8rwuSGXQzMlYtv7o6Cy', 'attivo', 2, 'default.png'),   
+('steppo04', 'Giulia', 'Bianchi', '$2y$10$K2Jdvdl4Jegtwk5ufgFoDuE1W5s9malDt.8rwuSGXQzMlYtv7o6Cy', 'attivo', 2, 'default.png'),
+('giaguaro04', 'Leone', 'Bianchi', '$2y$10$K2Jdvdl4Jegtwk5ufgFoDuE1W5s9malDt.8rwuSGXQzMlYtv7o6Cy', 'attivo', 2, 'default.png'),
+('utentebloccato', 'Marco', 'Neri', '$2y$10$K2Jdvdl4Jegtwk5ufgFoDuE1W5s9malDt.8rwuSGXQzMlYtv7o6Cy', 'bloccato', 2, 'default.png');   
 
 INSERT INTO CATEGORIE (nome) VALUES 
 ('Info Aule'), 
@@ -59,3 +59,4 @@ VALUES
 INSERT INTO PREFERITI (usernameUtente, idSpot) VALUES 
 ('zleo24', 1),
 ('steppo04', 3);
+
