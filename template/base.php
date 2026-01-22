@@ -140,12 +140,12 @@
         <div class="col-md-3 text-center text-md-end">
           <span class="d-block fw-bold small mb-1">Social</span>
           <div>
-            <a href="#" class="text-dark me-2 fs-5 text-decoration-none footer-social" aria-label="Vai a Instagram">
+            <a href="https://instagram.com" class="text-dark me-2 fs-5 text-decoration-none footer-social" aria-label="Vai a Instagram">
               <span class="bi bi-instagram"></span></a>
-            <a href="#" class="text-dark me-2 fs-5 text-decoration-none footer-social" aria-label="Vai a Facebook">
+            <a href="https://facebook.com" class="text-dark me-2 fs-5 text-decoration-none footer-social" aria-label="Vai a Facebook">
               <span class="bi bi-facebook"></span>
             </a>
-            <a href="#" class="text-dark fs-5 text-decoration-none footer-social" aria-label="Vai a TikTok">
+            <a href="https://tiktok.com" class="text-dark fs-5 text-decoration-none footer-social" aria-label="Vai a TikTok">
               <span class="bi bi-tiktok"></span>
             </a>
           </div>
