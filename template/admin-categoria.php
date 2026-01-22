@@ -32,11 +32,13 @@
                             <label for="idCategoriaPadre" class="form-label fw-bold text-secondary">Appartiene a (Opzionale)</label>
                             
                             <select id="idCategoriaPadre" class="form-select" name="idCategoriaPadre" aria-describedby="categoria-principale">
-                                <option value="" selected class="text-muted">-- Nessuna (Crea Categoria Principale) --</option>
+                                <option id="categoria-principale" value="" selected class="text-muted">-- Nessuna (Crea Categoria Principale) --</option>
 
                                 <?php foreach ($templateParams["categoriePrincipali"] as $cat): ?>
                                     <option value="<?php echo $cat['idCategoria']; ?>">
-                                        <?php echo htmlspecialchars($cat['nome']); ?>
+                                    <?php 
+                                        echo !empty($cat['nome']) ? htmlspecialchars($cat['nome']) : "Categoria senza nome"; 
+                                    ?>
                                     </option>
                                 <?php endforeach; ?>
                             </select>
