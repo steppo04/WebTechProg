@@ -1,7 +1,7 @@
 <section class="container mt-5">
     <div class="row mb-4">
         <div class="col-12 text-center">
-            <h2 class="display-6 border-bottom pb-2">Gestione Utenti</h2>
+            <h1 class="border-bottom pb-2">Gestione Utenti</h1>
         </div>
     </div>
 
@@ -15,7 +15,7 @@
                             <img src="<?php echo htmlspecialchars($imgUser); ?>" alt="" class="rounded-circle me-3"
                                 style="width: 50px; height: 50px; object-fit: cover;">
                             <div>
-                                <h3 class="h6 mb-0 fw-bold"><?php echo htmlspecialchars($utente["username"]); ?></h3>
+                                <h2 class="h6 mb-0 fw-bold"><?php echo htmlspecialchars($utente["username"]); ?></h2>
                                 <small
                                     class="text-muted"><?php echo htmlspecialchars($utente["nome"] . " " . $utente["cognome"]); ?></small>
                             </div>

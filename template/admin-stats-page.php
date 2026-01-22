@@ -2,7 +2,7 @@
 
     <div class="row mb-4">
         <div class="col-12 text-center">
-            <h2 id="titolo-statistiche" class="display-6 border-bottom pb-2">Pannello Statistiche</h2>
+            <h1 id="titolo-statistiche" class="border-bottom pb-2">Pannello Statistiche</h1>
         </div>
     </div>
 
@@ -10,30 +10,30 @@
         <div class="col-md-4">
             <div class="card shadow-sm border-0 h-100">
                 <div class="card-body">
-                    <p class="text-muted mb-1">Spot Approvati</p>
-                    <h3 class="display-4 text-danger fw-bold">
+                    <h3 class="text-muted mb-1">Spot Approvati</h3>
+                    <span class="display-4 text-danger fw-bold">
                         <?php echo htmlspecialchars($templateParams["stats"]['approvati']); ?>
-                    </h3>
+                    </span>
                 </div>
             </div>
         </div>
         <div class="col-md-4">
             <div class="card shadow-sm border-0 h-100">
                 <div class="card-body">
-                    <p class="text-muted mb-1">In Attesa di Revisione</p>
-                    <h3 class="display-4 text-danger fw-bold">
+                    <h3 class="text-muted mb-1">In Attesa di Revisione</h3>
+                    <span class="display-4 text-danger fw-bold">
                         <?php echo htmlspecialchars($templateParams["stats"]['in_attesa']); ?>
-                    </h3>
+                    </span>
                 </div>
             </div>
-        </div>
+        </div>  
         <div class="col-md-4">
             <div class="card shadow-sm border-0 h-100">
                 <div class="card-body">
-                    <p class="text-muted mb-1">Utenti Attivi</p>
-                    <h3 class="display-4 text-danger fw-bold">
+                    <h3 class="text-muted mb-1">Utenti Attivi</h3>
+                    <span class="display-4 text-danger fw-bold">
                         <?php echo htmlspecialchars($templateParams["stats"]['utenti_attivi']); ?>
-                    </h3>
+                    </span>
                 </div>
             </div>
         </div>
@@ -43,10 +43,10 @@
         <div class="col-md-6">
             <div class="card shadow-sm border-0 h-100">
                 <div class="card-header bg-danger text-white">
-                    <h4 class="h5 mb-0">
+                    <h3 class="mb-0">
                         <span class="bi bi-star-fill" aria-hidden="true"></span>
                         Utente più attivo
-                    </h4>
+                    </h3>
                 </div>
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <span class="h4 mb-0">
@@ -61,10 +61,10 @@
         <div class="col-md-6">
             <div class="card shadow-sm border-0 h-100">
                 <div class="card-header bg-danger text-white">
-                    <h4 class="h5 mb-0">
+                    <h3 class=" mb-0">
                         <span class="bi bi-tag-fill" aria-hidden="true"></span>
                         Categoria Popolare
-                    </h4>
+                    </h3>
                 </div>
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <span class="h4 mb-0">
@@ -88,10 +88,10 @@
         <div class="col-md-4">
             <div class="card shadow-sm border-0 h-100 text-center">
                 <div class="card-header bg-danger text-white">
-                    <h4 class="h5 mb-0">
+                    <h3 class="mb-0">
                         <span class="bi bi-heart-fill" aria-hidden="true"></span>
                         Spot più Amato
-                    </h4>
+                    </h3>
                 </div>
                 <div class="card-body d-flex flex-column justify-content-center">
                     <p class="h4 mb-2 text-truncate">
@@ -106,10 +106,10 @@
         <div class="col-md-4">
             <div class="card shadow-sm border-0 h-100 text-center">
                 <div class="card-header bg-danger text-white">
-                    <h4 class="h5 mb-0">
+                    <h3 class="mb-0">
                         <span class="bi bi-chat-dots-fill" aria-hidden="true"></span>
                         Top Commentatore
-                    </h4>
+                    </h3>
                 </div>
                 <div class="card-body d-flex flex-column justify-content-center">
                     <p class="h4 mb-2">
@@ -124,10 +124,10 @@
         <div class="col-md-4">
             <div class="card shadow-sm border-0 h-100 text-center">
                 <div class="card-header bg-danger text-white">
-                    <h4 class="h5 mb-0">
+                    <h3 class="mb-0">
                         <span class="bi bi-incognito" aria-hidden="true"></span>
                         Tasso Anonimato
-                    </h4>
+                    </h3>
                 </div>
                 <div class="card-body d-flex flex-column justify-content-center">
                     <h3 class="display-4 mb-0 fw-bold text-danger">

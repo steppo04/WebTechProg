@@ -1,4 +1,11 @@
 <section class="container mt-5" aria-labelledby="form-title">
+    <?php if (isset($templateParams["titolo"])): ?>
+        <div class="row mb-4 border-bottom pb-4">
+            <div class="col-12 text-center">
+                <h1 class="display-6"><?php echo $templateParams["titolo"]; ?></h1>
+            </div>
+        </div>
+    <?php endif; ?>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card shadow-sm border-0">

@@ -1,7 +1,7 @@
 <?php
 require_once 'bootstrap.php';
 
-$templateParams["titolo"] = "Spotted - Dettaglio spot";
+$templateParams["titolo"] = "Dettaglio spot";
 $templateParams["nome"] = "spot.php";
 
 $idSpot = $_GET["id"] ?? null;

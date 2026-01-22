@@ -7,7 +7,7 @@ if (!isAdminLoggedIn()) {
     exit();
 }
 
-$templateParams["titolo"] = "Spotted - Gestione Categorie";
+$templateParams["titolo"] = "Gestione Categorie";
 $templateParams["nome"] = "template/admin-categoria.php";
 $templateParams["categoriePrincipali"] = $dbh->getCategoriePrincipali();
 

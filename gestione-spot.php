@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-$templateParams["titolo"] = "Spot The Bug - Gestione Spot";
+$templateParams["titolo"] = "Gestione Spot";
 $templateParams["nome"] = "gestione-spot-page.php";
 $templateParams["categorie"] = $dbh->getCategories();
 $templateParams["spot"] = $spotEsistente;

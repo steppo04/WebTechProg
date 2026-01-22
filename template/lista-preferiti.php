@@ -55,7 +55,7 @@
 
               <div class="col-12 text-center my-5">
                   <p class="lead">Nessuno spot trovato.</p>
-                  <a href="lista-categoria.php" class="btn btn-secondary">Resetta la ricerca</a>
+                  <a href="lista-categoria.php" class="btn btn-secondary">Salva degli spot!</a>
               </div>
 
           <?php endif; ?>

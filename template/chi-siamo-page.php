@@ -9,14 +9,19 @@
             <span class="bi bi-megaphone-fill text-danger" style="font-size: 8rem;" aria-hidden="true"></span>
         </div>
     </div>
-
+    
     <hr class="my-5">
 
     <div class="row g-4 mb-5">
+         <div class="row justify-content-center g-4 mb-5">
+        <div class="col-12 text-center mb-4">
+            <h2 class="border-bottom d-inline-block pb-2">La nostra mission</h2>
+        </div>
+
         <div class="col-md-4">
             <div class="info-box h-100 text-center mx-auto">
                 <span class="bi bi-bullseye text-danger fs-1 mb-3 d-block" aria-hidden="true"></span>
-                <h2 class="h5 box-title">La nostra Mission</h2>
+                <h3 class="h5 box-title">I nostri obiettivi</h3>
                 <p class="box-text">Creare uno spazio collaborativo dove gli studenti possono aiutarsi a vicenda nel
                     risolvere problemi tecnici e burocratici.</p>
             </div>
@@ -24,7 +29,7 @@
         <div class="col-md-4">
             <div class="info-box h-100 text-center mx-auto">
                 <span class="bi bi-people-fill text-danger fs-1 mb-3 d-block" aria-hidden="true"></span>
-                <h2 class="h5 box-title">Community-driven</h2>
+                <h3 class="h5 box-title">Community-driven</h3>
                 <p class="box-text">Il sito è costruito dagli studenti per gli studenti, basandosi sulla trasparenza e
                     sulla partecipazione attiva.</p>
             </div>
@@ -32,7 +37,7 @@
         <div class="col-md-4">
             <div class="info-box h-100 text-center mx-auto">
                 <span class="bi bi-shield-check text-danger fs-1 mb-3 d-block" aria-hidden="true"></span>
-                <h2 class="h5 box-title">Affidabilità</h2>
+                <h3 class="h5 box-title">Affidabilità</h3>
                 <p class="box-text">Ogni segnalazione viene moderata dai nostri admin per garantire la qualità delle
                     informazioni condivise.</p>
             </div>

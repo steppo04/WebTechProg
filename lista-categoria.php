@@ -1,7 +1,7 @@
 <?php
 require_once 'bootstrap.php';
 
-$templateParams["titolo"] = "Spotted - Lista spotted";
+$templateParams["titolo"] = "Lista spotted";
 $templateParams["nome"] = "lista-spot.php";
 $templateParams["categorie"] = $dbh->getCategories();
 

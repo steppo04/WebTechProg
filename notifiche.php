@@ -11,7 +11,7 @@ $templateParams["notifiche"] = $notifiche;
 
 $dbh->markNotificationsAsRead($_SESSION["username"]);
 
-$templateParams["titolo"] = "Spot The Bug - Notifiche";
+$templateParams["titolo"] = "Notifiche";
 $templateParams["nome"] = "template/notifiche-page.php";
 
 require 'template/base.php';

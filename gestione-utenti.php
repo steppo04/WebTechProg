@@ -14,7 +14,7 @@ if (isset($_POST["username"]) && isset($_POST["azione"])) {
     setMsg("Cambiamento di stato avvenuto con successo");
 }
 
-$templateParams["titolo"] = "Spot The Bug - Gestione Utenti";
+$templateParams["titolo"] = "Gestione Utenti";
 $templateParams["nome"] = "gestione-utenti-page.php";
 $templateParams["utenti"] = $dbh->getUsersExceptAdmins();
 

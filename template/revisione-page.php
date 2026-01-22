@@ -1,7 +1,7 @@
 <section class="container mt-5">
     <div class="row mb-4">
         <div class="col-12 text-center">
-            <h2 class="display-6 border-bottom pb-2">Revisione Nuovi Spot</h2>
+            <h1 class="display-6 border-bottom pb-2">Revisione Nuovi Spot</h1>
         </div>
     </div>
 
@@ -11,7 +11,7 @@
                 <div class="col-12">
                     <div class="card shadow-sm border-0">
                         <div class="card-header bg-danger text-white fw-bold d-flex justify-content-between">
-                            <span><?php echo htmlspecialchars($spot["titolo"]); ?></span>
+                            <h2 class="display-8"><?php echo htmlspecialchars($spot["titolo"]); ?></h2>
                             <small class="opacity-75">Inviato da: <?php echo htmlspecialchars($spot["usernameUtente"]); ?></small>
                         </div>
                         <div class="card-body">

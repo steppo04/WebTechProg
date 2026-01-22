@@ -1,4 +1,11 @@
 <section class="container mt-5">
+        <?php if (isset($templateParams["titolo"])): ?>
+        <div class="row mb-4 border-bottom pb-4">
+            <div class="col-12 text-center">
+                <h1 class="display-6"><?php echo $templateParams["titolo"]; ?></h1>
+            </div>
+        </div>
+    <?php endif; ?>
     <div class="row mb-5 justify-content-center">
         <div class="col-md-8 text-center">
             <div class="p-4 bg-light rounded shadow-sm border-top border-danger border-4">
@@ -56,7 +63,7 @@
                                 <span><?php echo htmlspecialchars($spot["nomeCategoria"]); ?></span>
                             </div>
                             <div class="card-body">
-                                <h3 class="card-title"><?php echo htmlspecialchars($spot["titolo"]); ?></h3>
+                                <h4 class="card-title"><?php echo htmlspecialchars($spot["titolo"]); ?></h4>
                                 <p class="card-text text-truncate"><?php echo htmlspecialchars($spot["testo"]); ?></p>
                                 <div class="d-flex justify-content-between mt-3">
                                     <a href="dettaglio-spot.php?id=<?php echo $spot["idSpot"]; ?>"

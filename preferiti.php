@@ -7,7 +7,7 @@ if (!isUserLoggedIn()) {
     exit;
 }
 
-$templateParams["titolo"] = "Spotted - I miei Preferiti";
+$templateParams["titolo"] = "I miei Preferiti";
 $templateParams["nome"] = "lista-preferiti.php";
 $username = $_SESSION["username"];
 $filter = $_GET["filter"] ?? "recente";

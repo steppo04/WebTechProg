@@ -237,7 +237,6 @@ class DatabaseHelper
         $res = $this->db->query("SELECT COUNT(*) as total FROM UTENTI WHERE stato = 'attivo'");
         $stats['utenti_attivi'] = $res->fetch_assoc()['total'];
 
-        // Calcolo tasso anonimato
         $res = $this->db->query("SELECT COUNT(*) as total FROM SPOT WHERE isAnonymous = 1");
         $anonymousSpots = $res->fetch_assoc()['total'];
 

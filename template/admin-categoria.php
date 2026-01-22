@@ -2,7 +2,7 @@
 
     <div class="row mb-4">
         <div class="col-12 text-center">
-            <h2 class="display-6 border-bottom pb-2">Inserisci nuove categorie</h2>
+            <h1 class="border-bottom pb-2">Inserisci nuove categorie</h1>
         </div>
     </div>
 
@@ -12,7 +12,7 @@
             <div class="card shadow-sm border-0 border-end">
 
                 <div class="card-header bg-danger text-white py-3 text-center">
-                    <h3 class="mb-0 fw-bold">Crea Nuovo Elemento</h3>
+                    <h2 class="mb-0 fw-bold">Crea Nuovo Elemento</h2>
                 </div>
 
                 <div class="card-body p-4">

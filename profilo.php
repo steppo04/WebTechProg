@@ -23,7 +23,7 @@ $templateParams["isAdminProfile"] = ($utente["idTipo"] == 1);
 $templateParams["spots"] = $templateParams["isAdminProfile"] ? [] : $dbh->getSpotsByUsername($userToShow);
 $templateParams["isMine"] = ($userLogged == $userToShow);
 
-$templateParams["titolo"] = "Spotted - Profilo di " . htmlspecialchars($utente["username"]);
+$templateParams["titolo"] = "Profilo di " . htmlspecialchars($utente["username"]);
 $templateParams["nome"] = "template/profilo-page.php";
 
 require 'template/base.php';
