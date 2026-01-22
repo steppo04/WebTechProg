@@ -21,7 +21,7 @@ foreach ($newSpots as $spot) {
     $iconaClass = $isPreferito ? "bi-bookmark-fill" : "bi-bookmark";
 
     $html .= '<div class="col-12 col-md-6 col-lg-4 spot-item mb-4" data-id="' . $spot['idSpot'] . '">';
-    $html .= '  <div class="card h-100 shadow-sm card-spot">';
+    $html .= '  <article class="card h-100 shadow-sm card-spot">';
 
     $html .= '      <div class="card-header bg-danger text-white d-flex justify-content-between align-items-center">';
 
@@ -49,7 +49,7 @@ foreach ($newSpots as $spot) {
     $html .= '          <a href="dettaglio-spot.php?id=' . $spot['idSpot'] . '" class="btn btn-outline-primary btn-sm">Leggi di più</a>';
     $html .= '      </div>';
 
-    $html .= '  </div>';
+    $html .= '  </article>';
     $html .= '</div>';
 }
 
