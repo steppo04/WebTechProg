@@ -40,7 +40,6 @@ INSERT INTO SPOT (titolo, testo, stato, idCategoria, idSottoCategoria, usernameU
 VALUES 
 ('Spotto GymBro', 'Qualcuno vuole venire con me in palestra? ', 'approvato', 4, 8, 'zleo24', 'admin', NOW());
 
-
 INSERT INTO SPOT (titolo, testo, stato, idCategoria, idSottoCategoria, usernameUtente, usernameAdminApprovato, dataApprovazione) 
 VALUES 
 ('Perso iPhone', 'Ho dimenticato il mio iPhone nero in mensa verso le 13:00. Aiuto!', 'in_attesa', 2, 4, 'giaguaro04', NULL, NULL);
@@ -48,6 +47,13 @@ VALUES
 INSERT INTO SPOT (titolo, testo, stato, idCategoria, idSottoCategoria, usernameUtente, usernameAdminApprovato, dataApprovazione) 
 VALUES 
 ('Domanda esame Basi di Dati', 'Qualcuno sa se il prof accetta i diagrammi fatti a mano?', 'approvato', 3, 6, 'steppo04', 'admin', NOW());
+
+INSERT INTO SPOT (titolo, testo, stato, idCategoria, idSottoCategoria, usernameUtente, usernameAdminApprovato, dataApprovazione) 
+VALUES 
+('Domanda esame Reti', 'Qualcuno ha degli appunti fatti bene di reti?', 'approvato', 3, 6, 'steppo04', 'admin', NOW());
+INSERT INTO SPOT (titolo, testo, stato, idCategoria, idSottoCategoria, usernameUtente, usernameAdminApprovato, dataApprovazione) 
+VALUES 
+('Domanda esame algebra', 'è possibile usare la calcolatrice durante esame?', 'approvato', 3, 6, 'steppo04', 'admin', NOW());
 
 INSERT INTO SPOT (titolo, testo, stato, idCategoria, idSottoCategoria, usernameUtente, usernameAdminApprovato, dataApprovazione) 
 VALUES 
