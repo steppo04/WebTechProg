@@ -14,15 +14,19 @@ INSERT INTO UTENTI (username, nome, cognome, password, stato, idTipo, fotoProfil
 INSERT INTO CATEGORIE (nome) VALUES 
 ('Info Aule'), 
 ('Oggetti Smarriti'), 
-('Info Universitarie');
+('Info Universitarie'),
+('Persone');
 
 INSERT INTO SOTTOCATEGORIE (nome, idCategoria) VALUES 
 ('Biblioteca', 1),
 ('Mensa', 1),
-('Aula Studio', 1),
+('Aule Studio', 1),
 ('Elettronica', 2),
 ('Libri/Appunti', 2),
-('Esami', 3);
+('Esami', 3),
+('Scioperi',3),
+('Studenti',4),
+('Prof',4);
 
 INSERT INTO SPOT (titolo, testo, stato, idCategoria, idSottoCategoria, usernameUtente, usernameAdminApprovato, dataApprovazione) 
 VALUES 
@@ -30,11 +34,11 @@ VALUES
 
 INSERT INTO SPOT (titolo, testo, stato, idCategoria, idSottoCategoria, usernameUtente, usernameAdminApprovato, dataApprovazione) 
 VALUES 
-('Spotto ragazza', 'Chi è la ragazza che si trova sempre in polivalente?', 'approvato', 1, 1, 'zleo24', 'admin', NOW());
+('Spotto Laboratorio', 'Qual è un laboratorio libero dove posso studiare?', 'approvato', 1, 3, 'zleo24', 'admin', NOW());
 
 INSERT INTO SPOT (titolo, testo, stato, idCategoria, idSottoCategoria, usernameUtente, usernameAdminApprovato, dataApprovazione) 
 VALUES 
-('Spotto GymBro', 'Qualcuno vuole venire con me in palestra? ', 'approvato', 1, 1, 'zleo24', 'admin', NOW());
+('Spotto GymBro', 'Qualcuno vuole venire con me in palestra? ', 'approvato', 4, 8, 'zleo24', 'admin', NOW());
 
 
 INSERT INTO SPOT (titolo, testo, stato, idCategoria, idSottoCategoria, usernameUtente, usernameAdminApprovato, dataApprovazione) 
