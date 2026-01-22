@@ -48,7 +48,10 @@ document.addEventListener("DOMContentLoaded", function() {
                         </div>`;
                     });
                 } else {
-                    containerSpot.innerHTML = '<div class="col-12 text-center my-5"><p class="lead">Nessuno spot trovato.</p></div>';
+                    containerSpot.innerHTML = `<div class="col-12 text-center my-5">
+                        <p class="lead">Nessuno spot trovato.</p>
+                        <a href="lista-categoria.php" class="btn btn-secondary">Resetta la ricerca</a>
+                    </div>`;
                 }
             })
             .catch(error => console.error("Errore AJAX Ricerca:", error));
