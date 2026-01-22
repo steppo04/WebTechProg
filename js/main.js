@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function() {
             e.preventDefault(); 
             
             const idSpot = button.getAttribute('data-id');
-            const icon = button.querySelector('i');
+            const icon = button.querySelector('.bi');
             
             const isFilled = icon.classList.contains('bi-bookmark-fill');
             if (isFilled) {

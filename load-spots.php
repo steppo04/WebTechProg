@@ -31,7 +31,7 @@ foreach ($newSpots as $spot) {
         $html .= '      <button type="button" class="btn btn-link text-white p-0 btn-toggle-preferito" 
                                 data-id="' . $spot['idSpot'] . '" 
                                 title="Salva nei preferiti">';
-        $html .= '          <i class="bi ' . $iconaClass . ' fs-4"></i>';
+        $html .= '          <span class="bi ' . $iconaClass . ' fs-4"></span>';
         $html .= '      </button>';
     } else {
         $html .= '      <a href="login.php" class="text-white" title="Accedi per salvare">';
