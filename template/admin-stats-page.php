@@ -21,7 +21,7 @@
             <div class="card shadow-sm border-0 h-100">
                 <div class="card-body">
                     <p class="text-muted mb-1">In Attesa di Revisione</p>
-                    <h3 class="display-4 text-warning fw-bold">
+                    <h3 class="display-4 text-danger fw-bold">
                         <?php echo htmlspecialchars($templateParams["stats"]['in_attesa']); ?>
                     </h3>
                 </div>
@@ -31,7 +31,7 @@
             <div class="card shadow-sm border-0 h-100">
                 <div class="card-body">
                     <p class="text-muted mb-1">Utenti Attivi</p>
-                    <h3 class="display-4 text-success fw-bold">
+                    <h3 class="display-4 text-danger fw-bold">
                         <?php echo htmlspecialchars($templateParams["stats"]['utenti_attivi']); ?>
                     </h3>
                 </div>
@@ -39,13 +39,13 @@
         </div>
     </div>
 
-    <div class="row g-4">
+    <div class="row g-4 mb-5">
         <div class="col-md-6">
             <div class="card shadow-sm border-0 h-100">
                 <div class="card-header bg-danger text-white">
                     <h4 class="h5 mb-0">
-                        <span class="bi bi-star-fill" aria-hidden="true"></span> 
-                        Fan più attivo
+                        <span class="bi bi-star-fill" aria-hidden="true"></span>
+                        Utente più attivo
                     </h4>
                 </div>
                 <div class="card-body d-flex justify-content-between align-items-center">
@@ -62,7 +62,7 @@
             <div class="card shadow-sm border-0 h-100">
                 <div class="card-header bg-danger text-white">
                     <h4 class="h5 mb-0">
-                        <span class="bi bi-tag-fill" aria-hidden="true"></span> 
+                        <span class="bi bi-tag-fill" aria-hidden="true"></span>
                         Categoria Popolare
                     </h4>
                 </div>
@@ -70,9 +70,70 @@
                     <span class="h4 mb-0">
                         <?php echo htmlspecialchars($templateParams["top_cat"]['nome'] ?? 'Nessuna'); ?>
                     </span>
-                    <span class="badge bg-dark p-2 px-3">
-                        <?php echo htmlspecialchars($templateParams["top_cat"]['total'] ?? 0); ?> Post
+                    <span class="badge bg-danger p-2 px-3">
+                        <?php echo htmlspecialchars($templateParams["top_cat"]['total'] ?? 0); ?> Spot
                     </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-12 text-center">
+            <h2 class="display-6 border-bottom pb-2">Insights</h2>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 h-100 text-center">
+                <div class="card-header bg-danger text-white">
+                    <h4 class="h5 mb-0">
+                        <span class="bi bi-heart-fill" aria-hidden="true"></span>
+                        Spot più Amato
+                    </h4>
+                </div>
+                <div class="card-body d-flex flex-column justify-content-center">
+                    <p class="h4 mb-2 text-truncate">
+                        <?php echo htmlspecialchars($templateParams["most_favorited"]['titolo'] ?? 'Nessuno'); ?>
+                    </p>
+                    <p class="text-muted mb-0">
+                        <?php echo htmlspecialchars($templateParams["most_favorited"]['likes'] ?? 0); ?> Salvato
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 h-100 text-center">
+                <div class="card-header bg-danger text-white">
+                    <h4 class="h5 mb-0">
+                        <span class="bi bi-chat-dots-fill" aria-hidden="true"></span>
+                        Top Commentatore
+                    </h4>
+                </div>
+                <div class="card-body d-flex flex-column justify-content-center">
+                    <p class="h4 mb-2">
+                        <?php echo htmlspecialchars($templateParams["top_commenter"]['usernameUtente'] ?? 'Nessuno'); ?>
+                    </p>
+                    <p class="text-muted mb-0">
+                        <?php echo htmlspecialchars($templateParams["top_commenter"]['commenti'] ?? 0); ?> Commenti
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 h-100 text-center">
+                <div class="card-header bg-danger text-white">
+                    <h4 class="h5 mb-0">
+                        <span class="bi bi-incognito" aria-hidden="true"></span>
+                        Tasso Anonimato
+                    </h4>
+                </div>
+                <div class="card-body d-flex flex-column justify-content-center">
+                    <h3 class="display-4 mb-0 fw-bold text-danger">
+                        <?php echo htmlspecialchars($templateParams["stats"]['tasso_anonimato'] ?? 0); ?>%
+                    </h3>
+                    <small class="text-muted">degli spot sono anonimi</small>
                 </div>
             </div>
         </div>

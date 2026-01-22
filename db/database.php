@@ -95,7 +95,7 @@ class DatabaseHelper
                 WHERE S.stato = 'approvato' AND (S.dataInserimento < (SELECT dataInserimento FROM SPOT WHERE idSpot = ?) OR (S.dataInserimento = (SELECT dataInserimento FROM SPOT WHERE idSpot = ?) AND S.idSpot < ?))
                 ORDER BY S.dataInserimento DESC, S.idSpot DESC 
                 LIMIT ?";
-                
+
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("iiii", $lastId, $lastId, $lastId, $limit);
         $stmt->execute();
@@ -242,16 +242,24 @@ class DatabaseHelper
 
         $stats['approvati'] = 0;
         $stats['in_attesa'] = 0;
+        $totalSpots = 0;
 
         foreach ($results as $row) {
             if ($row['stato'] == 'approvato')
                 $stats['approvati'] = $row['total'];
             if ($row['stato'] == 'in_attesa')
                 $stats['in_attesa'] = $row['total'];
+            $totalSpots += $row['total'];
         }
 
         $res = $this->db->query("SELECT COUNT(*) as total FROM UTENTI WHERE stato = 'attivo'");
         $stats['utenti_attivi'] = $res->fetch_assoc()['total'];
+
+        // Calcolo tasso anonimato
+        $res = $this->db->query("SELECT COUNT(*) as total FROM SPOT WHERE isAnonymous = 1");
+        $anonymousSpots = $res->fetch_assoc()['total'];
+
+        $stats['tasso_anonimato'] = $totalSpots > 0 ? round(($anonymousSpots / $totalSpots) * 100, 1) : 0;
 
         return $stats;
     }
@@ -274,6 +282,27 @@ class DatabaseHelper
                 LEFT JOIN SPOT S ON C.idCategoria = S.idCategoria 
                 GROUP BY C.idCategoria 
                 ORDER BY total DESC LIMIT 1";
+        $res = $this->db->query($query);
+        return $res->fetch_assoc();
+    }
+
+    public function getMostFavoritedSpot()
+    {
+        $query = "SELECT S.titolo, COUNT(P.usernameUtente) as likes 
+                  FROM SPOT S 
+                  JOIN PREFERITI P ON S.idSpot = P.idSpot 
+                  GROUP BY S.idSpot 
+                  ORDER BY likes DESC LIMIT 1";
+        $res = $this->db->query($query);
+        return $res->fetch_assoc();
+    }
+
+    public function getTopCommenter()
+    {
+        $query = "SELECT usernameUtente, COUNT(*) as commenti 
+                  FROM COMMENTI 
+                  GROUP BY usernameUtente 
+                  ORDER BY commenti DESC LIMIT 1";
         $res = $this->db->query($query);
         return $res->fetch_assoc();
     }
@@ -330,13 +359,14 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function insertComment($username, $idSpot, $testo, $idRisposto = null){
+    public function insertComment($username, $idSpot, $testo, $idRisposto = null)
+    {
         $query = "INSERT INTO COMMENTI (usernameUtente, idSpot, testo, dataPubblicazione, idCommentoRisposto) VALUES (?, ?, ?, NOW(), ?)";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("sisi", $username, $idSpot, $testo, $idRisposto);
         $stmt->execute();
-    
-        return $stmt->insert_id; 
+
+        return $stmt->insert_id;
     }
 
     public function getCommentById($idCommento)
@@ -512,33 +542,36 @@ class DatabaseHelper
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getSpotsPagination($offset, $limit) {
+    public function getSpotsPagination($offset, $limit)
+    {
         $sql = "SELECT S.*, U.fotoProfilo 
                 FROM SPOT S 
                 JOIN UTENTI U ON S.usernameUtente = U.username 
                 WHERE S.stato = 'approvato' 
                 ORDER BY S.dataInserimento DESC 
                 LIMIT ? OFFSET ?";
-        
+
         $stmt = $this->db->prepare($sql);
         $stmt->bind_param("ii", $limit, $offset);
         $stmt->execute();
         $result = $stmt->get_result();
-    
+
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function isUsernameTaken($username) {
+    public function isUsernameTaken($username)
+    {
         $stmt = $this->db->prepare("SELECT COUNT(*) as count FROM UTENTI WHERE username = ?");
         $stmt->bind_param("s", $username);
         $stmt->execute();
         $result = $stmt->get_result();
         $row = $result->fetch_assoc();
-        
+
         return $row['count'] > 0;
     }
 
-    public function getUsersData($username) {
+    public function getUsersData($username)
+    {
         $stmt = $this->db->prepare("SELECT fotoProfilo FROM UTENTI WHERE username = ?");
         $stmt->bind_param("s", $username);
         $stmt->execute();
