@@ -2,7 +2,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <h2 class="mb-4 text-danger border-bottom border-danger pb-2">
-                <i class="bi bi-bell-fill"></i> Nuove Notifiche
+                <span class="bi bi-bell-fill"></span> Nuove Notifiche
             </h2>
 
             <?php
@@ -22,7 +22,7 @@
                             class="list-group-item list-group-item-action d-flex justify-content-between align-items-center border-start-danger">
                             <div>
                                 <p class="mb-1 fw-bold text-dark"><?php echo htmlspecialchars($notifica['testo']); ?></p>
-                                <small class="text-danger"><i class="bi bi-arrow-right"></i> Vai allo spot</small>
+                                <small class="text-danger"><span class="bi bi-arrow-right"></span> Vai allo spot</small>
                             </div>
                             <span class="badge bg-danger rounded-pill">Nuova</span>
                         </a>
@@ -31,7 +31,7 @@
             <?php endif; ?>
 
             <h2 class="mb-4 text-danger border-bottom border-secondary pb-2 mt-5">
-                <i class="bi bi-archive-fill"></i> Tutte le Notifiche
+                <span class="bi bi-archive-fill"></span> Tutte le Notifiche
             </h2>
 
             <?php if (empty($templateParams["notifiche"])): ?>

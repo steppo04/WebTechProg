@@ -42,14 +42,14 @@
                             </select>
                             
                             <div class="form-text text-muted mt-2 small">
-                                <i class="bi bi-info-circle-fill text-danger opacity-75"></i>
+                                <span class="bi bi-info-circle-fill text-danger opacity-75"></span>
                                 Seleziona un genitore per creare una <strong>Sottocategoria</strong>, altrimenti lascialo vuoto.
                             </div>
                         </div>
 
                         <div class="d-grid gap-2 mt-4">
                             <button type="submit" class="btn btn-danger shadow-sm text-uppercase fw-bold py-2">
-                                <i class="bi bi-plus-lg me-1"></i> Salva Categoria
+                                <span class="bi bi-plus-lg me-1"></span> Salva Categoria
                             </button>
 
                             <a href="index.php" class="btn btn-light text-muted border-0 btn-sm">

@@ -68,7 +68,7 @@
             ?>
               <a href="notifiche.php" id="notification-link"
                 class="btn btn-link text-danger me-3 position-relative py-1 px-2 text-decoration-none">
-                <i class="bi bi-bell-fill" style="font-size: 1.2rem;"></i>
+                <span class="bi bi-bell-fill" style="font-size: 1.2rem;"></span>
                 <span id="notification-badge-container">
                   <?php if ($unreadCount > 0): ?>
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
@@ -108,7 +108,7 @@
       ?>
         <div id="liveToast" class="toast shadow" role="alert" aria-live="assertive" aria-atomic="true">
           <div class="toast-header <?php echo $headerClass; ?>">
-            <i class="bi <?php echo $icona; ?> me-2"></i>
+            <span class="bi <?php echo $icona; ?> me-2"></span>
             <strong class="me-auto"><?php echo $titolo; ?></strong>
             <small class="opacity-75">Adesso</small>
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
@@ -141,12 +141,12 @@
           <span class="d-block fw-bold small mb-1">Social</span>
           <div>
             <a href="#" class="text-dark me-2 fs-5 text-decoration-none footer-social" aria-label="Vai a Instagram">
-              <i class="bi bi-instagram"></i></a>
+              <span class="bi bi-instagram"></span></a>
             <a href="#" class="text-dark me-2 fs-5 text-decoration-none footer-social" aria-label="Vai a Facebook">
-              <i class="bi bi-facebook"></i>
+              <span class="bi bi-facebook"></span>
             </a>
             <a href="#" class="text-dark fs-5 text-decoration-none footer-social" aria-label="Vai a TikTok">
-              <i class="bi bi-tiktok"></i>
+              <span class="bi bi-tiktok"></span>
             </a>
           </div>
         </div>

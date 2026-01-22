@@ -1,7 +1,7 @@
 <section class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8 text-center">
-            <i class="bi bi-emoji-dizzy display-1 text-danger" aria-hidden="true"></i>
+            <span class="bi bi-emoji-dizzy display-1 text-danger" aria-hidden="true"></span>
 
             <h1 class="display-1 fw-bold">404</h1>
             <h2 class="mb-4">Ops! Pagina non trovata.</h2>
@@ -11,7 +11,7 @@
             </p>
 
             <a href="index.php" class="btn btn-danger btn-lg px-4 gap-3">
-                <i class="bi bi-house-door-fill" aria-hidden="true"></i> Torna alla Home
+                <span class="bi bi-house-door-fill" aria-hidden="true"></span> Torna alla Home
             </a>
             <a href="javascript:history.back()" class="btn btn-outline-secondary btn-lg px-4">
                 Torna indietro

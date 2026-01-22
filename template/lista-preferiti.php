@@ -14,7 +14,7 @@
               <div class="col-12 d-flex justify-content-start">
                   <div class="dropdown">
                       <button class="btn btn-light dropdown-toggle btn-sm" type="button" id="dropdownSort" data-bs-toggle="dropdown" aria-expanded="false">
-                          <i class="bi bi-filter-left" aria-hidden="true"></i> Ordina per
+                          <span class="bi bi-filter-left" aria-hidden="true"></span> Ordina per
                       </button>
                       <ul class="dropdown-menu" aria-labelledby="dropdownSort">
                           <li><a class="dropdown-item" href="preferiti.php?filter=newest">Più recenti</a></li>
@@ -37,7 +37,7 @@
                               </div>
                               <div class="card-body">
                                   <p class="card-text text-muted small">
-                                      <i class="bi bi-chat-left-text" aria-hidden="true"></i> Spot:
+                                      <span class="bi bi-chat-left-text" aria-hidden="true"></span> Spot:
                                   </p>
                                   <p class="card-text"><?php echo htmlspecialchars($spot["testo"]); ?></p>
                               </div>

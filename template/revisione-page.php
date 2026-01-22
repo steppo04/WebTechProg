@@ -22,10 +22,10 @@
                                 <form method="POST" action="revisione.php">
                                     <input type="hidden" name="idSpot" value="<?php echo $spot["idSpot"]; ?>">
                                     <button type="submit" name="azione" value="rifiuta" class="btn btn-outline-danger btn-sm">
-                                        <i class="bi bi-x-circle"></i> Rifiuta
+                                        <span class="bi bi-x-circle"></span> Rifiuta
                                     </button>
                                     <button type="submit" name="azione" value="approva" class="btn btn-success btn-sm">
-                                        <i class="bi bi-check-circle"></i> Approva
+                                        <span class="bi bi-check-circle"></span> Approva
                                     </button>
                                 </form>
                             </div>
@@ -36,7 +36,7 @@
         </div>
     <?php else: ?>
         <div class="alert alert-info text-center mt-5">
-            <i class="bi bi-info-circle"></i> Non ci sono nuovi spot da revisionare.
+            <span class="bi bi-info-circle"></span> Non ci sono nuovi spot da revisionare.
         </div>
     <?php endif; ?>
 </section>

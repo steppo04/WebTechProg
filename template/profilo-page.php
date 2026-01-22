@@ -19,7 +19,7 @@
                         <input type="file" name="fileToUpload" id="fileToUpload" class="d-none" accept="image/x-png,image/gif,image/jpeg">
                         
                         <button type="button" class="btn btn-outline-danger btn-sm" id="btnChangePhoto">
-                            <i class="bi bi-pencil-square me-1" aria-hidden="true"></i> Modifica Foto
+                            <span class="bi bi-pencil-square me-1" aria-hidden="true"></span> Modifica Foto
                         </button>
                     </form>
 
@@ -52,7 +52,7 @@
                         <div class="col-md-6 col-lg-4">
                             <div class="card h-100 shadow-sm">
                                 <div class="card-header bg-danger text-white">
-                                    <span class="small"><?php echo htmlspecialchars($spot["nomeCategoria"]); ?></span>
+                                    <span><?php echo htmlspecialchars($spot["nomeCategoria"]); ?></span>
                                 </div>
                                 <div class="card-body">
                                     <h3 class="card-title"><?php echo htmlspecialchars($spot["titolo"]); ?></h3>

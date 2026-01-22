@@ -32,20 +32,20 @@
         <div class="card-container">
 
             <div class="info-box">
-                <div class="icon-wrapper" aria-hidden="true"><i class="bi bi-megaphone-fill" aria-hidden="true"></i></div>
+                <div class="icon-wrapper" aria-hidden="true"><span class="bi bi-megaphone-fill" aria-hidden="true"></span></div>
                 <h2 class="box-title">Racconta</h2>
                 <p class="box-text">Hai visto qualcosa di interessante?Condividilo con la community in pochi click.
                 </p>
             </div>
 
             <div class="info-box">
-                <div class="icon-wrapper" aria-hidden="true"><i class="bi bi-geo-alt-fill" aria-hidden="true"></i></div>
+                <div class="icon-wrapper" aria-hidden="true"><span class="bi bi-geo-alt-fill" aria-hidden="true"></span></div>
                 <h2 class="box-title">Ritrova</h2>
                 <p class="box-text">Chiavi perse? Libri dimenticati?Cerca nella categoria oggetti smarriti.</p>
             </div>
 
             <div class="info-box">
-                <div class="icon-wrapper" aria-hidden="true"><i class="bi bi-people-fill"></i></div>
+                <div class="icon-wrapper" aria-hidden="true"><span class="bi bi-people-fill"></span></div>
                 <h2 class="box-title">Connettiti</h2>
                 <p class="box-text">Rispondi agli spot e interagisci con gli altri studenti del campus.</p>
             </div>

@@ -44,7 +44,7 @@
             <div class="card shadow-sm border-0 h-100">
                 <div class="card-header bg-danger text-white">
                     <h4 class="h5 mb-0">
-                        <i class="bi bi-star-fill" aria-hidden="true"></i> 
+                        <span class="bi bi-star-fill" aria-hidden="true"></span> 
                         Fan più attivo
                     </h4>
                 </div>
@@ -62,7 +62,7 @@
             <div class="card shadow-sm border-0 h-100">
                 <div class="card-header bg-danger text-white">
                     <h4 class="h5 mb-0">
-                        <i class="bi bi-tag-fill" aria-hidden="true"></i> 
+                        <span class="bi bi-tag-fill" aria-hidden="true"></span> 
                         Categoria Popolare
                     </h4>
                 </div>

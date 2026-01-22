@@ -16,11 +16,11 @@
                         <button type="button" class="btn btn-link text-white p-0 btn-toggle-preferito"
                             data-id="<?php echo $templateParams['spot']['idSpot']; ?>" 
                             title="<?php echo $labelPreferito; ?>"
-                            aria-label="<?php echo $labelPreferito; ?>"> <i class="bi <?php echo $iconaClass; ?> fs-3" aria-hidden="true"></i>
+                            aria-label="<?php echo $labelPreferito; ?>"> <span class="bi <?php echo $iconaClass; ?> fs-3" aria-hidden="true"></span>
                         </button>
                     <?php else: ?>
                         <a href="login.php" class="text-white" title="Accedi per salvare" 
-                        aria-label="Accedi per salvare nei preferiti"> <i class="bi bi-bookmark fs-3" aria-hidden="true"></i>
+                        aria-label="Accedi per salvare nei preferiti"> <span class="bi bi-bookmark fs-3" aria-hidden="true"></span>
                         </a>
                     <?php endif; ?>
                 </div>
@@ -38,7 +38,7 @@
                                     <strong>Autore:</strong>
                                     <?php
                                     if ($templateParams["spot"]["isAnonymous"]) {
-                                        echo '<span class="fst-italic text-secondary">Anonimo <i class="bi bi-incognito" aria-hidden="true"></i></span>';
+                                        echo '<span class="fst-italic text-secondary">Anonimo <span class="bi bi-incognito" aria-hidden="true"></span></span>';
                                     } else {
                                         echo htmlspecialchars($templateParams["spot"]["nomeAutore"] . " " . $templateParams["spot"]["cognomeAutore"]);
                                     }
@@ -69,7 +69,7 @@
                     <?php if (isUserLoggedIn() && $_SESSION["username"] == $templateParams["spot"]["usernameUtente"]): ?>
                         <a href="gestione-spot.php?id=<?php echo $templateParams["spot"]["idSpot"]; ?>"
                             class="btn btn-warning btn-sm">
-                            <i class="bi bi-pencil-square" aria-hidden="true"></i> Modifica / Elimina
+                            <span class="bi bi-pencil-square" aria-hidden="true"></span> Modifica / Elimina
                         </a>
                     <?php endif; ?>
                 </div>
@@ -78,7 +78,7 @@
 
         <div class="col-md-4 border-start">
             <aside>
-                <h3 class="h5 mb-3"><i class="bi bi-chat-dots" aria-hidden="true"></i> Commenti
+                <h3 class="h5 mb-3"><span class="bi bi-chat-dots" aria-hidden="true"></span> Commenti
                     (<?php echo count($templateParams["commenti"]); ?>)</h3>
 
                 <div id="containerCommenti" class="list-group mb-3 overflow-auto" style="max-height: 35vh;">
@@ -90,7 +90,7 @@
                                     <div class="bg-light border-start border-secondary border-2 p-1 mb-2 rounded shadow-sm"
                                         style="font-size: 0.75rem; opacity: 0.8;">
                                         <span class="text fw-bold">
-                                            <i class="bi bi-quote" aria-hidden="true"></i> In risposta a
+                                            <span class="bi bi-quote" aria-hidden="true"></span> In risposta a
                                             <?php echo htmlspecialchars($commento["autorePadre"] ?? 'utente'); ?>:
                                         </span>
                                         <p class="mb-0 text-truncate italic">
@@ -117,7 +117,7 @@
                                 <div class="text-end">
                                     <a href="?id=<?php echo $templateParams['spot']['idSpot']; ?>&rspTo=<?php echo $commento['idCommento']; ?>#formCommento"
                                         class="text-decoration-none  fw-bold text-danger">
-                                        <i class="bi bi-reply" aria-hidden="true"></i> Rispondi
+                                        <span class="bi bi-reply" aria-hidden="true"></span> Rispondi
                                     </a>
 
                                     <?php if (isAdminLoggedIn()): ?>
@@ -128,7 +128,7 @@
                                                 value="<?php echo $templateParams['spot']['idSpot']; ?>">
 
                                             <button type="submit" class="btn btn-link text-decoration-none small fw-bold text-danger btn-confirm-delete" data-confirm-msg="Sei sicuro di voler eliminare questo commento?">
-                                                <i class="bi bi-trash" aria-hidden="true"></i> Elimina
+                                                <span class="bi bi-trash" aria-hidden="true"></span> Elimina
                                             </button>
                                         </form>
                                     <?php endif; ?>
@@ -151,7 +151,7 @@
                                 onclick="window.location.href='dettaglio-spot.php?id=<?php echo $templateParams['spot']['idSpot']; ?>'"></button>
 
                             <small class="text-danger fw-bold d-block mb-1" style="font-size: 0.7rem;">
-                                <i class="bi bi-reply-fill" aria-hidden="true"></i> Stai rispondendo a
+                                <span class="bi bi-reply-fill" aria-hidden="true"></span> Stai rispondendo a
                                 <?php echo htmlspecialchars($commentoDaRispondere["usernameUtente"]); ?>:
                             </small>
                             <p class="mb-0 text-muted small text-truncate">
@@ -164,7 +164,7 @@
                         class="alert alert-dismissible fade show d-none shadow-sm"
                         role="alert">
 
-                        <i id="alertIcon" class="bi me-2"></i>
+                        <span id="alertIcon" class="bi me-2"></span>
 
                         <span id="alertText"></span>
 

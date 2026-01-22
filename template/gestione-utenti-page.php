@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<section class="container mt-5">
     <div class="card shadow-sm border-0">
         <div class="card-header bg-danger text-white py-3">
             <h2 class="h4 mb-0">Gestione Utenti</h2>
@@ -53,4 +53,4 @@
             </div>
         </div>
     </div>
-</div>
+</section>

@@ -22,7 +22,7 @@
                             <button type="submit" class="btn btn-danger">Cerca</button>
 
                             <button type="button" class="btn btn-outline-dark d-flex gap-2 align-items-center" data-bs-toggle="modal" data-bs-target="#modalFiltri">
-                                <i class="bi bi-funnel"></i> Filtri
+                                <span class="bi bi-funnel"></span> Filtri
                             </button>
                         </div>
                     </div>
@@ -82,16 +82,16 @@
             <button type="button" class="btn btn-link text-white p-0 btn-toggle-preferito" 
                     data-id="<?php echo $spot['idSpot']; ?>"
                     title="Salva nei preferiti">
-                <i class="bi <?php echo $iconaClass; ?> fs-4"></i>
+                <span class="bi <?php echo $iconaClass; ?> fs-4"></span>
             </button>
         <?php else: ?>
             <a href="login.php" class="text-white" title="Accedi per salvare">
-                <i class="bi bi-bookmark fs-4"></i>
+                <span class="bi bi-bookmark fs-4"></span>
             </a>
         <?php endif; ?>
     </div>
                         <div class="card-body">
-                            <p class="card-text text-muted small"><i class="bi bi-chat-left-text" aria-hidden="true"></i> Spot:</p>
+                            <p class="card-text text-muted small"><span class="bi bi-chat-left-text" aria-hidden="true"></span> Spot:</p>
                             <p class="card-text"><?php echo htmlspecialchars($spot["testo"]); ?></p>
                         </div>
                         <div class="card-footer bg-transparent border-top-0">
@@ -110,7 +110,7 @@
 
     <div class="text-center my-5" id="load-more-wrapper">
         <button id="btn-load-more" class="btn btn-danger btn-lg rounded-pill px-5 shadow">
-            <i class="bi bi-arrow-down-circle"></i> Carica altri Spot
+            <span class="bi bi-arrow-down-circle"></span> Carica altri Spot
         </button>
     </div>
 
