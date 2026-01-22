@@ -10,7 +10,7 @@
         <div class="col-md-4">
             <div class="card shadow-sm border-0 h-100">
                 <div class="card-body">
-                    <h3 class="text-muted mb-1">Spot Approvati</h3>
+                    <h2 class="text-muted mb-1">Spot Approvati</h2>
                     <span class="display-4 text-danger fw-bold">
                         <?php echo htmlspecialchars($templateParams["stats"]['approvati']); ?>
                     </span>
@@ -20,7 +20,7 @@
         <div class="col-md-4">
             <div class="card shadow-sm border-0 h-100">
                 <div class="card-body">
-                    <h3 class="text-muted mb-1">In Attesa di Revisione</h3>
+                    <h2 class="text-muted mb-1">In Attesa di Revisione</h2>
                     <span class="display-4 text-danger fw-bold">
                         <?php echo htmlspecialchars($templateParams["stats"]['in_attesa']); ?>
                     </span>
@@ -30,7 +30,7 @@
         <div class="col-md-4">
             <div class="card shadow-sm border-0 h-100">
                 <div class="card-body">
-                    <h3 class="text-muted mb-1">Utenti Attivi</h3>
+                    <h2 class="text-muted mb-1">Utenti Attivi</h2>
                     <span class="display-4 text-danger fw-bold">
                         <?php echo htmlspecialchars($templateParams["stats"]['utenti_attivi']); ?>
                     </span>
