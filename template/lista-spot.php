@@ -19,8 +19,6 @@
                                 placeholder="Cerca uno spot..."
                                 value="<?php echo isset($_GET['ricerca']) ? htmlspecialchars($_GET['ricerca']) : ''; ?>">
 
-                            <button type="submit" class="btn btn-danger">Cerca</button>
-
                             <button type="button" class="btn btn-outline-dark d-flex gap-2 align-items-center" data-bs-toggle="modal" data-bs-target="#modalFiltri">
                                 <span class="bi bi-funnel"></span> Filtri
                             </button>
@@ -63,33 +61,33 @@
         <?php if (count($templateParams["spot"]) > 0): ?>
             <?php foreach ($templateParams["spot"] as $spot): ?>
                 <div class="col-12 col-md-6 col-lg-4 spot-item">
-                    <div class="card h-100 shadow-sm card-spot">
-                    <div class="card-header bg-danger text-white d-flex justify-content-between align-items-center">
-        <h2 class="card-title mb-0 fs-5 text-truncate" style="max-width: 80%;">
-            <?php echo htmlspecialchars($spot["titolo"]); ?>
-        </h2>
+                    <article class="card h-100 shadow-sm card-spot">
+                        <div class="card-header bg-danger text-white d-flex justify-content-between align-items-center">
+                            <h2 class="card-title mb-0 fs-5 text-truncate" style="max-width: 80%;">
+                                <?php echo htmlspecialchars($spot["titolo"]); ?>
+                            </h2>
 
-        <?php 
-        $isPreferito = false;
-        if (isUserLoggedIn()) {
-            $isPreferito = $dbh->isSpotPreferito($_SESSION["username"], $spot["idSpot"]);
-        }
-        
-        $iconaClass = $isPreferito ? "bi-bookmark-fill" : "bi-bookmark"; 
-        ?>
+                            <?php
+                            $isPreferito = false;
+                            if (isUserLoggedIn()) {
+                                $isPreferito = $dbh->isSpotPreferito($_SESSION["username"], $spot["idSpot"]);
+                            }
 
-        <?php if (isUserLoggedIn()): ?>
-            <button type="button" class="btn btn-link text-white p-0 btn-toggle-preferito" 
-                    data-id="<?php echo $spot['idSpot']; ?>"
-                    title="Salva nei preferiti">
-                <span class="bi <?php echo $iconaClass; ?> fs-4"></span>
-            </button>
-        <?php else: ?>
-            <a href="login.php" class="text-white" title="Accedi per salvare">
-                <span class="bi bi-bookmark fs-4"></span>
-            </a>
-        <?php endif; ?>
-    </div>
+                            $iconaClass = $isPreferito ? "bi-bookmark-fill" : "bi-bookmark";
+                            ?>
+
+                            <?php if (isUserLoggedIn()): ?>
+                                <button type="button" class="btn btn-link text-white p-0 btn-toggle-preferito"
+                                    data-id="<?php echo $spot['idSpot']; ?>"
+                                    title="Salva nei preferiti">
+                                    <span class="bi <?php echo $iconaClass; ?> fs-4"></span>
+                                </button>
+                            <?php else: ?>
+                                <a href="login.php" class="text-white" title="Accedi per salvare">
+                                    <span class="bi bi-bookmark fs-4"></span>
+                                </a>
+                            <?php endif; ?>
+                        </div>
                         <div class="card-body">
                             <p class="card-text text-muted small"><span class="bi bi-chat-left-text" aria-hidden="true"></span> Spot:</p>
                             <p class="card-text"><?php echo htmlspecialchars($spot["testo"]); ?></p>
@@ -97,7 +95,7 @@
                         <div class="card-footer bg-transparent border-top-0">
                             <a href="dettaglio-spot.php?id=<?php echo $spot['idSpot']; ?>" class="btn btn-outline-primary btn-sm" aria-label="Leggi di più sullo spot: <?php echo htmlspecialchars($spot['titolo']); ?>">Leggi di più</a>
                         </div>
-                    </div>
+                    </article>
                 </div>
             <?php endforeach; ?>
         <?php else: ?>

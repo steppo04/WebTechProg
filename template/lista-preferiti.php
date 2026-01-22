@@ -31,7 +31,7 @@
                   <?php foreach ($templateParams["spot"] as $spot): ?>
 
                       <div class="col-12 col-md-6 col-lg-4">
-                          <div class="card h-100 shadow-sm card-spot">
+                          <article class="card h-100 shadow-sm card-spot">
                               <div class="card-header bg-danger text-white">
                                   <h2 class="card-title mb-0 fs-5"><?php echo htmlspecialchars($spot["titolo"]); ?></h2>
                               </div>
@@ -46,7 +46,7 @@
                                       Leggi di più
                                   </a>
                               </div>
-                          </div>
+                          </article>
                       </div>
 
                   <?php endforeach; ?>

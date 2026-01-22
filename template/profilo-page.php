@@ -14,17 +14,17 @@
 
                 <?php if ($templateParams["isMine"]): ?>
                     <form action="upload-profile-pic.php" method="post" enctype="multipart/form-data" id="profileForm" class="mb-3">
-                        
+
                         <label for="fileToUpload" class="visually-hidden">Carica una nuova foto profilo</label>
                         <input type="file" name="fileToUpload" id="fileToUpload" class="d-none" accept="image/x-png,image/gif,image/jpeg">
-                        
+
                         <button type="button" class="btn btn-outline-danger btn-sm" id="btnChangePhoto">
                             <span class="bi bi-pencil-square me-1" aria-hidden="true"></span> Modifica Foto
                         </button>
                     </form>
 
                     <script src="js/profilo.js"></script>
-                    
+
                 <?php endif; ?>
 
                 <?php if ($templateParams["isAdminProfile"]): ?>
@@ -50,7 +50,7 @@
                 <div class="row g-4">
                     <?php foreach ($templateParams["spots"] as $spot): ?>
                         <div class="col-md-6 col-lg-4">
-                            <div class="card h-100 shadow-sm">
+                            <article class="card h-100 shadow-sm">
                                 <div class="card-header bg-danger text-white">
                                     <span><?php echo htmlspecialchars($spot["nomeCategoria"]); ?></span>
                                 </div>
@@ -61,13 +61,13 @@
                                         <a href="dettaglio-spot.php?id=<?php echo $spot["idSpot"]; ?>"
                                             class="btn btn-sm btn-outline-danger"
                                             aria-label="Leggi lo spot: <?php echo htmlspecialchars($spot["titolo"]); ?>">Leggi</a>
-                                        
+
                                         <?php if ($templateParams["isMine"]): ?>
                                             <span class="badge bg-secondary"><?php echo strtoupper($spot["stato"]); ?></span>
                                         <?php endif; ?>
                                     </div>
                                 </div>
-                            </div>
+                            </article>
                         </div>
                     <?php endforeach; ?>
                 </div>
