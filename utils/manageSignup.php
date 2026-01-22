@@ -19,7 +19,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit;
     }
 
-    $result = $dbh->insertUser($nome, $cognome, $username, $password);
+    $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+
+    $result = $dbh->insertUser($nome, $cognome, $username, $passwordHash);
 
     if ($result) {
         header("Location: ../login.php");

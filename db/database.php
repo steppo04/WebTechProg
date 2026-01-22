@@ -198,7 +198,7 @@ class DatabaseHelper
         if ($result->num_rows > 0) {
             $user = $result->fetch_assoc();
 
-            if ($password === $user['password']) {
+            if (password_verify($password, $user['password'])) {
                 if ($user['stato'] === 'attivo') {
                     return $user;
                 } else {

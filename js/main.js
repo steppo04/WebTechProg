@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const formData = new FormData();
             formData.append('idSpot', idSpot);
 
-            fetch('api-toggle-preferiti.php', {
+            fetch('toggle-preferiti.php', {
                 method: 'POST',
                 body: formData
             })
