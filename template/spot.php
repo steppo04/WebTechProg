@@ -52,8 +52,8 @@
                         <div class="col-sm-6">
                             <h3 class="h6 text-muted small fw-bold">Classificazione</h3>
                             <ul class="list-unstyled">
-                                <li><strong>Categoria:</strong> <span
-                                        class="badge bg-secondary"><?php echo htmlspecialchars($templateParams["spot"]["nomeCategoria"]); ?></span>
+                                <li><strong>Categoria:</strong>
+                                       <?php echo htmlspecialchars($templateParams["spot"]["nomeCategoria"]); ?>
                                 </li>
                                 <li><strong>Sottocategoria:</strong>
                                     <?php echo htmlspecialchars($templateParams["spot"]["nomeSottoCategoria"] ?? 'Nessuna'); ?>
