@@ -43,7 +43,7 @@
                               <p class="card-text"><?php echo htmlspecialchars($spot["testo"]); ?></p>
                           </div>
                           <div class="card-footer bg-transparent border-top-0">
-                              <a href="dettaglio-spot.php?id=<?php echo $spot['idSpot']; ?>" class="btn btn-outline-primary btn-sm" aria-label="Leggi di più sullo spot: <?php echo htmlspecialchars($spot['titolo']); ?>">
+                              <a href="dettaglio-spot.php?id=<?php echo $spot['idSpot']; ?>" class="btn btn-outline-danger btn-sm" aria-label="Leggi di più sullo spot: <?php echo htmlspecialchars($spot['titolo']); ?>">
                                   Leggi di più
                               </a>
                           </div>

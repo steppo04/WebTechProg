@@ -15,7 +15,7 @@ if (!empty($ricerca) && !empty($categorie)) {
 } elseif (!empty($categorie)) {
     $templateParams["spot"] = $dbh->getSpotsByCategories($categorie);
 } else {
-    $templateParams["spot"] = $dbh->getLastSpots(5);
+    $templateParams["spot"] = $dbh->getLastSpots();
 }
 
 require 'template/base.php';

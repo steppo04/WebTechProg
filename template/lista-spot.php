@@ -82,10 +82,6 @@
                                     title="Salva nei preferiti">
                                     <span class="bi <?php echo $iconaClass; ?> fs-4"></span>
                                 </button>
-                            <?php else: ?>
-                                <a href="login.php" class="text-white" title="Accedi per salvare">
-                                    <span class="bi bi-bookmark fs-4"></span>
-                                </a>
                             <?php endif; ?>
                         </div>
                         <div class="card-body">
@@ -93,7 +89,7 @@
                             <p class="card-text"><?php echo htmlspecialchars($spot["testo"]); ?></p>
                         </div>
                         <div class="card-footer bg-transparent border-top-0">
-                            <a href="dettaglio-spot.php?id=<?php echo $spot['idSpot']; ?>" class="btn btn-outline-primary btn-sm" aria-label="Leggi di più sullo spot: <?php echo htmlspecialchars($spot['titolo']); ?>">Leggi di più</a>
+                            <a href="dettaglio-spot.php?id=<?php echo $spot['idSpot']; ?>" class="btn btn-outline-danger btn-sm" aria-label="Leggi di più sullo spot: <?php echo htmlspecialchars($spot['titolo']); ?>">Leggi di più</a>
                         </div>
                     </article>
                 </div>

@@ -28,11 +28,6 @@ document.addEventListener("DOMContentLoaded", function() {
                                         title="Salva nei preferiti">
                                     <span class="bi ${iconClass} fs-4"></span>
                                 </button>`;
-                        } else {
-                            favButtonHtml = `
-                                <a href="login.php" class="text-white" title="Accedi per salvare">
-                                    <span class="bi bi-bookmark fs-4"></span>
-                                </a>`;
                         }
 
                         containerSpot.innerHTML += `

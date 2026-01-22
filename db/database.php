@@ -77,10 +77,9 @@ class DatabaseHelper
         return $stmt->execute();
     }
 
-    public function getLastSpots($n)
+    public function getLastSpots()
     {
-        $stmt = $this->db->prepare("SELECT S.*, U.fotoProfilo FROM SPOT S JOIN UTENTI U ON S.usernameUtente = U.username WHERE S.stato='approvato' ORDER BY S.dataInserimento DESC, S.idSpot DESC LIMIT ?");
-        $stmt->bind_param('i', $n);
+        $stmt = $this->db->prepare("SELECT S.*, U.fotoProfilo FROM SPOT S JOIN UTENTI U ON S.usernameUtente = U.username WHERE S.stato='approvato' ORDER BY S.dataInserimento DESC, S.idSpot DESC");
         $stmt->execute();
         $result = $stmt->get_result();
 
