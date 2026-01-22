@@ -1,15 +1,15 @@
 <?php
 require_once 'bootstrap.php';
 
-if (!isset($_POST['offset'])) {
-    echo json_encode(['html' => '', 'count' => 0]);
+if (!isset($_POST['lastId'])) {
+    echo json_encode(['html' => '', 'count' => 0, 'hasMore' => false]);
     exit;
 }
 
-$offset = intval($_POST['offset']);
+$lastId = intval($_POST['lastId']);
 $limit = 5;
 
-$newSpots = $dbh->getSpotsPagination($offset, $limit);
+$newSpots = $dbh->getSpotsAfterId($lastId, $limit);
 
 $html = '';
 
@@ -20,7 +20,7 @@ foreach ($newSpots as $spot) {
     }
     $iconaClass = $isPreferito ? "bi-bookmark-fill" : "bi-bookmark";
 
-    $html .= '<div class="col-12 col-md-6 col-lg-4 spot-item mb-4">';
+    $html .= '<div class="col-12 col-md-6 col-lg-4 spot-item mb-4" data-id="' . $spot['idSpot'] . '">';
     $html .= '  <div class="card h-100 shadow-sm card-spot">';
 
     $html .= '      <div class="card-header bg-danger text-white d-flex justify-content-between align-items-center">';
@@ -35,13 +35,13 @@ foreach ($newSpots as $spot) {
         $html .= '      </button>';
     } else {
         $html .= '      <a href="login.php" class="text-white" title="Accedi per salvare">';
-        $html .= '          <i class="bi bi-bookmark fs-4"></i>';
+        $html .= '          <span class="bi bi-bookmark fs-4"></span>';
         $html .= '      </a>';
     }
     $html .= '      </div>';
 
     $html .= '      <div class="card-body">';
-    $html .= '          <p class="card-text text-muted small"><i class="bi bi-chat-left-text"></i> Spot:</p>';
+    $html .= '          <p class="card-text text-muted small"><span class="bi bi-chat-left-text"></span> Spot:</p>';
     $html .= '          <p class="card-text">' . htmlspecialchars($spot["testo"]) . '</p>';
     $html .= '      </div>';
 
@@ -56,6 +56,7 @@ foreach ($newSpots as $spot) {
 header('Content-Type: application/json');
 echo json_encode([
     'html' => $html,
-    'count' => count($newSpots)
+    'count' => count($newSpots),
+    'hasMore' => count($newSpots) >= $limit
 ]);
 ?>

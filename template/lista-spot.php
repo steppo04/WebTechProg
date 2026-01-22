@@ -60,7 +60,7 @@
     <div class="row g-4 mb-4" id="container-spot">
         <?php if (count($templateParams["spot"]) > 0): ?>
             <?php foreach ($templateParams["spot"] as $spot): ?>
-                <div class="col-12 col-md-6 col-lg-4 spot-item">
+                <div class="col-12 col-md-6 col-lg-4 spot-item" data-id="<?php echo $spot['idSpot']; ?>">
                     <article class="card h-100 shadow-sm card-spot">
                         <div class="card-header bg-danger text-white d-flex justify-content-between align-items-center">
                             <h2 class="card-title mb-0 fs-5 text-truncate" style="max-width: 80%;">
