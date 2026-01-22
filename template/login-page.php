@@ -1,7 +1,7 @@
 <section>
     <div class="wrapper">
-        <div class="bg"></div>
-        <div class="noise-overlay"></div>
+        <div class="bg" aria-hidden="true"></div>
+        <div class="noise-overlay" aria-hidden="true"></div>
 
         <div class="auth-card">
             <h1 class="auth-title">Login</h1>
@@ -30,9 +30,12 @@
                 </div>
 
                 <div class="text-center mt-4">
-                    <p class="mb-0 text-muted small fw-bold">
+                    <p class="mb-0 small fw-bold text-dark">
                         Non sei ancora registrato?
-                        <a href="sign-up.php" class="auth-link">CREA UN ACCOUNT</a>
+                        
+                        <a href="sign-up.php" class="auth-link text-decoration-underline" style="color: #b02a37;">
+                            CREA UN ACCOUNT
+                        </a>
                     </p>
                 </div>
             </form>
