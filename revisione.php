@@ -11,6 +11,11 @@ if (!isAdminLoggedIn()) {
 if (isset($_POST["idSpot"]) && isset($_POST["azione"])) {
     $stato = ($_POST["azione"] == "approva") ? "approvato" : "rifiutato";
     $dbh->updateSpotStatus($_POST["idSpot"], $stato, $_SESSION["username"]);
+    if($_POST["azione"] == "approva"){
+        setMsg("Post approvato con successo","success");
+    }else{
+        setMsg("Post rifiutato con successo","success");
+    }
 }
 
 $templateParams["titolo"] = "Revisione Spot";

@@ -64,11 +64,11 @@
                             </div>
                             <div class="card-body">
                                 <h4 class="card-title"><?php echo htmlspecialchars($spot["titolo"]); ?></h4>
-                                <p class="card-text text-truncate"><?php echo htmlspecialchars($spot["testo"]); ?></p>
+                                <p class="card-text"><?php echo htmlspecialchars($spot["testo"]); ?></p>
                                 <div class="d-flex justify-content-between mt-3">
-                                    <a href="dettaglio-spot.php?id=<?php echo $spot["idSpot"]; ?>"
+                                    <?php if($spot["stato"]=='approvato'): ?><a href="dettaglio-spot.php?id=<?php echo $spot["idSpot"]; ?>"
                                         class="btn btn-sm btn-outline-danger"
-                                        aria-label="Leggi lo spot: <?php echo htmlspecialchars($spot["titolo"]); ?>">Leggi di più</a>
+                                        aria-label="Leggi lo spot: <?php echo htmlspecialchars($spot["titolo"]); ?>">Leggi di più</a><?php endif;?>
 
                                     <?php if ($templateParams["isMine"]): ?>
                                         <span class="badge border-danger text-danger d-flex justify-content-center align-items-center"><?php echo strtoupper($spot["stato"]); ?></span>

@@ -13,7 +13,7 @@ if (!empty($ricerca) && !empty($categorie)) {
 } elseif (!empty($categorie)) {
     $spots = $dbh->getSpotsByCategories($categorie);
 } else {
-    $spots = $dbh->getLastSpots(5);
+    $spots = $dbh->getLastSpots();
 }
 
 $isLogged = isUserLoggedIn();
