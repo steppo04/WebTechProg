@@ -11,6 +11,7 @@ if (!isAdminLoggedIn()) {
 if (isset($_POST["username"]) && isset($_POST["azione"])) {
     $nuovoStato = ($_POST["azione"] == "blocca") ? "bloccato" : "attivo";
     $dbh->updateUserStatus($_POST["username"], $nuovoStato);
+    setMsg("Cambiamento di stato avvenuto con successo");
 }
 
 $templateParams["titolo"] = "Spot The Bug - Gestione Utenti";

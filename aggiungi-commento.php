@@ -5,9 +5,17 @@ header('Content-Type: application/json');
 $response = ["success" => false, "message" => "", "data" => []];
 
 if (!isUserLoggedIn()) {
-    $response["message"] = "Devi effettuare l'accesso.";
-    echo json_encode($response);
-    exit();
+
+    if(isAdminLoggedIn()){
+        $response["message"] = "L'admin non può realizzare commenti";
+        echo json_encode($response);
+        exit();
+    }else{
+        $response["message"] = "Devi effettuare l'accesso.";
+        echo json_encode($response);
+        exit();
+    }
+    
 }
 
 $idSpot = $_POST["idSpot"];

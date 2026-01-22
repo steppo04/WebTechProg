@@ -18,10 +18,6 @@
                             title="<?php echo $labelPreferito; ?>"
                             aria-label="<?php echo $labelPreferito; ?>"> <span class="bi <?php echo $iconaClass; ?> fs-3" aria-hidden="true"></span>
                         </button>
-                    <?php else: ?>
-                        <a href="login.php" class="text-white" title="Accedi per salvare" 
-                        aria-label="Accedi per salvare nei preferiti"> <span class="bi bi-bookmark fs-3" aria-hidden="true"></span>
-                        </a>
                     <?php endif; ?>
                 </div>
 

@@ -3,7 +3,7 @@ require_once 'bootstrap.php';
 
 if (!isUserLoggedIn()) {
     header("location: login.php");
-    setMsg("Devi prima effettuale l'accesso", "danger");
+    setMsg("Non puoi accedere a questa pagina", "danger");
     exit;
 }
 
