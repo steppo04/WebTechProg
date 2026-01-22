@@ -2,18 +2,10 @@ document.addEventListener("DOMContentLoaded", function() {
     const inputRicerca = document.getElementById("ricerca");
     const containerSpot = document.getElementById("container-spot");
     const formRicerca = document.getElementById("form-ricerca");
-    const btnLoadMore = document.getElementById("btn-load-more");
-    const loadMoreWrapper = document.getElementById("load-more-wrapper");
 
     function eseguiRicerca() {
         const query = inputRicerca.value;
         const categories = Array.from(document.querySelectorAll('.check-filtro:checked')).map(cb => cb.value);
-
-        if (query.length > 0 || categories.length > 0) {
-            if(loadMoreWrapper) loadMoreWrapper.style.display = 'none';
-        } else {
-            if(loadMoreWrapper) loadMoreWrapper.style.display = 'block';
-        }
 
         let url = `ricerca.php?ricerca=${encodeURIComponent(query)}`;
         categories.forEach(cat => {
@@ -80,51 +72,4 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-
-    if(btnLoadMore) {
-        btnLoadMore.addEventListener("click", function() {
-
-            const allSpots = document.querySelectorAll(".spot-item");
-            const lastSpot = allSpots[allSpots.length - 1];
-            
-            if (!lastSpot) return; 
-
-            const lastId = lastSpot.getAttribute("data-id");
-            
-            const originalText = btnLoadMore.innerHTML;
-            btnLoadMore.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Caricamento...';
-            btnLoadMore.disabled = true;
-
-            const formData = new FormData();
-            formData.append("lastId", lastId);
-
-            fetch("load-spots.php", {
-                method: "POST",
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.html) {
-                    containerSpot.insertAdjacentHTML('beforeend', data.html);
-                }
-
-                if (!data.hasMore) {
-                    btnLoadMore.remove(); 
-                    const endMsg = document.createElement("p");
-                    endMsg.className = "text-center text-muted mt-3";
-                    endMsg.innerText = "Non ci sono altri spot!";
-                    loadMoreWrapper.appendChild(endMsg);
-                } else {
-                    btnLoadMore.innerHTML = originalText;
-                    btnLoadMore.disabled = false;
-                }
-            })
-            .catch(err => {
-                console.error("Errore AJAX Load More:", err);
-                btnLoadMore.innerHTML = originalText;
-                btnLoadMore.disabled = false;
-                alert("Errore nel caricamento. Riprova.");
-            });
-        });
-    }
 });

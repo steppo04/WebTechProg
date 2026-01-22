@@ -87,23 +87,6 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getSpotsAfterId($lastId, $limit)
-    {
-        $query = "SELECT S.*, U.fotoProfilo 
-                FROM SPOT S 
-                JOIN UTENTI U ON S.usernameUtente = U.username 
-                WHERE S.stato = 'approvato' AND (S.dataInserimento < (SELECT dataInserimento FROM SPOT WHERE idSpot = ?) OR (S.dataInserimento = (SELECT dataInserimento FROM SPOT WHERE idSpot = ?) AND S.idSpot < ?))
-                ORDER BY S.dataInserimento DESC, S.idSpot DESC 
-                LIMIT ?";
-
-        $stmt = $this->db->prepare($query);
-        $stmt->bind_param("iiii", $lastId, $lastId, $lastId, $limit);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        return $result->fetch_all(MYSQLI_ASSOC);
-    }
-
     public function getSpotsByString($str)
     {
 

@@ -106,12 +106,6 @@
         <?php endif; ?>
     </div>
 
-    <div class="text-center my-5" id="load-more-wrapper">
-        <button id="btn-load-more" class="btn btn-danger btn-lg rounded-pill px-5 shadow">
-            <span class="bi bi-arrow-down-circle"></span> Carica altri Spot
-        </button>
-    </div>
-
 </section>
 
 <script src="js/lista-spot.js"></script>

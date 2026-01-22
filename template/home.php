@@ -23,7 +23,7 @@
                     <?php if (!isUserLoggedIn() && !isAdminLoggedIn()): ?>
                         <a href="login.php" class="btn-custom btn-accedi">Accedi</a>
                     <?php elseif (isUserLoggedIn()): ?>
-                        <a href="gestione-spot.php" class="btn-custom btn-crea">+ Crea Spot</a>
+                        <a href="gestione-spot.php" class="btn-custom btn-crea">Crea Spot</a>
                     <?php endif; ?>
                 </div>
             </div>
