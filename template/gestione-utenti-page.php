@@ -1,7 +1,7 @@
 <section class="container mt-5">
     <div class="row mb-4">
-        <div class="col-12">
-            <h2 class="h4 mb-0 text-danger border-bottom pb-2">Gestione Utenti</h2>
+        <div class="col-12 text-center">
+            <h2 class="display-6 border-bottom pb-2">Gestione Utenti</h2>
         </div>
     </div>
 

@@ -334,11 +334,11 @@ body {
   }
 }
 
-div.card.card-spot {
+article.card.card-spot {
   transition: all 0.3s !important;
 }
 
-div.card.card-spot:hover {
+article.card.card-spot:hover {
   transform: scale(1.1) !important;
 }
 
