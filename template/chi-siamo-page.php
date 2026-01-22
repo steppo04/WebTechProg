@@ -1,6 +1,6 @@
 <section class="container mt-5" aria-labelledby="main-title">
 
-    <div class="row mb-5 align-items-center">
+    <div class="row mb-5 align-items-center border-bottom">
         <div class="col-md-6 text-center text-md-start">
             <h1 id="main-title" class="display-4 fw-bold text-danger">Spotted Campus</h1>
             <p class="lead">La piattaforma di cui non sapevi di avere bisogno</p>
@@ -9,11 +9,8 @@
             <span class="bi bi-megaphone-fill text-danger" style="font-size: 8rem;" aria-hidden="true"></span>
         </div>
     </div>
-    
-    <hr class="my-5">
 
     <div class="row g-4 mb-5">
-         <div class="row justify-content-center g-4 mb-5">
         <div class="col-12 text-center mb-4">
             <h2 class="border-bottom d-inline-block pb-2">La nostra mission</h2>
         </div>

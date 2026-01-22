@@ -1,9 +1,9 @@
-<section class="container mt-5">
+<section class="container mt-5" aria-labelledby="main-title">
     <div class="row justify-content-center">
         <div class="col-md-8 text-center">
             <span class="bi bi-emoji-dizzy display-1 text-danger" aria-hidden="true"></span>
 
-            <h1 class="display-1 fw-bold">404</h1>
+            <h1 id="main-title" class="display-1 fw-bold">Error 404</h1>
             <h2 class="mb-4">Ops! Pagina non trovata.</h2>
 
             <p class="lead text-muted mb-5">

@@ -1,8 +1,8 @@
-<section class="container mt-5">
+<section class="container mt-5" aria-labelledby="main-title">
 
     <div class="row mb-4">
         <div class="col-12 text-center">
-            <h1 class="border-bottom pb-2">Inserisci nuove categorie</h1>
+            <h1 id="main-title" class="border-bottom pb-2">Inserisci nuove categorie</h1>
         </div>
     </div>
 
@@ -31,7 +31,7 @@
                         <div class="mb-4">
                             <label for="idCategoriaPadre" class="form-label fw-bold text-secondary">Appartiene a (Opzionale)</label>
                             
-                            <select id="idCategoriaPadre" class="form-select" name="idCategoriaPadre">
+                            <select id="idCategoriaPadre" class="form-select" name="idCategoriaPadre" aria-describedby="categoria-principale">
                                 <option value="" selected class="text-muted">-- Nessuna (Crea Categoria Principale) --</option>
 
                                 <?php foreach ($templateParams["categoriePrincipali"] as $cat): ?>
@@ -42,14 +42,14 @@
                             </select>
                             
                             <div class="form-text text-muted mt-2 small">
-                                <span class="bi bi-info-circle-fill text-danger opacity-75"></span>
+                                <span class="bi bi-info-circle-fill text-danger opacity-75"  aria-hidden="true"></span>
                                 Seleziona un genitore per creare una <strong>Sottocategoria</strong>, altrimenti lascialo vuoto.
                             </div>
                         </div>
 
                         <div class="d-grid gap-2 mt-4">
                             <button type="submit" class="btn btn-danger shadow-sm text-uppercase fw-bold py-2">
-                                <span class="bi bi-plus-lg me-1"></span> Salva Categoria
+                                <span class="bi bi-plus-lg me-1"  aria-hidden="true"></span> Salva Categoria
                             </button>
 
                             <a href="index.php" class="btn btn-light text-muted border-0 btn-sm">

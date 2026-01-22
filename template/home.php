@@ -1,4 +1,4 @@
-<section class="aesthetic-wrapper">
+<section class="aesthetic-wrapper" aria-labelledby="main-title">
     <div class="aesthetic-bg" aria-hidden="true"></div>
     <div class="noise-overlay" aria-hidden="true"></div>
 
@@ -11,7 +11,7 @@
             <div class="sign-board">
 
 
-                <h1 class="title-main">SPOTTED CAMPUS</h1>
+                <h1 id="main-title" class="title-main">SPOTTED CAMPUS</h1>
                 <p class="text-desc">
                     "Il punto di riferimento per la tua vita universitaria.
                     Ritrova oggetti smarriti, scopri info utili e condividi le tue esperienze."

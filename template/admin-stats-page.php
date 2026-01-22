@@ -1,8 +1,8 @@
-<section class="container mt-5" aria-labelledby="titolo-statistiche">
+<section class="container mt-5" aria-labelledby="main-title">
 
     <div class="row mb-4">
         <div class="col-12 text-center">
-            <h1 id="titolo-statistiche" class="border-bottom pb-2">Pannello Statistiche</h1>
+            <h1 id="main-title" class="border-bottom pb-2">Pannello Statistiche</h1>
         </div>
     </div>
 

@@ -1,7 +1,7 @@
-<section class="container mt-5">
+<section class="container mt-5" aria-labelledby="main-title">
     <div class="row mb-4">
         <div class="col-12 text-center">
-            <h1 class="display-6 border-bottom pb-2">Revisione Nuovi Spot</h1>
+            <h1 id="main-title" class="display-6 border-bottom pb-2">Revisione Nuovi Spot</h1>
         </div>
     </div>
 

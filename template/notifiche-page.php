@@ -1,8 +1,8 @@
-<section class="container mt-5">
+<section class="container mt-5" aria-labelledby="main-title">
     <?php if (isset($templateParams["titolo"])): ?>
         <div class="row mb-4 border-bottom pb-4">
             <div class="col-12 text-center">
-                <h1 class="display-6"><?php echo $templateParams["titolo"]; ?></h1>
+                <h1 id="main-title" class="display-6"><?php echo $templateParams["titolo"]; ?></h1>
             </div>
         </div>
     <?php endif; ?>

@@ -1,11 +1,11 @@
-  <section class="container">
+  <section class="container" aria-labelledby="main-title">
       <div class="row mt-5">
 
           <?php if (isset($templateParams["titolo"])): ?>
 
               <div class="row mb-4">
                   <div class="col-12 text-center">
-                      <h1 class="display-6"><?php echo htmlspecialchars($templateParams["titolo"]); ?></h1>
+                      <h1 id="main-title" class="display-6"><?php echo htmlspecialchars($templateParams["titolo"]); ?></h1>
                   </div>
               </div>
           <?php endif; ?>

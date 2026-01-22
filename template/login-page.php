@@ -1,10 +1,10 @@
-<section>
+<section aria-labelledby="main-title">
     <div class="wrapper">
         <div class="bg" aria-hidden="true"></div>
         <div class="noise-overlay" aria-hidden="true"></div>
 
         <div class="auth-card">
-            <h1 class="auth-title">Login</h1>
+            <h1 id="main-title" class="auth-title">Login</h1>
 
             <?php if (isset($templateParams["errorelogin"])): ?>
                 <div class="alert alert-danger border-2 border-danger text-center fw-bold" role="alert">

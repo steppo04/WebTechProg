@@ -22,10 +22,11 @@ document.addEventListener("DOMContentLoaded", function() {
                         let favButtonHtml = '';
                         if (spot.isUserLoggedIn) {
                             const iconClass = spot.isPreferito ? 'bi-bookmark-fill' : 'bi-bookmark';
+                            const labelPref = spot.isPreferito ? 'rimuovi dai preferiti' : 'aggiungi ai preferiti';
                             favButtonHtml = `
                                 <button type="button" class="btn btn-link text-white p-0 btn-toggle-preferito" 
                                         data-id="${spot.idSpot}" 
-                                        title="Salva nei preferiti">
+                                        title="${labelPref}">
                                     <span class="bi ${iconClass} fs-4"></span>
                                 </button>`;
                         }

@@ -1,9 +1,9 @@
-<section id="formReg" class="wrapper">
+<section id="formReg" class="wrapper" aria-labelledby="main-title">
     <div class="bg" aria-hidden="true"></div>
     <div class="noise-overlay" aria-hidden="true"></div>
 
     <div class="auth-card">
-        <h1 class="auth-title">Registrazione</h1>
+        <h1 id="main-title" class="auth-title">Registrazione</h1>
 
         <?php if (isset($templateParams["erroresignup"])): ?>
             <div class="alert alert-danger border-2 border-danger text-center fw-bold" role="alert">
