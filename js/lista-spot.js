@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                         containerSpot.innerHTML += `
                         <div class="col-12 col-md-6 col-lg-4 spot-item" data-id="${spot.idSpot}"> 
-                            <div class="card h-100 shadow-sm card-spot">
+                            <article class="card h-100 shadow-sm card-spot">
                                 <div class="card-header bg-danger text-white d-flex justify-content-between align-items-center">
                                     <h2 class="card-title mb-0 fs-5 text-truncate" style="max-width: 80%;">${spot.titolo}</h2>
                                     ${favButtonHtml}
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function() {
                                 <div class="card-footer bg-transparent border-top-0">
                                     <a href="dettaglio-spot.php?id=${spot.idSpot}" class="btn btn-outline-primary btn-sm">Leggi di più</a>
                                 </div>
-                            </div>
+                            </article>
                         </div>`;
                     });
                 } else {
