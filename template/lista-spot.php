@@ -91,11 +91,11 @@
         <?php endif; ?>
     </div>
                         <div class="card-body">
-                            <p class="card-text text-muted small"><i class="bi bi-chat-left-text"></i> Spot:</p>
+                            <p class="card-text text-muted small"><i class="bi bi-chat-left-text" aria-hidden="true"></i> Spot:</p>
                             <p class="card-text"><?php echo htmlspecialchars($spot["testo"]); ?></p>
                         </div>
                         <div class="card-footer bg-transparent border-top-0">
-                            <a href="dettaglio-spot.php?id=<?php echo $spot['idSpot']; ?>" class="btn btn-outline-primary btn-sm">Leggi di più</a>
+                            <a href="dettaglio-spot.php?id=<?php echo $spot['idSpot']; ?>" class="btn btn-outline-primary btn-sm" aria-label="Leggi di più sullo spot: <?php echo htmlspecialchars($spot['titolo']); ?>">Leggi di più</a>
                         </div>
                     </div>
                 </div>

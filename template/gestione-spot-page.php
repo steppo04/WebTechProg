@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<section class="container mt-5" aria-labelledby="form-title">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card shadow-sm border-0">
@@ -7,7 +7,7 @@
                     $spot = isset($templateParams["spot"]) ? $templateParams["spot"] : null;
                     $isEdit = ($spot != null);
                     ?>
-                    <h2 class="h4 mb-0"><?php echo $isEdit ? "Modifica Spot" : "Crea il tuo Spot"; ?></h2>
+                    <h2 class="h4 mb-0" id="form-title"><?php echo $isEdit ? "Modifica Spot" : "Crea il tuo Spot"; ?></h2>
                 </div>
 
                 <div class="card-body p-4">
@@ -50,11 +50,11 @@
                         <div class="mb-3">
                             <div class="form-check form-switch">
                                 <input class="form-check-input" type="checkbox" name="isAnonymous" id="isAnonymous"
-                                    value="1" <?php echo ($isEdit && isset($spot['isAnonymous']) && $spot['isAnonymous']) ? 'checked' : ''; ?>>
+                                    value="1" <?php echo ($isEdit && isset($spot['isAnonymous']) && $spot['isAnonymous']) ? 'checked' : ''; ?> aria-describedby="anon-help">
                                 <label class="form-check-label fw-bold" for="isAnonymous">
                                     Pubblica in anonimo
                                 </label>
-                                <div class="form-text">Il tuo nome non verrà mostrato pubblicamente.</div>
+                                <div class="form-text" id="anon-help">Il tuo nome non verrà mostrato pubblicamente.</div>
                             </div>
                         </div>
 
@@ -77,6 +77,6 @@
             </div>
         </div>
     </div>
-</div>
+</section>
 
 <script src="js/gestione-spot.js"></script>
