@@ -25,35 +25,35 @@
                         </div>
                     </div>
                 </div>
-            </form>
 
-            <div class="modal fade" id="modalFiltri" tabindex="-1" role="dialog" aria-labelledby="modalFiltriLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h2 class="modal-title fs-5" id="modalFiltriLabel">Filtra per Categoria</h2>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <p>Seleziona una o più categorie:</p>
-                            <?php foreach ($templateParams["categorie"] as $categoria): ?>
-                                <div class="form-check mb-2">
-                                    <input class="form-check-input check-filtro" type="checkbox" name="cat[]"
-                                        value="<?php echo $categoria['idCategoria']; ?>"
-                                        id="cat<?php echo $categoria['idCategoria']; ?>"
-                                        <?php if (isset($_GET["cat"]) && in_array($categoria['idCategoria'], $_GET["cat"])) echo "checked"; ?>>
-                                    <label class="form-check-label" for="cat<?php echo $categoria['idCategoria']; ?>">
-                                        <?php echo $categoria['nome']; ?>
-                                    </label>
-                                </div>
-                            <?php endforeach; ?>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                <div class="modal fade" id="modalFiltri" tabindex="-1" role="dialog" aria-labelledby="modalFiltriLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2 class="modal-title fs-5" id="modalFiltriLabel">Filtra per Categoria</h2>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Seleziona una o più categorie:</p>
+                                <?php foreach ($templateParams["categorie"] as $categoria): ?>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input check-filtro" type="checkbox" name="cat[]"
+                                            value="<?php echo $categoria['idCategoria']; ?>"
+                                            id="cat<?php echo $categoria['idCategoria']; ?>"
+                                            <?php if (isset($_GET["cat"]) && in_array($categoria['idCategoria'], $_GET["cat"])) echo "checked"; ?>>
+                                        <label class="form-check-label" for="cat<?php echo $categoria['idCategoria']; ?>">
+                                            <?php echo $categoria['nome']; ?>
+                                        </label>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 

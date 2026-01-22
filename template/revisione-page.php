@@ -10,9 +10,16 @@
             <?php foreach ($templateParams["spotInAttesa"] as $spot): ?>
                 <div class="col-12">
                     <div class="card shadow-sm border-0">
-                        <div class="card-header bg-danger text-white fw-bold d-flex justify-content-between">
-                            <span><?php echo htmlspecialchars($spot["titolo"]); ?></span>
-                            <small class="opacity-75">Inviato da: <?php echo htmlspecialchars($spot["usernameUtente"]); ?></small>
+                        <div class="card-header bg-danger text-white fw-bold d-flex justify-content-between align-items-center">
+
+                            <span title="<?php echo htmlspecialchars($spot["titolo"]); ?>">
+                                <?php echo htmlspecialchars($spot["titolo"]); ?>
+                            </span>
+
+                            <small class="opacity-75 ms-2">
+                                Inviato da: <?php echo htmlspecialchars($spot["usernameUtente"]); ?>
+                            </small>
+
                         </div>
                         <div class="card-body">
                             <p class="mb-1 text-muted small"><strong>Categoria:</strong> <?php echo htmlspecialchars($spot["nomeCategoria"]); ?></p>
