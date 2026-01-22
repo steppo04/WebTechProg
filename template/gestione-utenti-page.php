@@ -1,56 +1,45 @@
 <section class="container mt-5">
-    <div class="card shadow-sm border-0">
-        <div class="card-header bg-danger text-white py-3">
-            <h2 class="h4 mb-0">Gestione Utenti</h2>
+    <div class="row mb-4">
+        <div class="col-12">
+            <h2 class="h4 mb-0 text-danger border-bottom pb-2">Gestione Utenti</h2>
         </div>
+    </div>
 
-        <div class="card-body p-0">
-            <div class="table-responsive">
-                <table class="table table-hover align-middle mb-0">
-                    <thead class="bg-light">
-                        <tr>
-                            <th class="ps-4">Username</th>
-                            <th>Nome Completo</th>
-                            <th>Stato</th>
-                            <th class="text-end pe-4">Azione</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($templateParams["utenti"] as $utente): ?>
-                            <tr>
-                                <td class="ps-4">
-                                    <div class="d-flex align-items-center">
-                                        <?php $imgUser = !empty($utente["fotoProfilo"]) ? "upload/" . $utente["fotoProfilo"] : "upload/default.png"; ?>
-                                        <img src="<?php echo htmlspecialchars($imgUser); ?>" alt="Foto profilo utente"
-                                            class="rounded-circle me-2"
-                                            style="width: 30px; height: 30px; object-fit: cover;">
-                                        <strong><?php echo htmlspecialchars($utente["username"]); ?></strong>
-                                    </div>
-                                </td>
-                                <td><?php echo htmlspecialchars($utente["nome"] . " " . $utente["cognome"]); ?></td>
-                                <td>
-                                    <span
-                                        class="badge <?php echo $utente['stato'] == 'attivo' ? 'bg-success' : 'bg-danger'; ?>">
-                                        <?php echo strtoupper($utente["stato"]); ?>
-                                    </span>
-                                </td>
-                                <td class="text-end pe-4">
-                                    <form method="POST" action="gestione-utenti.php">
-                                        <input type="hidden" name="username" value="<?php echo $utente["username"]; ?>">
-                                        <?php if ($utente["stato"] == "attivo"): ?>
-                                            <button type="submit" name="azione" value="blocca"
-                                                class="btn btn-sm btn-outline-danger">Blocca</button>
-                                        <?php else: ?>
-                                            <button type="submit" name="azione" value="sblocca"
-                                                class="btn btn-sm btn-outline-success">Sblocca</button>
-                                        <?php endif; ?>
-                                    </form>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
+    <div class="row g-3">
+        <?php foreach ($templateParams["utenti"] as $utente): ?>
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card shadow-sm border-0 border-start border-danger border-4">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <?php $imgUser = !empty($utente["fotoProfilo"]) ? "upload/" . $utente["fotoProfilo"] : "upload/default.png"; ?>
+                            <img src="<?php echo htmlspecialchars($imgUser); ?>" alt="" class="rounded-circle me-3"
+                                style="width: 50px; height: 50px; object-fit: cover;">
+                            <div>
+                                <h3 class="h6 mb-0 fw-bold"><?php echo htmlspecialchars($utente["username"]); ?></h3>
+                                <small
+                                    class="text-muted"><?php echo htmlspecialchars($utente["nome"] . " " . $utente["cognome"]); ?></small>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="badge <?php echo $utente['stato'] == 'attivo' ? 'bg-success' : 'bg-danger'; ?>">
+                                <?php echo strtoupper($utente["stato"]); ?>
+                            </span>
+
+                            <form method="POST" action="gestione-utenti.php">
+                                <input type="hidden" name="username" value="<?php echo $utente["username"]; ?>">
+                                <?php if ($utente["stato"] == "attivo"): ?>
+                                    <button type="submit" name="azione" value="blocca"
+                                        class="btn btn-sm btn-outline-danger">Blocca Utente</button>
+                                <?php else: ?>
+                                    <button type="submit" name="azione" value="sblocca"
+                                        class="btn btn-sm btn-outline-success">Sblocca Utente</button>
+                                <?php endif; ?>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        <?php endforeach; ?>
     </div>
 </section>
