@@ -62,7 +62,7 @@
                 <div class="card-footer bg-transparent d-flex justify-content-between align-items-center">
                     <a href="lista-categoria.php" class="btn btn-outline-secondary btn-sm">Torna alla lista</a>
 
-                    <?php if (isUserLoggedIn() && $_SESSION["username"] == $templateParams["spot"]["usernameUtente"]): ?>
+                    <?php if ((isUserLoggedIn() && $_SESSION["username"] == $templateParams["spot"]["usernameUtente"]) || isAdminLoggedIn()): ?>
                         <a href="gestione-spot.php?id=<?php echo $templateParams["spot"]["idSpot"]; ?>"
                             class="btn btn-warning btn-sm">
                             <span class="bi bi-pencil-square" aria-hidden="true"></span> Modifica / Elimina
