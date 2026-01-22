@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<section class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <h2 class="mb-4 text-danger border-bottom border-danger pb-2">
@@ -55,4 +55,4 @@
             <?php endif; ?>
         </div>
     </div>
-</div>
+</section>

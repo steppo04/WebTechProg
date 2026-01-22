@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<section class="container mt-5">
     <div class="row mb-4">
         <div class="col-12 text-center">
             <h2 class="display-6 border-bottom pb-2">Revisione Nuovi Spot</h2>
@@ -39,4 +39,4 @@
             <i class="bi bi-info-circle"></i> Non ci sono nuovi spot da revisionare.
         </div>
     <?php endif; ?>
-</div>
+</section>

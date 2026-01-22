@@ -1,11 +1,11 @@
-<div class="container mt-5">
+<section class="container mt-5">
     <div class="row mb-5 justify-content-center">
         <div class="col-md-8 text-center">
             <div class="p-4 bg-light rounded shadow-sm border-top border-danger border-4">
                 <?php
                 $imgProfile = !empty($templateParams["utente"]["fotoProfilo"]) ? "upload/" . $templateParams["utente"]["fotoProfilo"] : "upload/default.png";
                 ?>
-                <img src="<?php echo htmlspecialchars($imgProfile); ?>" alt="Profile Picture" class="profile-img mb-3">
+                <img src="<?php echo htmlspecialchars($imgProfile); ?>" alt="Foto profilo di <?php echo htmlspecialchars($templateParams["utente"]["username"]); ?>" class="profile-img mb-3">
 
                 <h2 class="mt-2 text-wrap text-break">
                     <?php echo htmlspecialchars($templateParams["utente"]["nome"] . " " . htmlspecialchars($templateParams["utente"]["cognome"])); ?>
@@ -14,9 +14,12 @@
 
                 <?php if ($templateParams["isMine"]): ?>
                     <form action="upload-profile-pic.php" method="post" enctype="multipart/form-data" id="profileForm" class="mb-3">
+                        
+                        <label for="fileToUpload" class="visually-hidden">Carica una nuova foto profilo</label>
                         <input type="file" name="fileToUpload" id="fileToUpload" class="d-none" accept="image/x-png,image/gif,image/jpeg">
+                        
                         <button type="button" class="btn btn-outline-danger btn-sm" id="btnChangePhoto">
-                            <i class="bi bi-pencil-square me-1"></i> Modifica Foto
+                            <i class="bi bi-pencil-square me-1" aria-hidden="true"></i> Modifica Foto
                         </button>
                     </form>
 
@@ -56,7 +59,9 @@
                                     <p class="card-text text-truncate"><?php echo htmlspecialchars($spot["testo"]); ?></p>
                                     <div class="d-flex justify-content-between mt-3">
                                         <a href="dettaglio-spot.php?id=<?php echo $spot["idSpot"]; ?>"
-                                            class="btn btn-sm btn-outline-danger">Leggi</a>
+                                            class="btn btn-sm btn-outline-danger"
+                                            aria-label="Leggi lo spot: <?php echo htmlspecialchars($spot["titolo"]); ?>">Leggi</a>
+                                        
                                         <?php if ($templateParams["isMine"]): ?>
                                             <span class="badge bg-secondary"><?php echo strtoupper($spot["stato"]); ?></span>
                                         <?php endif; ?>
@@ -73,4 +78,4 @@
             <?php endif; ?>
         </div>
     <?php endif; ?>
-</div>
+</section>
