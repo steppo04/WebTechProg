@@ -1,4 +1,4 @@
-<section class="wrapper">
+<section id="formReg" class="wrapper">
     <div class="bg" aria-hidden="true"></div>
     <div class="noise-overlay" aria-hidden="true"></div>
 
@@ -43,9 +43,7 @@
             <div class="text-center mt-4">
                 <p class="mb-0 small fw-bold text-dark">
                     Sei già registrato?
-                    <a href="login.php" class="auth-link text-decoration-underline" style="color: #b02a37;">
-                        ACCEDI QUI
-                    </a>
+                    <a href="login.php" class="auth-link">ACCEDI QUI</a>
                 </p>
             </div>
         </form>

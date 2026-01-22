@@ -78,6 +78,13 @@ body {
   letter-spacing: -1px;
 }
 
+@media (max-width: 450px) {
+  .auth-title {
+    font-size: 1.75rem;
+    line-height: 1.2;
+  }
+}
+
 .form-label {
   font-weight: 700;
   color: #333;
@@ -210,7 +217,6 @@ body {
   text-decoration: none;
   display: inline-block;
   white-space: normal;
-  /* Allow text to wrap if needed */
   text-align: center;
 }
 
@@ -222,7 +228,6 @@ body {
     margin: 5px;
     min-width: 120px;
     display: inline-flex;
-    /* Use flexbox for perfect centering */
     justify-content: center;
     align-items: center;
   }
@@ -279,8 +284,11 @@ body {
   background: white;
   border: 3px solid #1a1a1a;
   border-radius: 12px;
-  padding: 2rem 1.5rem;
-  width: 300px;
+  padding: 1rem 1rem;
+  /* Further reduced padding */
+  width: 100%;
+  max-width: 400px;
+  /* Increased max-width further */
   text-align: center;
   box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.15);
   transition: all 0.3s ease;

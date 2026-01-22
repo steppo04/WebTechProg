@@ -32,10 +32,8 @@
                 <div class="text-center mt-4">
                     <p class="mb-0 small fw-bold text-dark">
                         Non sei ancora registrato?
-                        
-                        <a href="sign-up.php" class="auth-link text-decoration-underline" style="color: #b02a37;">
-                            CREA UN ACCOUNT
-                        </a>
+
+                        <a href="sign-up.php#formReg" class="auth-link" style="color: #b02a37;">CREA UN ACCOUNT</a>
                     </p>
                 </div>
             </form>
