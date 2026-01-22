@@ -23,14 +23,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $dbh->insertCategoria($nomeInput);
                 setMsg("Categoria Principale '$nomeInput' creata!", "success");
             } catch (Exception $e) {
-                setMsg("Errore: Probabilmente la categoria esiste già.", "danger");
+                setMsg("Errore: La categoria esiste già.", "danger");
             }
         } else {
             try {
                 $dbh->insertSottoCategoria($nomeInput, $idPadre);
                 setMsg("Sottocategoria '$nomeInput' aggiunta con successo!", "success");
             } catch (Exception $e) {
-                setMsg("Errore durante l'inserimento.", "danger");
+                setMsg("Errore durante l'inserimento, la sottocategoria esiste già.", "danger");
             }
         }
 
