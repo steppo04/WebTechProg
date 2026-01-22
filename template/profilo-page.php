@@ -51,7 +51,7 @@
             <div class="row g-4">
                 <?php foreach ($templateParams["spots"] as $spot): ?>
                     <div class="col-md-6 col-lg-4">
-                        <article class="card h-100 shadow-sm">
+                        <article class="card h-100 shadow-sm card-spot">
                             <div class="card-header bg-danger text-white">
                                 <span><?php echo htmlspecialchars($spot["nomeCategoria"]); ?></span>
                             </div>
@@ -61,10 +61,10 @@
                                 <div class="d-flex justify-content-between mt-3">
                                     <a href="dettaglio-spot.php?id=<?php echo $spot["idSpot"]; ?>"
                                         class="btn btn-sm btn-outline-danger"
-                                        aria-label="Leggi lo spot: <?php echo htmlspecialchars($spot["titolo"]); ?>">Leggi</a>
+                                        aria-label="Leggi lo spot: <?php echo htmlspecialchars($spot["titolo"]); ?>">Leggi di più</a>
 
                                     <?php if ($templateParams["isMine"]): ?>
-                                        <span class="badge bg-secondary"><?php echo strtoupper($spot["stato"]); ?></span>
+                                        <span class="badge border-danger text-danger d-flex justify-content-center align-items-center"><?php echo strtoupper($spot["stato"]); ?></span>
                                     <?php endif; ?>
                                 </div>
                             </div>
