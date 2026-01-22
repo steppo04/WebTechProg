@@ -69,6 +69,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 .then(data => {
                     if (data.success) {
 
+                        const counterElement = document.getElementById('numeroCommenti');
+                        if (counterElement) {
+                            let currentCount = parseInt(counterElement.textContent);
+                            counterElement.textContent = currentCount + 1;
+                        }
+
                         let htmlRisposta = '';
                         //dati del padre
                         if (data.data.haRisposto) {

@@ -84,7 +84,7 @@
         <div class="col-md-4 border-start">
             <aside>
                 <h3 class="h5 mb-3"><span class="bi bi-chat-dots" aria-hidden="true"></span> Commenti
-                    (<?php echo count($templateParams["commenti"]); ?>)</h3>
+                    (<span id="numeroCommenti"><?php echo count($templateParams["commenti"]); ?></span>)</h3>
 
                 <div id="containerCommenti" class="list-group mb-3 overflow-auto" style="max-height: 35vh;">
                     <?php if (count($templateParams["commenti"]) > 0): ?>
