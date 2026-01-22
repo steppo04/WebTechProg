@@ -26,11 +26,29 @@ document.addEventListener("DOMContentLoaded", function() {
                 containerSpot.innerHTML = "";
                 if (data.length > 0) {
                     data.forEach(spot => {
+                        
+                        let favButtonHtml = '';
+                        if (spot.isUserLoggedIn) {
+                            const iconClass = spot.isPreferito ? 'bi-bookmark-fill' : 'bi-bookmark';
+                            favButtonHtml = `
+                                <button type="button" class="btn btn-link text-white p-0 btn-toggle-preferito" 
+                                        data-id="${spot.idSpot}" 
+                                        title="Salva nei preferiti">
+                                    <span class="bi ${iconClass} fs-4"></span>
+                                </button>`;
+                        } else {
+                            favButtonHtml = `
+                                <a href="login.php" class="text-white" title="Accedi per salvare">
+                                    <span class="bi bi-bookmark fs-4"></span>
+                                </a>`;
+                        }
+
                         containerSpot.innerHTML += `
                         <div class="col-12 col-md-6 col-lg-4 spot-item" data-id="${spot.idSpot}"> 
                             <div class="card h-100 shadow-sm card-spot">
-                                <div class="card-header bg-danger text-white">
-                                    <h2 class="card-title mb-0 fs-5 text-truncate">${spot.titolo}</h2>
+                                <div class="card-header bg-danger text-white d-flex justify-content-between align-items-center">
+                                    <h2 class="card-title mb-0 fs-5 text-truncate" style="max-width: 80%;">${spot.titolo}</h2>
+                                    ${favButtonHtml}
                                 </div>
                                 <div class="card-body">
                                     <p class="card-text text-muted small"><span class="bi bi-chat-left-text"></span> Spot:</p>
